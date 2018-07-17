@@ -22,13 +22,13 @@ dependencies {
     compile "io.elastic:sailor-jvm:2.0.1"
     compile "org.glassfish.jersey.core:jersey-client:2.25.1"
     compile "org.glassfish.jersey.media:jersey-media-json-processing:2.25.1"
-    compile group: 'org.jetbrains', name: 'annotations', version: '16.0.1'
-    compile 'com.fasterxml.jackson.module:jackson-module-jsonSchema:2.9.5'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jaxb-annotations', version: '2.9.6'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.3.0'
+    compile "org.jetbrains':annotations:16.0.1"
+    compile "com.fasterxml.jackson.module:jackson-module-jsonSchema:2.9.5"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.9.6"
+    compile "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.6"
+    compile "com.sun.xml.bind:jaxb-xjc:2.3.0"
     compile "com.sun.xml.ws:jaxws-tools:2.2.1"
-    compile group: 'org.membrane-soa', name: 'service-proxy-core', version: '4.6.1'
+    compile "org.membrane-soa:service-proxy-core:4.6.1"
 }
 
 uploadArchives {

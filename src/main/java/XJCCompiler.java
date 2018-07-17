@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 
 import com.sun.codemodel.JCodeModel;
-import com.sun.tools.internal.ws.WsImport;
 import com.sun.tools.xjc.api.S2JJAXBModel;
 import com.sun.tools.xjc.api.SchemaCompiler;
 import com.sun.tools.xjc.api.XJC;
@@ -23,7 +22,7 @@ import com.predic8.wsdl.*;
 
 public class XJCCompiler {
 
-  public static void main(String ... args) throws Throwable {
+  public static void main(String... args) throws Throwable {
 //    String schemaPath =      "/Users/paulvoropaiev/Development/elasticio/garry/Development/intellij-projects/EclipseLink-MOXy-Examples/src/main/EntityListService.xsd";
 //    String outputDirectory = "/Users/paulvoropaiev/Development/elasticio/garry/Development/intellij-projects/EclipseLink-MOXy-Examples/src/main/java/example/dynamic/convert";
 //
@@ -36,8 +35,8 @@ public class XJCCompiler {
 //
 //    System.out.println(jsonSchema.toString());
 
-    String wsdlAddress ="http://www.xignite.com/xcurrencies.asmx?WSDL";
-    String [] input = new String[] {
+    String wsdlAddress = "http://www.xignite.com/xcurrencies.asmx?WSDL";
+    String[] input = new String[]{
 //        "-keep",
 //        "-B-Xvalue-constructor","-Xnocompile",
         "-d",
@@ -45,7 +44,6 @@ public class XJCCompiler {
 //        "-p",
 //        "io.elastic.soap",
         wsdlAddress};
-
 
 //    WsImport.doMain(input);
 
@@ -72,7 +70,8 @@ public class XJCCompiler {
 
   }
 
-  private static void generateJAXB(String schemaPath, String outputDirectory, String fullyQualifiedClassName) throws IOException {
+  private static void generateJAXB(String schemaPath, String outputDirectory,
+      String fullyQualifiedClassName) throws IOException {
     // Setup schema compiler
     SchemaCompiler sc = XJC.createSchemaCompiler();
     sc.forcePackageName(fullyQualifiedClassName);

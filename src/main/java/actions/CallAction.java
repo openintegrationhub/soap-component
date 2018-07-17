@@ -13,47 +13,47 @@ import javax.json.JsonString;
  * Action to create a pet.
  */
 public class CallAction implements Module {
-    private static final Logger logger = LoggerFactory.getLogger(CallAction.class);
 
-    /**
-     * Executes the actions's logic by sending a request to the Petstore API and emitting response to the platform.
-     *
-     * @param parameters execution parameters
-     */
-    @Override
-    public void execute(final ExecutionParameters parameters) {
-        logger.info("About to create new pet");
-        // incoming message
-        final Message message = parameters.getMessage();
+  private static final Logger logger = LoggerFactory.getLogger(CallAction.class);
 
-        // body contains the mapped data
-        final JsonObject body = message.getBody();
+  /**
+   * Executes the actions's logic by sending a request to the Petstore API and emitting response to
+   * the platform.
+   *
+   * @param parameters execution parameters
+   */
+  @Override
+  public void execute(final ExecutionParameters parameters) {
+    logger.info("About to create new pet");
+    // incoming message
+    final Message message = parameters.getMessage();
 
-        // contains action's configuration
-        final JsonObject configuration = parameters.getConfiguration();
+    // body contains the mapped data
+    final JsonObject body = message.getBody();
 
-        // access the value of the mapped value into name field of the in-metadata
-        final JsonString name = body.getJsonString("name");
-        if (name == null) {
-            throw new IllegalStateException("Name is required");
-        }
+    // contains action's configuration
+    final JsonObject configuration = parameters.getConfiguration();
 
-        // access the value of the mapped value into name field of the in-metadata
-        final JsonString status = body.getJsonString("status");
-        if (status == null) {
-            throw new IllegalStateException("Status is required");
-        }
-
-
-
-        logger.info("Pet successfully created");
-
-        final Message data
-                = new Message.Builder().body(body).build();
-
-        logger.info("Emitting data");
-
-        // emitting the message to the platform
-        parameters.getEventEmitter().emitData(data);
+    // access the value of the mapped value into name field of the in-metadata
+    final JsonString name = body.getJsonString("name");
+    if (name == null) {
+      throw new IllegalStateException("Name is required");
     }
+
+    // access the value of the mapped value into name field of the in-metadata
+    final JsonString status = body.getJsonString("status");
+    if (status == null) {
+      throw new IllegalStateException("Status is required");
+    }
+
+    logger.info("Pet successfully created");
+
+    final Message data
+        = new Message.Builder().body(body).build();
+
+    logger.info("Emitting data");
+
+    // emitting the message to the platform
+    parameters.getEventEmitter().emitData(data);
+  }
 }
