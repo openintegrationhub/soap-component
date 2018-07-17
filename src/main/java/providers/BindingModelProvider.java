@@ -1,6 +1,5 @@
 package providers;
 
-
 import io.elastic.api.JSON;
 import io.elastic.api.SelectModelProvider;
 import org.slf4j.Logger;
@@ -8,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.json.*;
 
-public class OperationModelProvider implements SelectModelProvider {
+public class BindingModelProvider implements SelectModelProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(OperationModelProvider.class);
 
