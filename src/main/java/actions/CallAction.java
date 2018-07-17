@@ -1,9 +1,8 @@
-package io.elastic.petstore.actions;
+package actions;
 
 import io.elastic.api.ExecutionParameters;
 import io.elastic.api.Message;
 import io.elastic.api.Module;
-import io.elastic.petstore.HttpClientUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +12,8 @@ import javax.json.JsonString;
 /**
  * Action to create a pet.
  */
-public class CreatePet implements Module {
-    private static final Logger logger = LoggerFactory.getLogger(CreatePet.class);
+public class CallAction implements Module {
+    private static final Logger logger = LoggerFactory.getLogger(CallAction.class);
 
     /**
      * Executes the actions's logic by sending a request to the Petstore API and emitting response to the platform.

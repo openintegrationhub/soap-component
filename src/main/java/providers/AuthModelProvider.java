@@ -1,8 +1,7 @@
-package io.elastic.petstore.providers;
+package providers;
 
 
 import io.elastic.api.SelectModelProvider;
-import io.elastic.petstore.HttpClientUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,24 +21,17 @@ import javax.json.*;
  *
  * The value in the returned JSON object are used to display option's labels.
  */
-public class PetStatusModelProvider implements SelectModelProvider {
+public class AuthModelProvider implements SelectModelProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(PetStatusModelProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthModelProvider.class);
 
     @Override
     public JsonObject getSelectModel(final JsonObject configuration) {
-        logger.info("About to retrieve pet statuses from the Petstore API");
 
-        final JsonArray statuses = HttpClientUtils.getMany("/pet/statuses", configuration);
-
-        logger.info("Successfully retrieved {} statuses", statuses.size());
-
+        logger.info("input model configuration");
         final JsonObjectBuilder builder = Json.createObjectBuilder();
 
-        statuses.getValuesAs(JsonString.class).stream().forEach(s -> {
-            final String key = s.getString();
-            builder.add(key, key.substring(0, 1).toUpperCase() + key.substring(1));
-        });
+
 
         return builder.build();
     }

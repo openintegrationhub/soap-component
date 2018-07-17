@@ -1,90 +1,66 @@
 {
-  "title": "Petstore API (Java)",
-  "description": "elastic.io component for the Petstore API",
-  "docsUrl": "https://github.com/elasticio/petstore-component-java",
+  "title": "SOAP component",
+  "description": "Generic SOAP / WebServices integration component",
   "credentials": {
     "fields": {
-      "apiKey": {
-        "label": "API key",
+      "auth": {
+        "required": false,
+        "viewClass": "HTTPAuthView"
+      },
+      "wsdlURI": {
+        "label": "WSDL URI",
         "required": true,
         "viewClass": "TextFieldWithNoteView",
-        "note": "Please use <b>elasticio</b> as API key. For more details see <a href='https://petstore.elastic.io/docs/' target='_blank'>Petstore API docs</a>."
+        "placeholder": "http://www.webservicex.net/CreditCard.asmx?wsdl",
+        "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
       }
     },
-    "verifier": "io.elastic.petstore.ApiKeyVerifier"
-  },
-  "triggers": {
-    "getPetsByStatus": {
-      "main": "io.elastic.petstore.triggers.GetPetsByStatus",
-      "type": "polling",
-      "title": "Get Pets By Status (HttpClient)",
-      "description": "Retrieves pets from the Petstore API by given pet status using Apache HttpClient",
-      "fields": {
-        "status": {
-          "label": "Pet Status",
-          "required": true,
-          "viewClass": "SelectView",
-          "model": {
-            "available": "Available",
-            "pending": "Pending",
-            "sold": "Sold"
-          },
-          "prompt": "Select Pet Status"
+    "triggers": {
+      "call": {
+        "title": "Call",
+        "main": "actions.CallAction",
+        "fields": {
+          "operation": {
+            "viewClass": "SelectView",
+            "label": "Operation",
+            "required": true,
+            "model": "getOperations",
+            "prompt": "Chose an Operation [Service/Port]"
+          }
         }
-      },
-      "metadata": {
-        "out": "./schemas/getPetsByStatus.out.json"
       }
+      //,    "getPetsByStatusWithDynamicSelectModel": {
+      //      "main": "io.elastic.petstore.triggers.GetPetsByStatus",
+      //      "type": "polling",
+      //      "title": "Get Pets By Status With Dynamic Select Model",
+      //      "description": "Retrieves pets from the Petstore API by given pet status. The available statuses are retrieved from the Petstore API dynamically.",
+      //      "fields": {
+      //        "status": {
+      //          "label": "Pet Status",
+      //          "required": true,
+      //          "viewClass": "SelectView",
+      //          "model": "io.elastic.petstore.providers.PetStatusModelProvider",
+      //          "prompt": "Select Pet Status"
+      //        }
+      //      },
+      //      "metadata": {
+      //        "out": "./schemas/getPetsByStatus.out.json"
+      //      }
+      //    }
     },
-    "getPetsByStatusJaxRs": {
-      "main": "io.elastic.petstore.triggers.GetPetsByStatusJaxRs",
-      "type": "polling",
-      "title": "Get Pets By Status (JAX-RS)",
-      "description": "Retrieves pets from the Petstore API by given pet status using Java API for RESTful Web Services (JAX-RS)",
-      "fields": {
-        "status": {
-          "label": "Pet Status",
-          "required": true,
-          "viewClass": "SelectView",
-          "model": {
-            "available": "Available",
-            "pending": "Pending",
-            "sold": "Sold"
-          },
-          "prompt": "Select Pet Status"
+    "actions": {
+      "call": {
+        "title": "Call",
+        "main": "triggers.CallAction",
+        "fields": {
+          "operation": {
+            "viewClass": "SelectView",
+            "label": "Operation",
+            "required": true,
+            "model": "getOperations",
+            "prompt": "Chose an Operation [Service/Port]"
+          }
         }
-      },
-      "metadata": {
-        "out": "./schemas/getPetsByStatus.out.json"
-      }
-    },
-    "getPetsByStatusWithDynamicSelectModel": {
-      "main": "io.elastic.petstore.triggers.GetPetsByStatus",
-      "type": "polling",
-      "title": "Get Pets By Status With Dynamic Select Model",
-      "description": "Retrieves pets from the Petstore API by given pet status. The available statuses are retrieved from the Petstore API dynamically.",
-      "fields": {
-        "status": {
-          "label": "Pet Status",
-          "required": true,
-          "viewClass": "SelectView",
-          "model": "io.elastic.petstore.providers.PetStatusModelProvider",
-          "prompt": "Select Pet Status"
-        }
-      },
-      "metadata": {
-        "out": "./schemas/getPetsByStatus.out.json"
-      }
-    }
-  },
-  "actions": {
-    "createPet": {
-      "main": "io.elastic.petstore.actions.CreatePet",
-      "title": "Create a Pet",
-      "description": "Creates a new Pet",
-      "metadata": {
-        "in": "./schemas/createPet.in.json",
-        "out": "./schemas/createPet.out.json"
       }
     }
   }
