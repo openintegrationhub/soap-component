@@ -44,12 +44,12 @@ public class CallAction implements Module {
             throw new IllegalStateException("Status is required");
         }
 
-        final JsonObject pet = HttpClientUtils.post("/pet", configuration, body);
+
 
         logger.info("Pet successfully created");
 
         final Message data
-                = new Message.Builder().body(pet).build();
+                = new Message.Builder().body(body).build();
 
         logger.info("Emitting data");
 

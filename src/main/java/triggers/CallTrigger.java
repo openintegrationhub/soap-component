@@ -35,17 +35,9 @@ public class CallTrigger implements Module {
 
         final String path = "/pet/findByStatus?status=" + status.getString();
 
-        final JsonArray pets = HttpClientUtils.getMany(path, configuration);
-
-        logger.info("Got {} pets", pets.size());
-
-        // emitting naked arrays is forbidden by the platform
-        final JsonObject body = Json.createObjectBuilder()
-                .add("pets", pets)
-                .build();
 
         final Message data
-                = new Message.Builder().body(body).build();
+                = new Message.Builder().body(configuration).build();
 
         logger.info("Emitting data");
 
