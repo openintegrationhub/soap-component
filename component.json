@@ -40,7 +40,7 @@
           "viewClass": "SelectView",
           "label": "Operation",
           "required": true,
-          "model": "getOperations",
+          "model": "OperationModelProvider",
           "prompt": "Chose an Operation [Service/Port]"
         }
       }
