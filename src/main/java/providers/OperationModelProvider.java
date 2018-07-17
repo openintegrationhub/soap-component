@@ -1,6 +1,7 @@
 package providers;
 
 
+import io.elastic.api.JSON;
 import io.elastic.api.SelectModelProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,17 +22,15 @@ import javax.json.*;
  *
  * The value in the returned JSON object are used to display option's labels.
  */
-public class AuthModelProvider implements SelectModelProvider {
+public class OperationModelProvider implements SelectModelProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthModelProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(OperationModelProvider.class);
 
     @Override
     public JsonObject getSelectModel(final JsonObject configuration) {
 
-        logger.info("input model configuration");
+        logger.info("input model configuration", JSON.stringify(configuration));
         final JsonObjectBuilder builder = Json.createObjectBuilder();
-
-
 
         return builder.build();
     }
