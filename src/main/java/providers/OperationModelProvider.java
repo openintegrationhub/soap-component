@@ -31,6 +31,9 @@ public class OperationModelProvider implements SelectModelProvider {
 
         logger.info("input model configuration", JSON.stringify(configuration));
         final JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("getName", "getName");
+        builder.add("getTime", "getTime");
+
 
         return builder.build();
     }
