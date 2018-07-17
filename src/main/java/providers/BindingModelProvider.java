@@ -1,14 +1,16 @@
 package providers;
 
+import com.predic8.wsdl.Binding;
+import com.predic8.wsdl.Definitions;
+import com.predic8.wsdl.WSDLParser;
 import io.elastic.api.JSON;
 import io.elastic.api.SelectModelProvider;
 import java.util.List;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.predic8.wsdl.*;
-
-
-import javax.json.*;
 
 public class BindingModelProvider implements SelectModelProvider {
 

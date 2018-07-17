@@ -43,6 +43,20 @@
       "title": "Call",
       "main": "triggers.CallAction",
       "fields": {
+        "wsdlURI": {
+          "label": "WSDL URI",
+          "required": true,
+          "viewClass": "TextFieldWithNoteView",
+          "placeholder": "http://www.webservicex.net/CreditCard.asmx?wsdl",
+          "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
+        },
+        "binding": {
+          "viewClass": "SelectView",
+          "label": "Binding",
+          "required": true,
+          "model": "providers.BindingModelProvider",
+          "prompt": "Chose an Binding [Service/Port]"
+        },
         "operation": {
           "viewClass": "SelectView",
           "label": "Operation",
