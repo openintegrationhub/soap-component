@@ -1,4 +1,4 @@
-package providers;
+package io.elastic.soap.providers;
 
 
 import com.predic8.wsdl.Binding;

@@ -12,28 +12,28 @@
   "triggers": {
     "callTrigger": {
       "title": "Call",
-      "main": "actions.CallAction",
+      "main": "io.elastic.soap.actions.CallAction",
       "fields": {
         "wsdlURI": {
           "label": "WSDL URI",
           "required": true,
           "viewClass": "TextFieldWithNoteView",
           "placeholder": "http://www.webservicex.net/CreditCard.asmx?wsdl",
-          "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
+          "note": "Specify full WSDL URI, it should be accessible from the Internet."
         },
         "binding": {
           "viewClass": "SelectView",
           "label": "Binding",
           "required": true,
           "model": "providers.BindingModelProvider",
-          "prompt": "Chose an Binding [Service/Port]"
+          "prompt": "Choose a Binding [Service/Port]"
         },
         "operation": {
           "viewClass": "SelectView",
           "label": "Operation",
           "required": true,
           "model": "providers.OperationModelProvider",
-          "prompt": "Chose an Operation [Service/Port]"
+          "prompt": "Choose an Operation [Service/Port]"
         }
       }
     }
@@ -41,7 +41,7 @@
   "actions": {
     "callAction": {
       "title": "Call",
-      "main": "triggers.CallAction",
+      "main": "io.elastic.soap.triggers.CallAction",
       "fields": {
         "operation": {
           "viewClass": "SelectView",

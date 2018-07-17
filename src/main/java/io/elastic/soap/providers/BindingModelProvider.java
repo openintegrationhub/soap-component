@@ -1,4 +1,4 @@
-package providers;
+package io.elastic.soap.providers;
 
 import io.elastic.api.JSON;
 import io.elastic.api.SelectModelProvider;
