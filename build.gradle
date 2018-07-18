@@ -20,15 +20,16 @@ repositories {
 
 dependencies {
     compile "io.elastic:sailor-jvm:2.0.1"
-    compile "org.glassfish.jersey.core:jersey-client:2.25.1"
-    compile "org.glassfish.jersey.media:jersey-media-json-processing:2.25.1"
-    compile "org.jetbrains':annotations:16.0.1"
+    compile "org.jetbrains:annotations:16.0.1"
     compile "com.fasterxml.jackson.module:jackson-module-jsonSchema:2.9.5"
     compile "com.fasterxml.jackson.core:jackson-databind:2.9.6"
     compile "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.6"
     compile "com.sun.xml.bind:jaxb-xjc:2.3.0"
     compile "com.sun.xml.ws:jaxws-tools:2.2.1"
-    compile "org.membrane-soa:service-proxy-core:4.6.1"
+    compile("org.membrane-soa:service-proxy-core:4.6.1") {
+        exclude group: "javax.annotation"
+    }
+
 }
 
 uploadArchives {
