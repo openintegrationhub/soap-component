@@ -1,6 +1,6 @@
 {
   "title": "SOAP component",
-  "description": "Generic SOAP / WebServices integration component",
+  "description": "Generic SOAP / WebServices integration Component",
   "credentials": {
     "fields": {
       "auth": {
@@ -12,7 +12,7 @@
   "triggers": {
     "callTrigger": {
       "title": "Call",
-      "main": "io.elastic.soap.actions.CallAction",
+      "main": "io.elastic.soap.triggers.CallAction",
       "fields": {
         "wsdlURI": {
           "label": "WSDL URI",
@@ -25,23 +25,24 @@
           "viewClass": "SelectView",
           "label": "Binding",
           "required": true,
-          "model": "providers.BindingModelProvider",
+          "model": "io.elastic.soap.providers.BindingModelProvider",
           "prompt": "Choose a Binding [Service/Port]"
         },
         "operation": {
           "viewClass": "SelectView",
           "label": "Operation",
           "required": true,
-          "model": "providers.OperationModelProvider",
+          "model": "io.elastic.soap.providers.OperationModelProvider",
           "prompt": "Choose an Operation [Service/Port]"
         }
-      }
+      },
+      "dynamicMetadata": "io.elastic.soap.providers.BodyMetaProvider"
     }
   },
   "actions": {
     "callAction": {
       "title": "Call",
-      "main": "io.elastic.soap.triggers.CallAction",
+      "main": "io.elastic.soap.actions.CallAction",
       "fields": {
         "wsdlURI": {
           "label": "WSDL URI",
@@ -54,17 +55,18 @@
           "viewClass": "SelectView",
           "label": "Binding",
           "required": true,
-          "model": "providers.BindingModelProvider",
+          "model": "io.elastic.soap.providers.BindingModelProvider",
           "prompt": "Chose an Binding [Service/Port]"
         },
         "operation": {
           "viewClass": "SelectView",
           "label": "Operation",
           "required": true,
-          "model": "providers.OperationModelProvider",
+          "model": "io.elastic.soap.providers.OperationModelProvider",
           "prompt": "Chose an Operation [Service/Port]"
         }
-      }
+      },
+      "dynamicMetadata": "io.elastic.soap.providers.BodyMetaProvider"
     }
   }
 }

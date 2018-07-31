@@ -5,7 +5,10 @@ import com.predic8.wsdl.Definitions;
 import com.predic8.wsdl.WSDLParser;
 import io.elastic.api.JSON;
 import io.elastic.api.SelectModelProvider;
+import io.elastic.soap.AppConstants;
+import io.elastic.soap.utils.Utils;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
@@ -18,16 +21,33 @@ public class BindingModelProvider implements SelectModelProvider {
 
   @Override
   public JsonObject getSelectModel(final JsonObject configuration) {
+    logger.info("Input model configuration: {}", JSON.stringify(configuration));
+    String wsdlUrl = null;
+    try {
+      wsdlUrl = Utils.getWsdlUrl(configuration);
+    } catch (NullPointerException npe) {
+      throw new RuntimeException("WSDL URL can not be empty");
+    }
 
-    logger.info("input model configuration", JSON.stringify(configuration));
-    String wsdlAddress = configuration.getJsonString("wsdlURI").getString();
-    logger.info("input wsdl url {}", wsdlAddress);
-
-    WSDLParser parser = new WSDLParser();
-    Definitions defs = parser.parse(wsdlAddress);
-    List<Binding> bindingList = defs.getBindings();
+    List<Binding> bindingList = getDefinitionsFromWsdl(wsdlUrl).getBindings();
     final JsonObjectBuilder builder = Json.createObjectBuilder();
-    bindingList.forEach(binding -> builder.add(binding.getName(), binding.getName()));
+    bindingList.stream().filter(
+        binding ->
+            binding.getProtocol().equals(AppConstants.SOAP11_PROTOCOL_NAME) ||
+                binding.getProtocol().equals(AppConstants.SOAP12_PROTOCOL_NAME))
+        .collect(Collectors.toList())
+        .forEach(binding -> builder.add(binding.getName(), binding.getName()));
+
     return builder.build();
+  }
+
+  /**
+   * Method calls external WSDL by its URL and parses it
+   *
+   * @return {@link Definitions} object
+   */
+  public Definitions getDefinitionsFromWsdl(String wsdlUrl) {
+    WSDLParser parser = new WSDLParser();
+    return parser.parse(wsdlUrl);
   }
 }

@@ -6,6 +6,7 @@ import com.predic8.wsdl.Definitions;
 import com.predic8.wsdl.WSDLParser;
 import io.elastic.api.JSON;
 import io.elastic.api.SelectModelProvider;
+import io.elastic.soap.utils.Utils;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.json.Json;
@@ -21,22 +22,37 @@ public class OperationModelProvider implements SelectModelProvider {
   @Override
   public JsonObject getSelectModel(final JsonObject configuration) {
 
-    logger.info("input model configuration", JSON.stringify(configuration));
-    String wsdlAddress = configuration.getJsonString("wsdlURI").getString();
-    String bindingName = configuration.getJsonString("binding").getString();
-    logger.info("input wsdl url {}", wsdlAddress);
+    logger.info("Input model configuration: {}", JSON.stringify(configuration));
+    String wsdlUrl = null;
+    String bindingName = null;
+    try {
+      bindingName = Utils.getBinding(configuration);
+      wsdlUrl = Utils.getWsdlUrl(configuration);
+    } catch (NullPointerException npe) {
+      throw new RuntimeException("WSDL URL and Binding Name can not be empty");
+    }
+    logger.info("Input wsdl url: {}, binding: {}", wsdlUrl, bindingName);
 
-    WSDLParser parser = new WSDLParser();
-    Definitions defs = parser.parse(wsdlAddress);
-    List<Binding> bindingList = defs.getBindings();
+    List<Binding> bindingList = getDefinitionsFromWsdl(wsdlUrl).getBindings();
     final JsonObjectBuilder builder = Json.createObjectBuilder();
+    String finalBindingName = bindingName;
     bindingList.stream()
-        .filter(binding -> binding.getName().equals(bindingName))
+        .filter(binding -> binding.getName().equals(finalBindingName))
         .collect(Collectors.toList())
         .forEach(binding -> binding.getOperations()
             .forEach(
                 bindingOperation -> builder
                     .add(bindingOperation.getName(), bindingOperation.getName())));
     return builder.build();
+  }
+
+  /**
+   * Method calls external WSDL by its URL and parses it
+   *
+   * @return {@link Definitions} object
+   */
+  public Definitions getDefinitionsFromWsdl(String wsdlUrl) {
+    WSDLParser parser = new WSDLParser();
+    return parser.parse(wsdlUrl);
   }
 }

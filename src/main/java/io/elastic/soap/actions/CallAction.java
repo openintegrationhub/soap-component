@@ -3,11 +3,10 @@ package io.elastic.soap.actions;
 import io.elastic.api.ExecutionParameters;
 import io.elastic.api.Message;
 import io.elastic.api.Module;
+import io.elastic.soap.services.SoapCallService;
+import javax.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.json.JsonObject;
-import javax.json.JsonString;
 
 /**
  * Action to create a pet.
@@ -17,41 +16,32 @@ public class CallAction implements Module {
   private static final Logger logger = LoggerFactory.getLogger(CallAction.class);
 
   /**
-   * Executes the io.elastic.soap.actions's logic by sending a request to the Petstore API and emitting response to
-   * the platform.
+   * Executes the io.elastic.soap.actions's logic by sending a request to the SOAP Service and
+   * emitting response to the platform.
    *
    * @param parameters execution parameters
    */
   @Override
   public void execute(final ExecutionParameters parameters) {
-    logger.info("About to create new pet");
-    // incoming message
+
     final Message message = parameters.getMessage();
+    logger.info("Input message: {}", message);
 
-    // body contains the mapped data
     final JsonObject body = message.getBody();
-
-    // contains action's configuration
     final JsonObject configuration = parameters.getConfiguration();
 
-    // access the value of the mapped value into name field of the in-metadata
-    final JsonString name = body.getJsonString("name");
-    if (name == null) {
-      throw new IllegalStateException("Name is required");
+    JsonObject outputBody = null;
+    SoapCallService soapCallService = new SoapCallService();
+    try {
+      outputBody = soapCallService.call(body, configuration);
+    } catch (Throwable throwable) {
+      logger.error("Unexpected internal component error: {}", throwable.getMessage());
+      throw new RuntimeException(throwable);
+      //throw new RuntimeException("Unexpected internal component error: " + throwable.getMessage());
     }
 
-    // access the value of the mapped value into name field of the in-metadata
-    final JsonString status = body.getJsonString("status");
-    if (status == null) {
-      throw new IllegalStateException("Status is required");
-    }
-
-    logger.info("Pet successfully created");
-
-    final Message data
-        = new Message.Builder().body(body).build();
-
-    logger.info("Emitting data");
+    final Message data = new Message.Builder().body(outputBody).build();
+    logger.info("Emitting data: {}", outputBody);
 
     // emitting the message to the platform
     parameters.getEventEmitter().emitData(data);
