@@ -1,4 +1,9 @@
-<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.xignite.com/services/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.xignite.com/services/">
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.xignite.com/services/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.xignite.com/services/">
   <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
     Provide real-time currency foreign exchange information and calculations.
   </wsdl:documentation>
@@ -10,7 +15,8 @@
       <s:element name="ListCurrenciesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListCurrenciesResult" type="tns:CurrencyList"/>
+            <s:element minOccurs="0" maxOccurs="1" name="ListCurrenciesResult"
+              type="tns:CurrencyList"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -18,7 +24,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:Common">
             <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="Currencies" type="tns:ArrayOfCurrencyItem"/>
+              <s:element minOccurs="0" maxOccurs="1" name="Currencies"
+                type="tns:ArrayOfCurrencyItem"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -41,7 +48,8 @@
       </s:simpleType>
       <s:complexType name="ArrayOfCurrencyItem">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CurrencyItem" nillable="true" type="tns:CurrencyItem"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CurrencyItem" nillable="true"
+            type="tns:CurrencyItem"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="CurrencyItem">
@@ -57,7 +65,8 @@
       </s:complexType>
       <s:complexType name="ArrayOfCountry">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Country" nillable="true" type="tns:Country"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Country" nillable="true"
+            type="tns:Country"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="Country">
@@ -84,7 +93,8 @@
       <s:element name="ListActiveCurrenciesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListActiveCurrenciesResult" type="tns:CurrencyList"/>
+            <s:element minOccurs="0" maxOccurs="1" name="ListActiveCurrenciesResult"
+              type="tns:CurrencyList"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -94,7 +104,8 @@
       <s:element name="ListOfficialRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ListOfficialRatesResult" type="tns:OfficialRates"/>
+            <s:element minOccurs="0" maxOccurs="1" name="ListOfficialRatesResult"
+              type="tns:OfficialRates"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -102,25 +113,29 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:Common">
             <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="CountryList" type="tns:ArrayOfOfficialCountry"/>
+              <s:element minOccurs="0" maxOccurs="1" name="CountryList"
+                type="tns:ArrayOfOfficialCountry"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:complexType name="ArrayOfOfficialCountry">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="OfficialCountry" nillable="true" type="tns:OfficialCountry"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OfficialCountry" nillable="true"
+            type="tns:OfficialCountry"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="OfficialCountry">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string"/>
-          <s:element minOccurs="0" maxOccurs="1" name="OfficialCurrencies" type="tns:ArrayOfOfficialCurrency"/>
+          <s:element minOccurs="0" maxOccurs="1" name="OfficialCurrencies"
+            type="tns:ArrayOfOfficialCurrency"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfOfficialCurrency">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="OfficialCurrency" nillable="true" type="tns:OfficialCurrency"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OfficialCurrency" nillable="true"
+            type="tns:OfficialCurrency"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="OfficialCurrency">
@@ -141,7 +156,8 @@
       <s:element name="GetUnitOfAccountResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetUnitOfAccountResult" type="tns:UnitOfAccount"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUnitOfAccountResult"
+              type="tns:UnitOfAccount"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -168,7 +184,8 @@
       <s:element name="ConvertRealTimeValueResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ConvertRealTimeValueResult" type="tns:ExchangeConversion"/>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvertRealTimeValueResult"
+              type="tns:ExchangeConversion"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -457,7 +474,8 @@
       <s:element name="ConvertHistoricalValueResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ConvertHistoricalValueResult" type="tns:ExchangeConversion"/>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvertHistoricalValueResult"
+              type="tns:ExchangeConversion"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -472,7 +490,8 @@
       <s:element name="GetRealTimeForwardRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeForwardRateResult" type="tns:ForwardRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeForwardRateResult"
+              type="tns:ForwardRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -497,7 +516,8 @@
       </s:complexType>
       <s:complexType name="ArrayOfForward">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Forward" nillable="true" type="tns:Forward"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Forward" nillable="true"
+            type="tns:Forward"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="Forward">
@@ -547,7 +567,8 @@
       <s:element name="GetRealTimeCrossRateAsStringResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateAsStringResult" type="tns:CrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateAsStringResult"
+              type="tns:CrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -590,7 +611,8 @@
       <s:element name="GetLatestCrossRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetLatestCrossRateResult" type="tns:CrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLatestCrossRateResult"
+              type="tns:CrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -605,13 +627,15 @@
       <s:element name="GetLatestCrossRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetLatestCrossRatesResult" type="tns:ArrayOfCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLatestCrossRatesResult"
+              type="tns:ArrayOfCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfCrossRate">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRate" nillable="true" type="tns:CrossRate"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRate" nillable="true"
+            type="tns:CrossRate"/>
         </s:sequence>
       </s:complexType>
       <s:element name="GetRealTimeCrossRate">
@@ -625,7 +649,8 @@
       <s:element name="GetRealTimeCrossRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateResult" type="tns:CrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateResult"
+              type="tns:CrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -640,7 +665,8 @@
       <s:element name="GetRealTimeCrossRateGMTResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateGMTResult" type="tns:CrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateGMTResult"
+              type="tns:CrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -655,7 +681,8 @@
       <s:element name="GetRawCrossRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRawCrossRateResult" type="tns:CrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRawCrossRateResult"
+              type="tns:CrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -669,7 +696,8 @@
       <s:element name="GetRawCrossRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRawCrossRatesResult" type="tns:ArrayOfCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRawCrossRatesResult"
+              type="tns:ArrayOfCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -683,7 +711,8 @@
       <s:element name="GetRealTimeCrossRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRatesResult" type="tns:ArrayOfCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRatesResult"
+              type="tns:ArrayOfCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -699,27 +728,31 @@
       <s:element name="GetHistoricalCrossRateTablesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTablesResult" type="tns:ArrayOfCrossRateTable"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTablesResult"
+              type="tns:ArrayOfCrossRateTable"/>
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfCrossRateTable">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTable" nillable="true" type="tns:CrossRateTable"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTable" nillable="true"
+            type="tns:CrossRateTable"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="CrossRateTable">
         <s:complexContent mixed="false">
           <s:extension base="tns:Common">
             <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="Lines" type="tns:ArrayOfCrossRateTableLine"/>
+              <s:element minOccurs="0" maxOccurs="1" name="Lines"
+                type="tns:ArrayOfCrossRateTableLine"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:complexType name="ArrayOfCrossRateTableLine">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTableLine" nillable="true" type="tns:CrossRateTableLine"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTableLine" nillable="true"
+            type="tns:CrossRateTableLine"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="CrossRateTableLine">
@@ -727,14 +760,16 @@
           <s:extension base="tns:Common">
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="From" type="tns:Currency"/>
-              <s:element minOccurs="0" maxOccurs="1" name="ExchangeRates" type="tns:ArrayOfExchangeRate"/>
+              <s:element minOccurs="0" maxOccurs="1" name="ExchangeRates"
+                type="tns:ArrayOfExchangeRate"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:complexType name="ArrayOfExchangeRate">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="ExchangeRate" nillable="true" type="tns:ExchangeRate"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExchangeRate" nillable="true"
+            type="tns:ExchangeRate"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="ExchangeRate">
@@ -762,27 +797,31 @@
       <s:element name="GetHistoricalCrossRateTablesBidAskResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTablesBidAskResult" type="tns:ArrayOfCrossRateTableWithBidAsk"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTablesBidAskResult"
+              type="tns:ArrayOfCrossRateTableWithBidAsk"/>
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfCrossRateTableWithBidAsk">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTableWithBidAsk" nillable="true" type="tns:CrossRateTableWithBidAsk"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTableWithBidAsk"
+            nillable="true" type="tns:CrossRateTableWithBidAsk"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="CrossRateTableWithBidAsk">
         <s:complexContent mixed="false">
           <s:extension base="tns:Common">
             <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="Lines" type="tns:ArrayOfCrossRateTableLineWithBidAsk"/>
+              <s:element minOccurs="0" maxOccurs="1" name="Lines"
+                type="tns:ArrayOfCrossRateTableLineWithBidAsk"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:complexType name="ArrayOfCrossRateTableLineWithBidAsk">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTableLineWithBidAsk" nillable="true" type="tns:CrossRateTableLineWithBidAsk"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateTableLineWithBidAsk"
+            nillable="true" type="tns:CrossRateTableLineWithBidAsk"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="CrossRateTableLineWithBidAsk">
@@ -790,7 +829,8 @@
           <s:extension base="tns:Common">
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="From" type="tns:Currency"/>
-              <s:element minOccurs="0" maxOccurs="1" name="ExchangeRates" type="tns:ArrayOfCrossRate"/>
+              <s:element minOccurs="0" maxOccurs="1" name="ExchangeRates"
+                type="tns:ArrayOfCrossRate"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -808,7 +848,8 @@
       <s:element name="GetCurrencyReportResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyReportResult" type="tns:Report"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyReportResult"
+              type="tns:Report"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -824,7 +865,8 @@
       </s:complexType>
       <s:complexType name="ArrayOfLine">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Line" nillable="true" type="tns:Line"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Line" nillable="true"
+            type="tns:Line"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="Line">
@@ -881,7 +923,8 @@
       <s:element name="GetHistoricalCrossRateTableResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTableResult" type="tns:CrossRateTable"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTableResult"
+              type="tns:CrossRateTable"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -896,7 +939,8 @@
       <s:element name="GetHistoricalCrossRateTableBidAskResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTableBidAskResult" type="tns:CrossRateTableWithBidAsk"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTableBidAskResult"
+              type="tns:CrossRateTableWithBidAsk"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -910,7 +954,8 @@
       <s:element name="GetRealTimeCrossRateTableResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateTableResult" type="tns:CrossRateTable"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateTableResult"
+              type="tns:CrossRateTable"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -924,7 +969,8 @@
       <s:element name="GetRealTimeCrossRateTableWithBidAskResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateTableWithBidAskResult" type="tns:CrossRateTableWithBidAsk"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateTableWithBidAskResult"
+              type="tns:CrossRateTableWithBidAsk"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -938,7 +984,8 @@
       <s:element name="GetAllCrossRatesForACurrencyResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetAllCrossRatesForACurrencyResult" type="tns:CrossRateTableLineWithBidAsk"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllCrossRatesForACurrencyResult"
+              type="tns:CrossRateTableLineWithBidAsk"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -955,7 +1002,8 @@
       <s:element name="GetRealTimeCrossRateTableAsHTMLResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateTableAsHTMLResult" type="tns:HTMLCrossRateTable"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRealTimeCrossRateTableAsHTMLResult"
+              type="tns:HTMLCrossRateTable"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -981,7 +1029,8 @@
       <s:element name="GetSimpleRealTimeCrossRateTableAsHTMLResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetSimpleRealTimeCrossRateTableAsHTMLResult" type="tns:HTMLCrossRateTable"/>
+            <s:element minOccurs="0" maxOccurs="1"
+              name="GetSimpleRealTimeCrossRateTableAsHTMLResult" type="tns:HTMLCrossRateTable"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -999,7 +1048,8 @@
       <s:element name="GetHistoricalCrossRateTableAsHTMLResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTableAsHTMLResult" type="tns:HTMLCrossRateTable"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateTableAsHTMLResult"
+              type="tns:HTMLCrossRateTable"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1014,7 +1064,8 @@
       <s:element name="GetHistoricalCrossRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateResult" type="tns:HistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateResult"
+              type="tns:HistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1047,13 +1098,15 @@
       <s:element name="GetHistoricalCrossRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesResult" type="tns:ArrayOfHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesResult"
+              type="tns:ArrayOfHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfHistoricalCrossRate">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoricalCrossRate" nillable="true" type="tns:HistoricalCrossRate"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoricalCrossRate" nillable="true"
+            type="tns:HistoricalCrossRate"/>
         </s:sequence>
       </s:complexType>
       <s:element name="GetHistoricalCrossRateBidAsk">
@@ -1067,7 +1120,8 @@
       <s:element name="GetHistoricalCrossRateBidAskResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateBidAskResult" type="tns:FullHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRateBidAskResult"
+              type="tns:FullHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1102,13 +1156,15 @@
       <s:element name="GetHistoricalCrossRatesBidAskResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesBidAskResult" type="tns:ArrayOfFullHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesBidAskResult"
+              type="tns:ArrayOfFullHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfFullHistoricalCrossRate">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="FullHistoricalCrossRate" nillable="true" type="tns:FullHistoricalCrossRate"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FullHistoricalCrossRate"
+            nillable="true" type="tns:FullHistoricalCrossRate"/>
         </s:sequence>
       </s:complexType>
       <s:element name="GetHistoricalCrossRatesRange">
@@ -1123,7 +1179,8 @@
       <s:element name="GetHistoricalCrossRatesRangeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesRangeResult" type="tns:HistoricalCrossRates"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesRangeResult"
+              type="tns:HistoricalCrossRates"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1136,14 +1193,16 @@
               <s:element minOccurs="0" maxOccurs="1" name="To" type="tns:Currency"/>
               <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
               <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
-              <s:element minOccurs="0" maxOccurs="1" name="CrossRates" type="tns:ArrayOfCrossRateItem"/>
+              <s:element minOccurs="0" maxOccurs="1" name="CrossRates"
+                type="tns:ArrayOfCrossRateItem"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:complexType name="ArrayOfCrossRateItem">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateItem" nillable="true" type="tns:CrossRateItem"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CrossRateItem" nillable="true"
+            type="tns:CrossRateItem"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="CrossRateItem">
@@ -1167,7 +1226,8 @@
       <s:element name="GetHistoricalCrossRatesBidAskRangeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesBidAskRangeResult" type="tns:FullHistoricalCrossRates"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesBidAskRangeResult"
+              type="tns:FullHistoricalCrossRates"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1180,14 +1240,16 @@
               <s:element minOccurs="0" maxOccurs="1" name="To" type="tns:Currency"/>
               <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
               <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
-              <s:element minOccurs="0" maxOccurs="1" name="CrossRates" type="tns:ArrayOfFullCrossRateItem"/>
+              <s:element minOccurs="0" maxOccurs="1" name="CrossRates"
+                type="tns:ArrayOfFullCrossRateItem"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:complexType name="ArrayOfFullCrossRateItem">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="FullCrossRateItem" nillable="true" type="tns:FullCrossRateItem"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FullCrossRateItem" nillable="true"
+            type="tns:FullCrossRateItem"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="FullCrossRateItem">
@@ -1223,7 +1285,8 @@
       <s:element name="GetHistoricalCrossRatesAsOfResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesAsOfResult" type="tns:HistoricalCrossRates"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesAsOfResult"
+              type="tns:HistoricalCrossRates"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1240,7 +1303,8 @@
       <s:element name="GetHistoricalCrossRatesBidAskAsOfResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesBidAskAsOfResult" type="tns:FullHistoricalCrossRates"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalCrossRatesBidAskAsOfResult"
+              type="tns:FullHistoricalCrossRates"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1288,7 +1352,8 @@
       <s:element name="GetOfficialCrossRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRateResult" type="tns:HistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRateResult"
+              type="tns:HistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1304,7 +1369,8 @@
       <s:element name="GetOfficialCrossRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRatesResult" type="tns:ArrayOfHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRatesResult"
+              type="tns:ArrayOfHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1320,7 +1386,8 @@
       <s:element name="GetOfficialCrossRateBidAskResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRateBidAskResult" type="tns:FullHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRateBidAskResult"
+              type="tns:FullHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1336,7 +1403,8 @@
       <s:element name="GetOfficialCrossRatesBidAskResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRatesBidAskResult" type="tns:ArrayOfFullHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOfficialCrossRatesBidAskResult"
+              type="tns:ArrayOfFullHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1351,7 +1419,8 @@
       <s:element name="GetMutipleHistoricalCrossRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetMutipleHistoricalCrossRatesResult" type="tns:MultipleHistoricalCrossRates"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMutipleHistoricalCrossRatesResult"
+              type="tns:MultipleHistoricalCrossRates"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1359,7 +1428,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:Common">
             <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="HistoricalCrossRates" type="tns:ArrayOfFullHistoricalCrossRate"/>
+              <s:element minOccurs="0" maxOccurs="1" name="HistoricalCrossRates"
+                type="tns:ArrayOfFullHistoricalCrossRate"/>
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -1376,13 +1446,15 @@
       <s:element name="GetAverageHistoricalCrossRatesResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetAverageHistoricalCrossRatesResult" type="tns:ArrayOfAverageHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAverageHistoricalCrossRatesResult"
+              type="tns:ArrayOfAverageHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="ArrayOfAverageHistoricalCrossRate">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="AverageHistoricalCrossRate" nillable="true" type="tns:AverageHistoricalCrossRate"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AverageHistoricalCrossRate"
+            nillable="true" type="tns:AverageHistoricalCrossRate"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="AverageHistoricalCrossRate">
@@ -1418,7 +1490,8 @@
       <s:element name="GetAverageHistoricalCrossRateResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetAverageHistoricalCrossRateResult" type="tns:AverageHistoricalCrossRate"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAverageHistoricalCrossRateResult"
+              type="tns:AverageHistoricalCrossRate"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1434,7 +1507,8 @@
       <s:element name="GetHistoricalMonthlyCrossRatesRangeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalMonthlyCrossRatesRangeResult" type="tns:FullHistoricalCrossRates"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalMonthlyCrossRatesRangeResult"
+              type="tns:FullHistoricalCrossRates"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1448,7 +1522,8 @@
       <s:element name="GetCrossRateChangeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCrossRateChangeResult" type="tns:CrossRateChange"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCrossRateChangeResult"
+              type="tns:CrossRateChange"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1472,7 +1547,8 @@
       </s:complexType>
       <s:complexType name="ArrayOfChange">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Change" nillable="true" type="tns:Change"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Change" nillable="true"
+            type="tns:Change"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="Change">
@@ -1498,7 +1574,8 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
-            <s:element minOccurs="1" maxOccurs="1" name="PeriodType" type="tns:HistoricalPeriodTypes"/>
+            <s:element minOccurs="1" maxOccurs="1" name="PeriodType"
+              type="tns:HistoricalPeriodTypes"/>
             <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
             <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
             <s:element minOccurs="1" maxOccurs="1" name="Style" type="tns:StockChartStyles"/>
@@ -1571,8 +1648,10 @@
               <s:element minOccurs="0" maxOccurs="1" name="ColorDown" type="s:string"/>
               <s:element minOccurs="0" maxOccurs="1" name="ColorHighLowLine" type="s:string"/>
               <s:element minOccurs="0" maxOccurs="1" name="ColorCollection" type="s:string"/>
-              <s:element minOccurs="1" maxOccurs="1" name="GridHorizontalStyle" type="tns:LinePattern"/>
-              <s:element minOccurs="1" maxOccurs="1" name="GridVerticalStyle" type="tns:LinePattern"/>
+              <s:element minOccurs="1" maxOccurs="1" name="GridHorizontalStyle"
+                type="tns:LinePattern"/>
+              <s:element minOccurs="1" maxOccurs="1" name="GridVerticalStyle"
+                type="tns:LinePattern"/>
               <s:element minOccurs="1" maxOccurs="1" name="GridHorizontalWidth" type="s:int"/>
               <s:element minOccurs="1" maxOccurs="1" name="GridVerticalWidth" type="s:int"/>
               <s:element minOccurs="0" maxOccurs="1" name="ColorFrame" type="s:string"/>
@@ -1604,7 +1683,8 @@
               <s:element minOccurs="1" maxOccurs="1" name="VolumeTextOffset" type="s:int"/>
               <s:element minOccurs="1" maxOccurs="1" name="PriceTextOffset" type="s:int"/>
               <s:element minOccurs="1" maxOccurs="1" name="FrameType" type="tns:ImageFrameType"/>
-              <s:element minOccurs="1" maxOccurs="1" name="Projection" type="tns:PredefinedProjection"/>
+              <s:element minOccurs="1" maxOccurs="1" name="Projection"
+                type="tns:PredefinedProjection"/>
               <s:element minOccurs="1" maxOccurs="1" name="MarginTop" type="s:int"/>
               <s:element minOccurs="1" maxOccurs="1" name="MarginBottom" type="s:int"/>
               <s:element minOccurs="1" maxOccurs="1" name="MarginLeft" type="s:int"/>
@@ -1624,8 +1704,10 @@
               <s:element minOccurs="1" maxOccurs="1" name="ShowPriceChartLabels" type="s:boolean"/>
               <s:element minOccurs="1" maxOccurs="1" name="TickPrecision" type="tns:TickPeriod"/>
               <s:element minOccurs="1" maxOccurs="1" name="TickPeriods" type="s:int"/>
-              <s:element minOccurs="1" maxOccurs="1" name="WaterMarkHorizontalAlign" type="tns:HorzAlign"/>
-              <s:element minOccurs="1" maxOccurs="1" name="LightScheme" type="tns:PredefinedLightModel"/>
+              <s:element minOccurs="1" maxOccurs="1" name="WaterMarkHorizontalAlign"
+                type="tns:HorzAlign"/>
+              <s:element minOccurs="1" maxOccurs="1" name="LightScheme"
+                type="tns:PredefinedLightModel"/>
               <s:element minOccurs="1" maxOccurs="1" name="FontSizeLegend" type="s:int"/>
               <s:element minOccurs="1" maxOccurs="1" name="FontSizeAxes" type="s:int"/>
               <s:element minOccurs="1" maxOccurs="1" name="FontSizeTitle" type="s:int"/>
@@ -1720,7 +1802,8 @@
       <s:element name="GetCurrencyChartCustomResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartCustomResult" type="tns:HistoricalChart"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartCustomResult"
+              type="tns:HistoricalChart"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1728,7 +1811,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:StockChart">
             <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="PeriodType" type="tns:HistoricalPeriodTypes"/>
+              <s:element minOccurs="1" maxOccurs="1" name="PeriodType"
+                type="tns:HistoricalPeriodTypes"/>
               <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
               <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
               <s:element minOccurs="1" maxOccurs="1" name="Width" type="s:int"/>
@@ -1753,7 +1837,8 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
-            <s:element minOccurs="1" maxOccurs="1" name="PeriodType" type="tns:HistoricalPeriodTypes"/>
+            <s:element minOccurs="1" maxOccurs="1" name="PeriodType"
+              type="tns:HistoricalPeriodTypes"/>
             <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
             <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
             <s:element minOccurs="1" maxOccurs="1" name="Style" type="tns:StockChartStyles"/>
@@ -1766,7 +1851,8 @@
       <s:element name="GetCurrencyChartCustomBinaryResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartCustomBinaryResult" type="tns:ChartBinary"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartCustomBinaryResult"
+              type="tns:ChartBinary"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1783,7 +1869,8 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
-            <s:element minOccurs="1" maxOccurs="1" name="PeriodType" type="tns:HistoricalPeriodTypes"/>
+            <s:element minOccurs="1" maxOccurs="1" name="PeriodType"
+              type="tns:HistoricalPeriodTypes"/>
             <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
             <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
             <s:element minOccurs="1" maxOccurs="1" name="Style" type="tns:StockChartStyles"/>
@@ -1796,7 +1883,8 @@
       <s:element name="GetCurrencyChartResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartResult" type="tns:HistoricalChart"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartResult"
+              type="tns:HistoricalChart"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1804,7 +1892,8 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
-            <s:element minOccurs="1" maxOccurs="1" name="PeriodType" type="tns:HistoricalPeriodTypes"/>
+            <s:element minOccurs="1" maxOccurs="1" name="PeriodType"
+              type="tns:HistoricalPeriodTypes"/>
             <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
             <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
             <s:element minOccurs="1" maxOccurs="1" name="Style" type="tns:StockChartStyles"/>
@@ -1817,7 +1906,8 @@
       <s:element name="GetCurrencyChartBinaryResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartBinaryResult" type="tns:ChartBinary"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyChartBinaryResult"
+              type="tns:ChartBinary"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1840,7 +1930,8 @@
       <s:element name="GetCurrencyIntradayChartResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyIntradayChartResult" type="tns:CurrencyChartIntraday"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyIntradayChartResult"
+              type="tns:CurrencyChartIntraday"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1879,7 +1970,8 @@
       <s:element name="GetCurrencyIntradayChartCustomBinaryResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyIntradayChartCustomBinaryResult" type="tns:ChartBinary"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyIntradayChartCustomBinaryResult"
+              type="tns:ChartBinary"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1902,7 +1994,8 @@
       <s:element name="GetCurrencyIntradayChartCustomResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyIntradayChartCustomResult" type="tns:CurrencyChartIntraday"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrencyIntradayChartCustomResult"
+              type="tns:CurrencyChartIntraday"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1912,7 +2005,8 @@
       <s:element name="GetChartDesignResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetChartDesignResult" type="tns:ChartDesign"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetChartDesignResult"
+              type="tns:ChartDesign"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1974,7 +2068,8 @@
       </s:complexType>
       <s:complexType name="ArrayOfTick">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Tick" nillable="true" type="tns:Tick"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Tick" nillable="true"
+            type="tns:Tick"/>
         </s:sequence>
       </s:complexType>
       <s:complexType name="Tick">
@@ -2000,7 +2095,8 @@
       <s:element name="GetHistoricalTicksResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalTicksResult" type="tns:Ticks"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalTicksResult"
+              type="tns:Ticks"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -2016,7 +2112,8 @@
       <s:element name="GetHistoricalHighLowResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalHighLowResult" type="tns:HighLowTick"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHistoricalHighLowResult"
+              type="tns:HighLowTick"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -2050,7 +2147,8 @@
       <s:element name="GetIntradayHighLowResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetIntradayHighLowResult" type="tns:HighLowTick"/>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIntradayHighLowResult"
+              type="tns:HighLowTick"/>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -2062,21 +2160,30 @@
       <s:element name="CrossRate" nillable="true" type="tns:CrossRate"/>
       <s:element name="ArrayOfCrossRate" nillable="true" type="tns:ArrayOfCrossRate"/>
       <s:element name="ArrayOfCrossRateTable" nillable="true" type="tns:ArrayOfCrossRateTable"/>
-      <s:element name="ArrayOfCrossRateTableWithBidAsk" nillable="true" type="tns:ArrayOfCrossRateTableWithBidAsk"/>
+      <s:element name="ArrayOfCrossRateTableWithBidAsk" nillable="true"
+        type="tns:ArrayOfCrossRateTableWithBidAsk"/>
       <s:element name="Report" nillable="true" type="tns:Report"/>
       <s:element name="CrossRateTable" nillable="true" type="tns:CrossRateTable"/>
-      <s:element name="CrossRateTableWithBidAsk" nillable="true" type="tns:CrossRateTableWithBidAsk"/>
-      <s:element name="CrossRateTableLineWithBidAsk" nillable="true" type="tns:CrossRateTableLineWithBidAsk"/>
+      <s:element name="CrossRateTableWithBidAsk" nillable="true"
+        type="tns:CrossRateTableWithBidAsk"/>
+      <s:element name="CrossRateTableLineWithBidAsk" nillable="true"
+        type="tns:CrossRateTableLineWithBidAsk"/>
       <s:element name="HTMLCrossRateTable" nillable="true" type="tns:HTMLCrossRateTable"/>
       <s:element name="HistoricalCrossRate" nillable="true" type="tns:HistoricalCrossRate"/>
-      <s:element name="ArrayOfHistoricalCrossRate" nillable="true" type="tns:ArrayOfHistoricalCrossRate"/>
+      <s:element name="ArrayOfHistoricalCrossRate" nillable="true"
+        type="tns:ArrayOfHistoricalCrossRate"/>
       <s:element name="FullHistoricalCrossRate" nillable="true" type="tns:FullHistoricalCrossRate"/>
-      <s:element name="ArrayOfFullHistoricalCrossRate" nillable="true" type="tns:ArrayOfFullHistoricalCrossRate"/>
+      <s:element name="ArrayOfFullHistoricalCrossRate" nillable="true"
+        type="tns:ArrayOfFullHistoricalCrossRate"/>
       <s:element name="HistoricalCrossRates" nillable="true" type="tns:HistoricalCrossRates"/>
-      <s:element name="FullHistoricalCrossRates" nillable="true" type="tns:FullHistoricalCrossRates"/>
-      <s:element name="MultipleHistoricalCrossRates" nillable="true" type="tns:MultipleHistoricalCrossRates"/>
-      <s:element name="ArrayOfAverageHistoricalCrossRate" nillable="true" type="tns:ArrayOfAverageHistoricalCrossRate"/>
-      <s:element name="AverageHistoricalCrossRate" nillable="true" type="tns:AverageHistoricalCrossRate"/>
+      <s:element name="FullHistoricalCrossRates" nillable="true"
+        type="tns:FullHistoricalCrossRates"/>
+      <s:element name="MultipleHistoricalCrossRates" nillable="true"
+        type="tns:MultipleHistoricalCrossRates"/>
+      <s:element name="ArrayOfAverageHistoricalCrossRate" nillable="true"
+        type="tns:ArrayOfAverageHistoricalCrossRate"/>
+      <s:element name="AverageHistoricalCrossRate" nillable="true"
+        type="tns:AverageHistoricalCrossRate"/>
       <s:element name="CrossRateChange" nillable="true" type="tns:CrossRateChange"/>
       <s:element name="HistoricalChart" nillable="true" type="tns:HistoricalChart"/>
       <s:element name="ChartBinary" nillable="true" type="tns:ChartBinary"/>
@@ -3397,22 +3504,27 @@
   </wsdl:message>
   <wsdl:portType name="XigniteCurrenciesSoap">
     <wsdl:operation name="ListCurrencies">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListCurrenciesSoapIn"/>
       <wsdl:output message="tns:ListCurrenciesSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="ListActiveCurrencies">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListActiveCurrenciesSoapIn"/>
       <wsdl:output message="tns:ListActiveCurrenciesSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="ListOfficialRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported official rates.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported official
+        rates.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListOfficialRatesSoapIn"/>
       <wsdl:output message="tns:ListOfficialRatesSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetUnitOfAccount">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Unit Of Account.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Unit Of Account.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetUnitOfAccountSoapIn"/>
       <wsdl:output message="tns:GetUnitOfAccountSoapOut"/>
     </wsdl:operation>
@@ -3431,27 +3543,37 @@
       <wsdl:output message="tns:ConvertHistoricalValueSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeForwardRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a set of real-time currency forward rates.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a set of real-time
+        currency forward rates.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeForwardRateSoapIn"/>
       <wsdl:output message="tns:GetRealTimeForwardRateSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateAsString">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateAsStringSoapIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateAsStringSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetLatestCrossRateSoapIn"/>
       <wsdl:output message="tns:GetLatestCrossRateSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetLatestCrossRatesSoapIn"/>
       <wsdl:output message="tns:GetLatestCrossRatesSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateSoapIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateSoapOut"/>
     </wsdl:operation>
@@ -3463,17 +3585,23 @@
       <wsdl:output message="tns:GetRealTimeCrossRateGMTSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRawCrossRateSoapIn"/>
       <wsdl:output message="tns:GetRawCrossRateSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRawCrossRatesSoapIn"/>
       <wsdl:output message="tns:GetRawCrossRatesSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRatesSoapIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRatesSoapOut"/>
     </wsdl:operation>
@@ -3499,27 +3627,37 @@
       <wsdl:output message="tns:GetCurrencyReportSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTable">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical
+        currency cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateTableSoapIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateTableSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTableBidAsk">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical
+        currency cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateTableBidAskSoapIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateTableBidAskSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTable">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateTableSoapIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateTableSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTableWithBidAsk">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateTableWithBidAskSoapIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateTableWithBidAskSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetAllCrossRatesForACurrency">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all valid cross rates for a currency.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all valid cross
+        rates for a currency.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetAllCrossRatesForACurrencySoapIn"/>
       <wsdl:output message="tns:GetAllCrossRatesForACurrencySoapOut"/>
     </wsdl:operation>
@@ -3545,7 +3683,9 @@
       <wsdl:output message="tns:GetHistoricalCrossRateTableAsHTMLSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a cross-rate as of a historical date.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a cross-rate as of a
+        historical date.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateSoapIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateSoapOut"/>
     </wsdl:operation>
@@ -3662,17 +3802,23 @@
       <wsdl:output message="tns:GetCrossRateChangeSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartCustom">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a custom currency chart for a date range.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a custom currency chart
+        for a date range.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyChartCustomSoapIn"/>
       <wsdl:output message="tns:GetCurrencyChartCustomSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartCustomBinary">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a custom currency chart for a date range.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a custom currency chart
+        for a date range.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyChartCustomBinarySoapIn"/>
       <wsdl:output message="tns:GetCurrencyChartCustomBinarySoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChart">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a historical currency chart for a date range.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a historical currency
+        chart for a date range.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyChartSoapIn"/>
       <wsdl:output message="tns:GetCurrencyChartSoapOut"/>
     </wsdl:operation>
@@ -3684,7 +3830,9 @@
       <wsdl:output message="tns:GetCurrencyChartBinarySoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChart">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a intraday currency chart for a time range</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a intraday currency
+        chart for a time range
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyIntradayChartSoapIn"/>
       <wsdl:output message="tns:GetCurrencyIntradayChartSoapOut"/>
     </wsdl:operation>
@@ -3717,12 +3865,16 @@
       <wsdl:output message="tns:GetTickSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetTicks">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for a currency pair.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for
+        a currency pair.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetTicksSoapIn"/>
       <wsdl:output message="tns:GetTicksSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalTicks">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for a currency pair.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for
+        a currency pair.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalTicksSoapIn"/>
       <wsdl:output message="tns:GetHistoricalTicksSoapOut"/>
     </wsdl:operation>
@@ -3734,29 +3886,36 @@
       <wsdl:output message="tns:GetHistoricalHighLowSoapOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetIntradayHighLow">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the high and the low ticks for today.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the high and the low
+        ticks for today.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetIntradayHighLowSoapIn"/>
       <wsdl:output message="tns:GetIntradayHighLowSoapOut"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="XigniteCurrenciesHttpGet">
     <wsdl:operation name="ListCurrencies">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListCurrenciesHttpGetIn"/>
       <wsdl:output message="tns:ListCurrenciesHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="ListActiveCurrencies">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListActiveCurrenciesHttpGetIn"/>
       <wsdl:output message="tns:ListActiveCurrenciesHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="ListOfficialRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported official rates.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported official
+        rates.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListOfficialRatesHttpGetIn"/>
       <wsdl:output message="tns:ListOfficialRatesHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetUnitOfAccount">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Unit Of Account.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Unit Of Account.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetUnitOfAccountHttpGetIn"/>
       <wsdl:output message="tns:GetUnitOfAccountHttpGetOut"/>
     </wsdl:operation>
@@ -3775,27 +3934,37 @@
       <wsdl:output message="tns:ConvertHistoricalValueHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeForwardRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a set of real-time currency forward rates.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a set of real-time
+        currency forward rates.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeForwardRateHttpGetIn"/>
       <wsdl:output message="tns:GetRealTimeForwardRateHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateAsString">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateAsStringHttpGetIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateAsStringHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetLatestCrossRateHttpGetIn"/>
       <wsdl:output message="tns:GetLatestCrossRateHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetLatestCrossRatesHttpGetIn"/>
       <wsdl:output message="tns:GetLatestCrossRatesHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateHttpGetIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateHttpGetOut"/>
     </wsdl:operation>
@@ -3807,17 +3976,23 @@
       <wsdl:output message="tns:GetRealTimeCrossRateGMTHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRawCrossRateHttpGetIn"/>
       <wsdl:output message="tns:GetRawCrossRateHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRawCrossRatesHttpGetIn"/>
       <wsdl:output message="tns:GetRawCrossRatesHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRatesHttpGetIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRatesHttpGetOut"/>
     </wsdl:operation>
@@ -3843,27 +4018,37 @@
       <wsdl:output message="tns:GetCurrencyReportHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTable">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical
+        currency cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateTableHttpGetIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateTableHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTableBidAsk">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical
+        currency cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateTableBidAskHttpGetIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateTableBidAskHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTable">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateTableHttpGetIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateTableHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTableWithBidAsk">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateTableWithBidAskHttpGetIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateTableWithBidAskHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetAllCrossRatesForACurrency">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all valid cross rates for a currency.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all valid cross
+        rates for a currency.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetAllCrossRatesForACurrencyHttpGetIn"/>
       <wsdl:output message="tns:GetAllCrossRatesForACurrencyHttpGetOut"/>
     </wsdl:operation>
@@ -3889,7 +4074,9 @@
       <wsdl:output message="tns:GetHistoricalCrossRateTableAsHTMLHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a cross-rate as of a historical date.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a cross-rate as of a
+        historical date.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateHttpGetIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateHttpGetOut"/>
     </wsdl:operation>
@@ -4006,7 +4193,9 @@
       <wsdl:output message="tns:GetCrossRateChangeHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChart">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a historical currency chart for a date range.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a historical currency
+        chart for a date range.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyChartHttpGetIn"/>
       <wsdl:output message="tns:GetCurrencyChartHttpGetOut"/>
     </wsdl:operation>
@@ -4018,7 +4207,9 @@
       <wsdl:output message="tns:GetCurrencyChartBinaryHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChart">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a intraday currency chart for a time range</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a intraday currency
+        chart for a time range
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyIntradayChartHttpGetIn"/>
       <wsdl:output message="tns:GetCurrencyIntradayChartHttpGetOut"/>
     </wsdl:operation>
@@ -4037,12 +4228,16 @@
       <wsdl:output message="tns:GetTickHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetTicks">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for a currency pair.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for
+        a currency pair.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetTicksHttpGetIn"/>
       <wsdl:output message="tns:GetTicksHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalTicks">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for a currency pair.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for
+        a currency pair.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalTicksHttpGetIn"/>
       <wsdl:output message="tns:GetHistoricalTicksHttpGetOut"/>
     </wsdl:operation>
@@ -4054,29 +4249,36 @@
       <wsdl:output message="tns:GetHistoricalHighLowHttpGetOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetIntradayHighLow">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the high and the low ticks for today.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the high and the low
+        ticks for today.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetIntradayHighLowHttpGetIn"/>
       <wsdl:output message="tns:GetIntradayHighLowHttpGetOut"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="XigniteCurrenciesHttpPost">
     <wsdl:operation name="ListCurrencies">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListCurrenciesHttpPostIn"/>
       <wsdl:output message="tns:ListCurrenciesHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="ListActiveCurrencies">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported currencies.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListActiveCurrenciesHttpPostIn"/>
       <wsdl:output message="tns:ListActiveCurrenciesHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="ListOfficialRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported official rates.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List supported official
+        rates.
+      </wsdl:documentation>
       <wsdl:input message="tns:ListOfficialRatesHttpPostIn"/>
       <wsdl:output message="tns:ListOfficialRatesHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetUnitOfAccount">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Unit Of Account.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Unit Of Account.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetUnitOfAccountHttpPostIn"/>
       <wsdl:output message="tns:GetUnitOfAccountHttpPostOut"/>
     </wsdl:operation>
@@ -4095,27 +4297,37 @@
       <wsdl:output message="tns:ConvertHistoricalValueHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeForwardRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a set of real-time currency forward rates.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a set of real-time
+        currency forward rates.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeForwardRateHttpPostIn"/>
       <wsdl:output message="tns:GetRealTimeForwardRateHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateAsString">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateAsStringHttpPostIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateAsStringHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetLatestCrossRateHttpPostIn"/>
       <wsdl:output message="tns:GetLatestCrossRateHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetLatestCrossRatesHttpPostIn"/>
       <wsdl:output message="tns:GetLatestCrossRatesHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateHttpPostIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateHttpPostOut"/>
     </wsdl:operation>
@@ -4127,17 +4339,23 @@
       <wsdl:output message="tns:GetRealTimeCrossRateGMTHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRawCrossRateHttpPostIn"/>
       <wsdl:output message="tns:GetRawCrossRateHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRawCrossRatesHttpPostIn"/>
       <wsdl:output message="tns:GetRawCrossRatesHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRates">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible cross rate.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the latest possible
+        cross rate.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRatesHttpPostIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRatesHttpPostOut"/>
     </wsdl:operation>
@@ -4163,27 +4381,37 @@
       <wsdl:output message="tns:GetCurrencyReportHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTable">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical
+        currency cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateTableHttpPostIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateTableHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTableBidAsk">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a historical
+        currency cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateTableBidAskHttpPostIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateTableBidAskHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTable">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateTableHttpPostIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateTableHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTableWithBidAsk">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency cross-rate table.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a real-time currency
+        cross-rate table.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetRealTimeCrossRateTableWithBidAskHttpPostIn"/>
       <wsdl:output message="tns:GetRealTimeCrossRateTableWithBidAskHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetAllCrossRatesForACurrency">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all valid cross rates for a currency.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all valid cross
+        rates for a currency.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetAllCrossRatesForACurrencyHttpPostIn"/>
       <wsdl:output message="tns:GetAllCrossRatesForACurrencyHttpPostOut"/>
     </wsdl:operation>
@@ -4209,7 +4437,9 @@
       <wsdl:output message="tns:GetHistoricalCrossRateTableAsHTMLHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRate">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a cross-rate as of a historical date.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a cross-rate as of a
+        historical date.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalCrossRateHttpPostIn"/>
       <wsdl:output message="tns:GetHistoricalCrossRateHttpPostOut"/>
     </wsdl:operation>
@@ -4326,7 +4556,9 @@
       <wsdl:output message="tns:GetCrossRateChangeHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChart">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a historical currency chart for a date range.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a historical currency
+        chart for a date range.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyChartHttpPostIn"/>
       <wsdl:output message="tns:GetCurrencyChartHttpPostOut"/>
     </wsdl:operation>
@@ -4338,7 +4570,9 @@
       <wsdl:output message="tns:GetCurrencyChartBinaryHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChart">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a intraday currency chart for a time range</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Draw a intraday currency
+        chart for a time range
+      </wsdl:documentation>
       <wsdl:input message="tns:GetCurrencyIntradayChartHttpPostIn"/>
       <wsdl:output message="tns:GetCurrencyIntradayChartHttpPostOut"/>
     </wsdl:operation>
@@ -4357,12 +4591,16 @@
       <wsdl:output message="tns:GetTickHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetTicks">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for a currency pair.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for
+        a currency pair.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetTicksHttpPostIn"/>
       <wsdl:output message="tns:GetTicksHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalTicks">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for a currency pair.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a range of ticks for
+        a currency pair.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetHistoricalTicksHttpPostIn"/>
       <wsdl:output message="tns:GetHistoricalTicksHttpPostOut"/>
     </wsdl:operation>
@@ -4374,7 +4612,9 @@
       <wsdl:output message="tns:GetHistoricalHighLowHttpPostOut"/>
     </wsdl:operation>
     <wsdl:operation name="GetIntradayHighLow">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the high and the low ticks for today.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the high and the low
+        ticks for today.
+      </wsdl:documentation>
       <wsdl:input message="tns:GetIntradayHighLowHttpPostIn"/>
       <wsdl:output message="tns:GetIntradayHighLowHttpPostOut"/>
     </wsdl:operation>
@@ -4392,7 +4632,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ListActiveCurrencies">
-      <soap:operation soapAction="http://www.xignite.com/services/ListActiveCurrencies" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/ListActiveCurrencies"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:ListActiveCurrenciesHeader" part="Header" use="literal"/>
@@ -4402,7 +4643,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ListOfficialRates">
-      <soap:operation soapAction="http://www.xignite.com/services/ListOfficialRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/ListOfficialRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:ListOfficialRatesHeader" part="Header" use="literal"/>
@@ -4412,7 +4654,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetUnitOfAccount">
-      <soap:operation soapAction="http://www.xignite.com/services/GetUnitOfAccount" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetUnitOfAccount"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetUnitOfAccountHeader" part="Header" use="literal"/>
@@ -4422,7 +4665,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ConvertRealTimeValue">
-      <soap:operation soapAction="http://www.xignite.com/services/ConvertRealTimeValue" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/ConvertRealTimeValue"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:ConvertRealTimeValueHeader" part="Header" use="literal"/>
@@ -4432,7 +4676,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ConvertHistoricalValue">
-      <soap:operation soapAction="http://www.xignite.com/services/ConvertHistoricalValue" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/ConvertHistoricalValue"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:ConvertHistoricalValueHeader" part="Header" use="literal"/>
@@ -4442,7 +4687,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeForwardRate">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeForwardRate" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeForwardRate"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRealTimeForwardRateHeader" part="Header" use="literal"/>
@@ -4452,7 +4698,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateAsString">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateAsString" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateAsString"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRealTimeCrossRateAsStringHeader" part="Header" use="literal"/>
@@ -4462,7 +4709,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRate">
-      <soap:operation soapAction="http://www.xignite.com/services/GetLatestCrossRate" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetLatestCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetLatestCrossRateHeader" part="Header" use="literal"/>
@@ -4472,7 +4720,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRates">
-      <soap:operation soapAction="http://www.xignite.com/services/GetLatestCrossRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetLatestCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetLatestCrossRatesHeader" part="Header" use="literal"/>
@@ -4482,7 +4731,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRate">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRate" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRealTimeCrossRateHeader" part="Header" use="literal"/>
@@ -4492,7 +4742,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateGMT">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateGMT" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateGMT"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRealTimeCrossRateGMTHeader" part="Header" use="literal"/>
@@ -4502,7 +4753,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRate">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRawCrossRate" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRawCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRawCrossRateHeader" part="Header" use="literal"/>
@@ -4512,7 +4764,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRates">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRawCrossRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRawCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRawCrossRatesHeader" part="Header" use="literal"/>
@@ -4522,7 +4775,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRates">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRealTimeCrossRatesHeader" part="Header" use="literal"/>
@@ -4532,7 +4786,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTables">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTables" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTables"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRateTablesHeader" part="Header" use="literal"/>
@@ -4542,17 +4797,21 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTablesBidAsk">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTablesBidAsk" style="document"/>
+      <soap:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTablesBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetHistoricalCrossRateTablesBidAskHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetHistoricalCrossRateTablesBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyReport">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyReport" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyReport"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetCurrencyReportHeader" part="Header" use="literal"/>
@@ -4562,7 +4821,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTable">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTable" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTable"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRateTableHeader" part="Header" use="literal"/>
@@ -4572,17 +4832,20 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTableBidAsk">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableBidAsk" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetHistoricalCrossRateTableBidAskHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetHistoricalCrossRateTableBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTable">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTable" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTable"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetRealTimeCrossRateTableHeader" part="Header" use="literal"/>
@@ -4592,17 +4855,21 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTableWithBidAsk">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableWithBidAsk" style="document"/>
+      <soap:operation
+        soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableWithBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetRealTimeCrossRateTableWithBidAskHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetRealTimeCrossRateTableWithBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAllCrossRatesForACurrency">
-      <soap:operation soapAction="http://www.xignite.com/services/GetAllCrossRatesForACurrency" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetAllCrossRatesForACurrency"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetAllCrossRatesForACurrencyHeader" part="Header" use="literal"/>
@@ -4612,37 +4879,45 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTableAsHTML">
-      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableAsHTML" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableAsHTML"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetRealTimeCrossRateTableAsHTMLHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetRealTimeCrossRateTableAsHTMLHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetSimpleRealTimeCrossRateTableAsHTML">
-      <soap:operation soapAction="http://www.xignite.com/services/GetSimpleRealTimeCrossRateTableAsHTML" style="document"/>
+      <soap:operation
+        soapAction="http://www.xignite.com/services/GetSimpleRealTimeCrossRateTableAsHTML"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetSimpleRealTimeCrossRateTableAsHTMLHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetSimpleRealTimeCrossRateTableAsHTMLHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTableAsHTML">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableAsHTML" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableAsHTML"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetHistoricalCrossRateTableAsHTMLHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetHistoricalCrossRateTableAsHTMLHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRate">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRate" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRateHeader" part="Header" use="literal"/>
@@ -4652,7 +4927,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRates">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRatesHeader" part="Header" use="literal"/>
@@ -4662,7 +4938,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateBidAsk">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateBidAsk" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRateBidAskHeader" part="Header" use="literal"/>
@@ -4672,7 +4949,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesBidAsk">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAsk" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRatesBidAskHeader" part="Header" use="literal"/>
@@ -4682,7 +4960,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesRange">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesRange" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesRange"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRatesRangeHeader" part="Header" use="literal"/>
@@ -4692,17 +4971,21 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesBidAskRange">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskRange" style="document"/>
+      <soap:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskRange"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetHistoricalCrossRatesBidAskRangeHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetHistoricalCrossRatesBidAskRangeHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesAsOf">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesAsOf" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesAsOf"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalCrossRatesAsOfHeader" part="Header" use="literal"/>
@@ -4712,17 +4995,20 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesBidAskAsOf">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskAsOf" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskAsOf"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetHistoricalCrossRatesBidAskAsOfHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetHistoricalCrossRatesBidAskAsOfHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRate">
-      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRate" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetOfficialCrossRateHeader" part="Header" use="literal"/>
@@ -4732,7 +5018,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRates">
-      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetOfficialCrossRatesHeader" part="Header" use="literal"/>
@@ -4742,7 +5029,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRateBidAsk">
-      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRateBidAsk" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRateBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetOfficialCrossRateBidAskHeader" part="Header" use="literal"/>
@@ -4752,7 +5040,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRatesBidAsk">
-      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRatesBidAsk" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRatesBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetOfficialCrossRatesBidAskHeader" part="Header" use="literal"/>
@@ -4762,27 +5051,32 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetMutipleHistoricalCrossRates">
-      <soap:operation soapAction="http://www.xignite.com/services/GetMutipleHistoricalCrossRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetMutipleHistoricalCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetMutipleHistoricalCrossRatesHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetMutipleHistoricalCrossRatesHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAverageHistoricalCrossRates">
-      <soap:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRates" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetAverageHistoricalCrossRatesHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetAverageHistoricalCrossRatesHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAverageHistoricalCrossRate">
-      <soap:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRate" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetAverageHistoricalCrossRateHeader" part="Header" use="literal"/>
@@ -4792,17 +5086,21 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalMonthlyCrossRatesRange">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalMonthlyCrossRatesRange" style="document"/>
+      <soap:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalMonthlyCrossRatesRange"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetHistoricalMonthlyCrossRatesRangeHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetHistoricalMonthlyCrossRatesRangeHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCrossRateChange">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCrossRateChange" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCrossRateChange"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetCrossRateChangeHeader" part="Header" use="literal"/>
@@ -4812,7 +5110,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartCustom">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustom" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustom"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetCurrencyChartCustomHeader" part="Header" use="literal"/>
@@ -4822,7 +5121,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartCustomBinary">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustomBinary" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustomBinary"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetCurrencyChartCustomBinaryHeader" part="Header" use="literal"/>
@@ -4832,7 +5132,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChart">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChart" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChart"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetCurrencyChartHeader" part="Header" use="literal"/>
@@ -4842,7 +5143,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartBinary">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChartBinary" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyChartBinary"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetCurrencyChartBinaryHeader" part="Header" use="literal"/>
@@ -4852,7 +5154,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChart">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChart" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChart"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetCurrencyIntradayChartHeader" part="Header" use="literal"/>
@@ -4862,20 +5165,25 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChartCustomBinary">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustomBinary" style="document"/>
+      <soap:operation
+        soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustomBinary"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetCurrencyIntradayChartCustomBinaryHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetCurrencyIntradayChartCustomBinaryHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChartCustom">
-      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustom" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustom"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
-        <soap:header message="tns:GetCurrencyIntradayChartCustomHeader" part="Header" use="literal"/>
+        <soap:header message="tns:GetCurrencyIntradayChartCustomHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal"/>
@@ -4912,7 +5220,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalTicks">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalTicks" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalTicks"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalTicksHeader" part="Header" use="literal"/>
@@ -4922,7 +5231,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalHighLow">
-      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalHighLow" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetHistoricalHighLow"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetHistoricalHighLowHeader" part="Header" use="literal"/>
@@ -4932,7 +5242,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetIntradayHighLow">
-      <soap:operation soapAction="http://www.xignite.com/services/GetIntradayHighLow" style="document"/>
+      <soap:operation soapAction="http://www.xignite.com/services/GetIntradayHighLow"
+        style="document"/>
       <wsdl:input>
         <soap:body use="literal"/>
         <soap:header message="tns:GetIntradayHighLowHeader" part="Header" use="literal"/>
@@ -4945,7 +5256,8 @@
   <wsdl:binding name="XigniteCurrenciesSoap12" type="tns:XigniteCurrenciesSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="ListCurrencies">
-      <soap12:operation soapAction="http://www.xignite.com/services/ListCurrencies" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/ListCurrencies"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:ListCurrenciesHeader" part="Header" use="literal"/>
@@ -4955,7 +5267,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ListActiveCurrencies">
-      <soap12:operation soapAction="http://www.xignite.com/services/ListActiveCurrencies" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/ListActiveCurrencies"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:ListActiveCurrenciesHeader" part="Header" use="literal"/>
@@ -4965,7 +5278,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ListOfficialRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/ListOfficialRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/ListOfficialRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:ListOfficialRatesHeader" part="Header" use="literal"/>
@@ -4975,7 +5289,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetUnitOfAccount">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetUnitOfAccount" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetUnitOfAccount"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetUnitOfAccountHeader" part="Header" use="literal"/>
@@ -4985,7 +5300,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ConvertRealTimeValue">
-      <soap12:operation soapAction="http://www.xignite.com/services/ConvertRealTimeValue" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/ConvertRealTimeValue"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:ConvertRealTimeValueHeader" part="Header" use="literal"/>
@@ -4995,7 +5311,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ConvertHistoricalValue">
-      <soap12:operation soapAction="http://www.xignite.com/services/ConvertHistoricalValue" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/ConvertHistoricalValue"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:ConvertHistoricalValueHeader" part="Header" use="literal"/>
@@ -5005,7 +5322,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeForwardRate">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeForwardRate" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeForwardRate"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetRealTimeForwardRateHeader" part="Header" use="literal"/>
@@ -5015,17 +5333,20 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateAsString">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateAsString" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateAsString"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetRealTimeCrossRateAsStringHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetRealTimeCrossRateAsStringHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRate">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetLatestCrossRate" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetLatestCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetLatestCrossRateHeader" part="Header" use="literal"/>
@@ -5035,7 +5356,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetLatestCrossRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetLatestCrossRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetLatestCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetLatestCrossRatesHeader" part="Header" use="literal"/>
@@ -5045,7 +5367,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRate">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRate" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetRealTimeCrossRateHeader" part="Header" use="literal"/>
@@ -5055,7 +5378,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateGMT">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateGMT" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateGMT"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetRealTimeCrossRateGMTHeader" part="Header" use="literal"/>
@@ -5065,7 +5389,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRate">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRawCrossRate" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRawCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetRawCrossRateHeader" part="Header" use="literal"/>
@@ -5075,7 +5400,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRawCrossRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRawCrossRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRawCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetRawCrossRatesHeader" part="Header" use="literal"/>
@@ -5085,7 +5411,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetRealTimeCrossRatesHeader" part="Header" use="literal"/>
@@ -5095,27 +5422,33 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTables">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTables" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTables"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRateTablesHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRateTablesHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTablesBidAsk">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTablesBidAsk" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTablesBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRateTablesBidAskHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRateTablesBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyReport">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyReport" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyReport"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetCurrencyReportHeader" part="Header" use="literal"/>
@@ -5125,7 +5458,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTable">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTable" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTable"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetHistoricalCrossRateTableHeader" part="Header" use="literal"/>
@@ -5135,17 +5469,21 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTableBidAsk">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableBidAsk" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRateTableBidAskHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRateTableBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTable">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTable" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTable"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetRealTimeCrossRateTableHeader" part="Header" use="literal"/>
@@ -5155,57 +5493,71 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTableWithBidAsk">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableWithBidAsk" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableWithBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetRealTimeCrossRateTableWithBidAskHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetRealTimeCrossRateTableWithBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAllCrossRatesForACurrency">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetAllCrossRatesForACurrency" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetAllCrossRatesForACurrency"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetAllCrossRatesForACurrencyHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetAllCrossRatesForACurrencyHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetRealTimeCrossRateTableAsHTML">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableAsHTML" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetRealTimeCrossRateTableAsHTML"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetRealTimeCrossRateTableAsHTMLHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetRealTimeCrossRateTableAsHTMLHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetSimpleRealTimeCrossRateTableAsHTML">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetSimpleRealTimeCrossRateTableAsHTML" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetSimpleRealTimeCrossRateTableAsHTML"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetSimpleRealTimeCrossRateTableAsHTMLHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetSimpleRealTimeCrossRateTableAsHTMLHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateTableAsHTML">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableAsHTML" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalCrossRateTableAsHTML"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRateTableAsHTMLHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRateTableAsHTMLHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRate">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRate" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetHistoricalCrossRateHeader" part="Header" use="literal"/>
@@ -5215,7 +5567,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetHistoricalCrossRatesHeader" part="Header" use="literal"/>
@@ -5225,47 +5578,57 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRateBidAsk">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateBidAsk" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRateBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRateBidAskHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRateBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesBidAsk">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAsk" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRatesBidAskHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRatesBidAskHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesRange">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesRange" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesRange"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRatesRangeHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRatesRangeHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesBidAskRange">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskRange" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskRange"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRatesBidAskRangeHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRatesBidAskRangeHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesAsOf">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesAsOf" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesAsOf"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetHistoricalCrossRatesAsOfHeader" part="Header" use="literal"/>
@@ -5275,17 +5638,21 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalCrossRatesBidAskAsOf">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskAsOf" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalCrossRatesBidAskAsOf"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalCrossRatesBidAskAsOfHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalCrossRatesBidAskAsOfHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRate">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRate" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetOfficialCrossRateHeader" part="Header" use="literal"/>
@@ -5295,7 +5662,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetOfficialCrossRatesHeader" part="Header" use="literal"/>
@@ -5305,7 +5673,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRateBidAsk">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRateBidAsk" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRateBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetOfficialCrossRateBidAskHeader" part="Header" use="literal"/>
@@ -5315,7 +5684,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetOfficialCrossRatesBidAsk">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRatesBidAsk" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetOfficialCrossRatesBidAsk"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetOfficialCrossRatesBidAskHeader" part="Header" use="literal"/>
@@ -5325,47 +5695,57 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetMutipleHistoricalCrossRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetMutipleHistoricalCrossRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetMutipleHistoricalCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetMutipleHistoricalCrossRatesHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetMutipleHistoricalCrossRatesHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAverageHistoricalCrossRates">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRates" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRates"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetAverageHistoricalCrossRatesHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetAverageHistoricalCrossRatesHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetAverageHistoricalCrossRate">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRate" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetAverageHistoricalCrossRate"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetAverageHistoricalCrossRateHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetAverageHistoricalCrossRateHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalMonthlyCrossRatesRange">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalMonthlyCrossRatesRange" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetHistoricalMonthlyCrossRatesRange"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetHistoricalMonthlyCrossRatesRangeHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetHistoricalMonthlyCrossRatesRangeHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCrossRateChange">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCrossRateChange" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCrossRateChange"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetCrossRateChangeHeader" part="Header" use="literal"/>
@@ -5375,7 +5755,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartCustom">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustom" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustom"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetCurrencyChartCustomHeader" part="Header" use="literal"/>
@@ -5385,17 +5766,20 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartCustomBinary">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustomBinary" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChartCustomBinary"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetCurrencyChartCustomBinaryHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetCurrencyChartCustomBinaryHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChart">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChart" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChart"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetCurrencyChartHeader" part="Header" use="literal"/>
@@ -5405,7 +5789,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyChartBinary">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChartBinary" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyChartBinary"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetCurrencyChartBinaryHeader" part="Header" use="literal"/>
@@ -5415,7 +5800,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChart">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChart" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChart"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetCurrencyIntradayChartHeader" part="Header" use="literal"/>
@@ -5425,27 +5811,33 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChartCustomBinary">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustomBinary" style="document"/>
+      <soap12:operation
+        soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustomBinary"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetCurrencyIntradayChartCustomBinaryHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetCurrencyIntradayChartCustomBinaryHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrencyIntradayChartCustom">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustom" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetCurrencyIntradayChartCustom"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
-        <soap12:header message="tns:GetCurrencyIntradayChartCustomHeader" part="Header" use="literal"/>
+        <soap12:header message="tns:GetCurrencyIntradayChartCustomHeader" part="Header"
+          use="literal"/>
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetChartDesign">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetChartDesign" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetChartDesign"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetChartDesignHeader" part="Header" use="literal"/>
@@ -5475,7 +5867,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalTicks">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalTicks" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalTicks"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetHistoricalTicksHeader" part="Header" use="literal"/>
@@ -5485,7 +5878,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetHistoricalHighLow">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalHighLow" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetHistoricalHighLow"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetHistoricalHighLowHeader" part="Header" use="literal"/>
@@ -5495,7 +5889,8 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetIntradayHighLow">
-      <soap12:operation soapAction="http://www.xignite.com/services/GetIntradayHighLow" style="document"/>
+      <soap12:operation soapAction="http://www.xignite.com/services/GetIntradayHighLow"
+        style="document"/>
       <wsdl:input>
         <soap12:body use="literal"/>
         <soap12:header message="tns:GetIntradayHighLowHeader" part="Header" use="literal"/>

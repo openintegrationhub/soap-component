@@ -13,106 +13,128 @@ import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.utils.Utils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Provides dynamically generated fields set representing correlated XSD schema for given WSDL, its
+ * binding and operation.
+ */
 public class BodyMetaProvider implements DynamicMetadataProvider {
 
-  private static final Logger logger = LoggerFactory.getLogger(BodyMetaProvider.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BodyMetaProvider.class);
 
   private JsonSchema inSchema;
   private JsonSchema outSchema;
   private JsonElement out, in;
 
-  public byte[] getMeta(JsonObject configuration) throws Throwable {
+  public byte[] getMeta(final JsonObject configuration) throws Throwable {
 
-    String wsdlUrl = null;
-    String binding = null;
-    String operation = null;
+    String wsdlUrl;
+    String binding;
+    String operation;
 
     try {
       wsdlUrl = Utils.getWsdlUrl(configuration);
       binding = Utils.getBinding(configuration);
       operation = Utils.getOperation(configuration);
     } catch (NullPointerException npe) {
-      logger.error("WSDL URL, Binding and Operation can not be empty.");
+      LOGGER.error("WSDL URL, Binding and Operation can not be empty.");
       throw new RuntimeException(npe);
     }
-    logger.info("Got configuration: WSDL URL: {}, Binding: {}, Operation: {}", wsdlUrl, binding,
+    LOGGER.info("Got configuration: WSDL URL: {}, Binding: {}, Operation: {}", wsdlUrl, binding,
         operation);
-    SoapBodyDescriptor soapBodyDescriptor = getSoapBodyDescriptor(wsdlUrl, binding, operation);
+    final SoapBodyDescriptor soapBodyDescriptor = getSoapBodyDescriptor(wsdlUrl, binding,
+            operation);
+
+    LOGGER.info("Received SOAP Body descriptor: {}", soapBodyDescriptor);
 
     try {
       JaxbCompiler.generateAndLoadJaxbStructure(wsdlUrl);
     } catch (Throwable throwable) {
-      logger.error("Internal JAXB structure was failed to generate. Check logs");
+      LOGGER.error("Internal JAXB structure was failed to generate. Check logs");
       throw new RuntimeException(throwable);
     }
 
-    String className = soapBodyDescriptor.getRequestBodyClassName();
+    final String className = soapBodyDescriptor.getRequestBodyClassName();
     if (className == null) {
       throw new RuntimeException(
           "Either Element Name or Class Name (Type) of the XSD element MUST be not empty. "
               + "Validate an XSD schema and try again.");
     }
-    logger.info("ClassName for the root element of the {} operation is {}", operation, className);
-    return generateSchema(className, soapBodyDescriptor).getBytes();
+    LOGGER.info("ClassName for the root element of the {} operation is {}", operation, className);
+    return generateSchema(soapBodyDescriptor).getBytes(StandardCharsets.UTF_8);
   }
 
   /**
    * Class that calls external WSDL, parses it and generates JAXB structure, loading it into
    * classloader
    */
-  public SoapBodyDescriptor getSoapBodyDescriptor(String wsdlUrl, String binding,
-      String operation) {
+  public SoapBodyDescriptor getSoapBodyDescriptor(final String wsdlUrl, final String binding,
+      final String operation) {
     return JaxbCompiler.getSoapBodyDescriptor(wsdlUrl, binding, operation);
   }
 
-  private String generateSchema(String className, SoapBodyDescriptor soapBodyDescriptor)
+  private String generateSchema(final SoapBodyDescriptor soapBodyDescriptor)
       throws JsonProcessingException {
-    JsonParser parser = new JsonParser();
-    ObjectMapper objectMapper = Utils.getConfiguredObjectMapper();
+    final ObjectMapper objectMapper = Utils.getConfiguredObjectMapper();
+    String resultSchema = null;
     try {
-      JsonSchemaGenerator schemaGen = new JsonSchemaGenerator(objectMapper);
-      inSchema = schemaGen.generateSchema(Class.forName(className));
+      final JsonSchemaGenerator schemaGen = new JsonSchemaGenerator(objectMapper);
+      inSchema = schemaGen.generateSchema(Class.forName(soapBodyDescriptor.getRequestBodyClassName()));
+      outSchema = schemaGen.generateSchema(Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
+      resultSchema = appendToSchemaStructure(soapBodyDescriptor).toString();
+      LOGGER.info("Generated schema: {}", resultSchema);
     } catch (JsonMappingException e) {
-      logger.error("Could not map the Json to deserialize schema");
+      LOGGER.error("Could not map the Json to deserialize schema");
       throw new RuntimeException(e);
     } catch (ClassNotFoundException e) {
-      logger.error("{} class can not be found");
+      LOGGER.error("The class in the schema can not be found");
       throw new RuntimeException(e);
     }
+    return resultSchema;
+  }
 
-    String inSchemaString = objectMapper.writeValueAsString(inSchema);
-    com.google.gson.JsonObject root = parser.parse("{\"type\":\"object\",\"properties\":{}}")
-        .getAsJsonObject();
-    com.google.gson.JsonObject body = root.getAsJsonObject("properties");
-    body.add(soapBodyDescriptor.getRequestBodyElementName(), parser.parse(inSchemaString));
-    logger.info("Generated schema: {}", root);
-    in = root;
-    com.google.gson.JsonObject gson = new com.google.gson.JsonObject();
-    gson.add("in", in);
-    return gson.toString();
+
+  private com.google.gson.JsonObject appendToSchemaStructure(SoapBodyDescriptor soapBodyDescriptor) throws JsonProcessingException {
+    ObjectMapper objectMapper = Utils.getConfiguredObjectMapper();
+    final String rootStr = "{\"type\":\"object\",\"properties\":{}}";
+    final String inSchemaString = objectMapper.writeValueAsString(inSchema);
+    final String outSchemaString = objectMapper.writeValueAsString(outSchema);
+    final JsonParser parser = new JsonParser();
+
+    in = parser.parse(rootStr);
+    com.google.gson.JsonObject inProps = in.getAsJsonObject().getAsJsonObject("properties");
+    out = parser.parse(rootStr);
+    com.google.gson.JsonObject outProps = out.getAsJsonObject().getAsJsonObject("properties");
+
+    inProps.add(soapBodyDescriptor.getRequestBodyElementName(), parser.parse(inSchemaString));
+    outProps.getAsJsonObject().add(soapBodyDescriptor.getResponseBodyElementName(), parser.parse(outSchemaString));
+    final com.google.gson.JsonObject gsonInOutSchema = new com.google.gson.JsonObject();
+    gsonInOutSchema.add("in", in);
+    gsonInOutSchema.add("out", out);
+    return gsonInOutSchema;
   }
 
   @Override
-  public javax.json.JsonObject getMetaModel(javax.json.JsonObject configuration) {
+  public JsonObject getMetaModel(final JsonObject configuration) {
     try {
-      logger.info("Got configuration: {}", configuration.toString());
+      LOGGER.info("Got configuration: {}", configuration.toString());
       return deserialize(getMeta(configuration));
     } catch (IOException e) {
-      logger.error("IOException caught. Check the logs");
+      LOGGER.error("IOException caught. Check the logs");
       throw new RuntimeException(e);
     } catch (Throwable throwable) {
-      logger.error("Throwable caught. Check the logs");
+      LOGGER.error("Throwable caught. Check the logs");
       throw new RuntimeException(throwable);
     }
   }
 
-  javax.json.JsonObject deserialize(byte[] content) throws IOException {
+  public JsonObject deserialize(final byte[] content) throws IOException {
     try (ByteArrayInputStream bais = new ByteArrayInputStream(content);
         JsonReader reader = Json.createReader(bais)) {
       return reader.readObject();

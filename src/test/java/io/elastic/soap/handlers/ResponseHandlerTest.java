@@ -33,10 +33,11 @@ public class ResponseHandlerTest {
   private static GetBankResponseType responseObject;
 
   @BeforeAll
-  public static void initConfig() throws IOException, SOAPException {
+  public static void initConfig() throws SOAPException {
     responseHandler = new ResponseHandler();
-    soapBodyDescriptor = new SoapBodyDescriptor();
-    soapBodyDescriptor.setResponseBodyElementName("getBankResponse");
+    soapBodyDescriptor = new SoapBodyDescriptor.Builder()
+        .setResponseBodyElementName("getBankResponse")
+        .build();
 
     final MessageFactory factory = MessageFactory.newInstance();
     responseMessage = factory.createMessage();

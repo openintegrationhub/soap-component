@@ -2,11 +2,10 @@ package io.elastic.soap.utils;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.CaseFormat;
 import com.sun.xml.bind.api.impl.NameConverter;
 import io.elastic.soap.AppConstants;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 public final class Utils {
 
-  private static final Logger logger = LoggerFactory.getLogger(Utils.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
 
   // Private constructor to prevent instantiation. Since utility classes should not be instantiated
   private Utils() {
@@ -48,8 +47,8 @@ public final class Utils {
    * @return String representation of the Binding.
    */
   public static String getBinding(final JsonObject config) {
-    String binding = Utils.getConfigParam(config, AppConstants.BINDING_CONFIG_NAME);
-    logger.info("Got '{}' binding from the config", binding);
+    final String binding = Utils.getConfigParam(config, AppConstants.BINDING_CONFIG_NAME);
+    LOGGER.info("Got '{}' binding from the config", binding);
     return binding;
   }
 
@@ -60,18 +59,20 @@ public final class Utils {
    * @return String representation of the Operation.
    */
   public static String getOperation(final JsonObject config) {
-    String operation = Utils.getConfigParam(config, AppConstants.OPERATION_CONFIG_NAME);
-    logger.info("Got '{}' operation from the config", operation);
+    final String operation = Utils.getConfigParam(config, AppConstants.OPERATION_CONFIG_NAME);
+    LOGGER.info("Got '{}' operation from the config", operation);
     return operation;
   }
 
   /**
-   * Since many WSDL schemas have XSD elements started from the small letter (getBank), but WSImport
-   * utility generates this class starting from a capital letter (GetBank), it should be manually
-   * forced to start from the capital letter.
+   * Since many WSDL schemas have XSD elements started from the small letter (getBank), with
+   * underscore (CustomerQueryIn_sync), but WSImport utility generates this class starting from a
+   * capital letter (GetBank) and without underscores (CustomerQueryInSync), it should be manually
+   * converted to upper camel case.
    */
-  public static String getWithUpperFirstLetter(String elementName) {
-    return elementName.substring(0, 1).toUpperCase() + elementName.substring(1);
+  public static String convertStringToUpperCamelCase(final String elementName) {
+    return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL,
+        CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, elementName));
   }
 
   /**
@@ -81,37 +82,42 @@ public final class Utils {
    * @return String representation of the WSDL URL.
    */
   public static String getWsdlUrl(final JsonObject config) {
-
-    String wsdlUrl = Utils.getConfigParam(config, AppConstants.WSDL_CONFIG_NAME);
-
-    String authType = config.getJsonObject("auth").getJsonString("type").getString();
-
-    if (AppConstants.BASIC_AUTH_CONFIG_NAME.equals(authType)) {
-      try {
-        wsdlUrl = injectAuthStringIntoUrl(config);
-      } catch (MalformedURLException e) {
-        logger.error("{} url is not correct. Check the validity and try again", wsdlUrl);
-        throw new RuntimeException(
-            wsdlUrl + " url is not correct. Check the validity and try again");
-      }
-    }
-    logger.info("Got '{}' WSDL URL from the config", wsdlUrl);
-    return wsdlUrl;
+    return Utils.getConfigParam(config, AppConstants.WSDL_CONFIG_NAME);
   }
 
   /**
-   * If auth type is 'Basic Auth', then we should modificate url in a way like this: https://host ->
-   * https://username:password@host
+   * Check if basic auth credentials are enabled
+   *
+   * @return true if basic auth is enabled. false otherwise
    */
-  public static String injectAuthStringIntoUrl(final JsonObject config)
-      throws MalformedURLException {
-    String wsdlUrl = Utils.getConfigParam(config, AppConstants.WSDL_CONFIG_NAME);
-    URL url = new URL(wsdlUrl);
-    String username, password;
-    username = config.getJsonObject("auth").getJsonObject("basic").getString("username");
-    password = config.getJsonObject("auth").getJsonObject("basic").getString("password");
-    String host = url.getHost();
-    return wsdlUrl.replace(host, username + ":" + password + "@" + host);
+  public static boolean isBasicAuth(JsonObject config) {
+    final String authType = config.getJsonObject("auth").getJsonString("type").getString();
+    boolean isBasicAuth = false;
+    if (AppConstants.BASIC_AUTH_CONFIG_NAME.equals(authType)) {
+      isBasicAuth = true;
+    }
+    return isBasicAuth;
+  }
+
+  /**
+   * Builds basic auth header for authorization. E.g.: Basic X0VJT0VYVEVOREVEOldlbGNvbWUxMjM=
+   */
+  public static String getBasicAuthHeader(JsonObject config) {
+    return Base64Utils.getBasicAuthHeader(config);
+  }
+
+  /**
+   * Retrieves username from the credentials object
+   */
+  protected static String getUsername(JsonObject config) {
+    return config.getJsonObject("auth").getJsonObject("basic").getString("username");
+  }
+
+  /**
+   * Retrieves password from the credentials object
+   */
+  protected static String getPassword(JsonObject config) {
+    return config.getJsonObject("auth").getJsonObject("basic").getString("password");
   }
 
   /**
@@ -137,15 +143,16 @@ public final class Utils {
    * @param path path to root folder. {@link Path} type.
    * @return List of Path values
    */
-  public static List<Path> listGeneratedFiles(String path) throws IOException {
-    Path source = Paths.get(path);
+  public static List<Path> listGeneratedFiles(final String path) throws IOException {
+    final Path source = Paths.get(path);
     return Files.walk(source).filter(Files::isRegularFile)
-        .filter(p -> !p.startsWith("src/main") && !p.startsWith("src/test"))
+        .filter(
+            pathFilter -> !pathFilter.startsWith("src/main") && !pathFilter.startsWith("src/test"))
         .collect(Collectors.toList());
   }
 
-  public static String convertToPackageName(String xmlNamespace) {
-    NameConverter nameConverter = new NameConverter.Standard();
+  public static String convertToPackageName(final String xmlNamespace) {
+    final NameConverter nameConverter = new NameConverter.Standard();
     return nameConverter.toPackageName(xmlNamespace);
   }
 }

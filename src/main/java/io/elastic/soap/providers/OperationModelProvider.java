@@ -1,6 +1,5 @@
 package io.elastic.soap.providers;
 
-
 import com.predic8.wsdl.Binding;
 import com.predic8.wsdl.Definitions;
 import com.predic8.wsdl.WSDLParser;
@@ -15,27 +14,32 @@ import javax.json.JsonObjectBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Provides data for input Operation select box.
+ * It is a list of operations available in the provided WSDL for a given Binding
+ */
+
 public class OperationModelProvider implements SelectModelProvider {
 
-  private static final Logger logger = LoggerFactory.getLogger(OperationModelProvider.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(OperationModelProvider.class);
 
   @Override
   public JsonObject getSelectModel(final JsonObject configuration) {
 
-    logger.info("Input model configuration: {}", JSON.stringify(configuration));
-    String wsdlUrl = null;
-    String bindingName = null;
+    LOGGER.info("Input model configuration: {}", JSON.stringify(configuration));
+    String wsdlUrl;
+    String bindingName;
     try {
       bindingName = Utils.getBinding(configuration);
       wsdlUrl = Utils.getWsdlUrl(configuration);
     } catch (NullPointerException npe) {
       throw new RuntimeException("WSDL URL and Binding Name can not be empty");
     }
-    logger.info("Input wsdl url: {}, binding: {}", wsdlUrl, bindingName);
+    LOGGER.info("Input wsdl url: {}, binding: {}", wsdlUrl, bindingName);
 
-    List<Binding> bindingList = getDefinitionsFromWsdl(wsdlUrl).getBindings();
+    final List<Binding> bindingList = getDefinitionsFromWsdl(wsdlUrl).getBindings();
     final JsonObjectBuilder builder = Json.createObjectBuilder();
-    String finalBindingName = bindingName;
+    final String finalBindingName = bindingName;
     bindingList.stream()
         .filter(binding -> binding.getName().equals(finalBindingName))
         .collect(Collectors.toList())
@@ -51,8 +55,8 @@ public class OperationModelProvider implements SelectModelProvider {
    *
    * @return {@link Definitions} object
    */
-  public Definitions getDefinitionsFromWsdl(String wsdlUrl) {
-    WSDLParser parser = new WSDLParser();
+  public Definitions getDefinitionsFromWsdl(final String wsdlUrl) {
+    final WSDLParser parser = new WSDLParser();
     return parser.parse(wsdlUrl);
   }
 }

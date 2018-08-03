@@ -4,7 +4,6 @@ import static junit.framework.Assert.assertTrue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.elastic.soap.AppConstants;
-import java.net.MalformedURLException;
 import javax.json.Json;
 import javax.json.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,10 +16,12 @@ public class UtilsTest {
   private static JsonObject configHttpsNoAuth;
   private static JsonObject configHttpsBasicAuth;
   private static String elementName;
+  private static String elementNameUnderscored;
 
   @BeforeAll
   public static void initTest() {
     elementName = "getBank";
+    elementNameUnderscored = "getFirst_rate_Bank";
     configHttpNoAuth = Json.createObjectBuilder()
         .add(AppConstants.BINDING_CONFIG_NAME, "XigniteCurrenciesSoap")
         .add(AppConstants.OPERATION_CONFIG_NAME, "GetCurrencyIntradayChartCustom")
@@ -73,19 +74,6 @@ public class UtilsTest {
   }
 
   @Test
-  public void injectAuthStringIntoUrlHttp() throws MalformedURLException {
-    assertTrue(Utils.injectAuthStringIntoUrl(configHttpBasicAuth)
-        .equals("http://Leadtributor:Leadtributor@www.xignite.com/xcurrencies.asmx?WSDL"));
-  }
-
-  @Test
-  public void injectAuthStringIntoUrlHttps() throws MalformedURLException {
-    assertTrue(Utils.injectAuthStringIntoUrl(configHttpsBasicAuth)
-        .equals(
-            "https://Leadtributor:Leadtributor@www.thomas-bayer.com/axis2/services/BLZService?wsdl"));
-  }
-
-  @Test
   public void getConfiguredObjectMapper() {
     assertTrue(Utils.getConfiguredObjectMapper() instanceof ObjectMapper);
   }
@@ -102,33 +90,48 @@ public class UtilsTest {
 
   @Test
   public void getWithUpperFirstLetter() {
-    assertTrue("GetBank".equals(Utils.getWithUpperFirstLetter(elementName)));
+    assertTrue("GetBank".equals(Utils.convertStringToUpperCamelCase(elementName)));
   }
 
   @Test
-  public void getHttpWsdlUrlNoAuth() {
+  public void getWithUpperFirstLetterUnderscore() {
+    assertTrue(
+        "GetFirstRateBank".equals(Utils.convertStringToUpperCamelCase(elementNameUnderscored)));
+  }
+
+  @Test
+  public void getHttpWsdlUrl() {
     assertTrue(
         "http://www.xignite.com/xcurrencies.asmx?WSDL".equals(Utils.getWsdlUrl(configHttpNoAuth)));
   }
 
   @Test
-  public void getHttpsWsdlUrlNoAuth() {
+  public void getHttpsWsdlUrl() {
     assertTrue(
         "https://www.thomas-bayer.com/axis2/services/BLZService?wsdl".equals(Utils.getWsdlUrl(
             configHttpsNoAuth)));
   }
 
   @Test
-  public void getHttpWsdlUrlBasicAuth() {
-    assertTrue(
-        "http://Leadtributor:Leadtributor@www.xignite.com/xcurrencies.asmx?WSDL".equals(Utils.getWsdlUrl(
-            configHttpBasicAuth)));
+  public void isBasicAuth() {
+    assertTrue(Utils.isBasicAuth(configHttpBasicAuth));
   }
 
   @Test
-  public void getHttpsWsdlUrlBasicAuth() {
-    assertTrue(
-        "https://Leadtributor:Leadtributor@www.thomas-bayer.com/axis2/services/BLZService?wsdl".equals(Utils.getWsdlUrl(
-            configHttpsBasicAuth)));
+  public void getBasicAuthHeader() {
+    assertTrue("Basic TGVhZHRyaWJ1dG9yOkxlYWR0cmlidXRvcg=="
+        .equals(Utils.getBasicAuthHeader(configHttpBasicAuth)));
   }
+
+  @Test
+  public void getUsername() {
+    assertTrue("Leadtributor".equals(Utils.getUsername(configHttpBasicAuth)));
+  }
+
+  @Test
+  public void getPassword() {
+    assertTrue("Leadtributor".equals(Utils.getPassword(configHttpBasicAuth)));
+  }
+
+
 }

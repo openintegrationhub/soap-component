@@ -15,21 +15,25 @@ import javax.json.JsonObjectBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Provides data for input Binding select box.
+ * It is a list of bindings available in the provided WSDL
+ */
 public class BindingModelProvider implements SelectModelProvider {
 
-  private static final Logger logger = LoggerFactory.getLogger(BindingModelProvider.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BindingModelProvider.class);
 
   @Override
   public JsonObject getSelectModel(final JsonObject configuration) {
-    logger.info("Input model configuration: {}", JSON.stringify(configuration));
-    String wsdlUrl = null;
+    LOGGER.info("Input model configuration: {}", JSON.stringify(configuration));
+    String wsdlUrl;
     try {
       wsdlUrl = Utils.getWsdlUrl(configuration);
     } catch (NullPointerException npe) {
       throw new RuntimeException("WSDL URL can not be empty");
     }
 
-    List<Binding> bindingList = getDefinitionsFromWsdl(wsdlUrl).getBindings();
+    final List<Binding> bindingList = getDefinitionsFromWsdl(wsdlUrl).getBindings();
     final JsonObjectBuilder builder = Json.createObjectBuilder();
     bindingList.stream().filter(
         binding ->
@@ -46,8 +50,8 @@ public class BindingModelProvider implements SelectModelProvider {
    *
    * @return {@link Definitions} object
    */
-  public Definitions getDefinitionsFromWsdl(String wsdlUrl) {
-    WSDLParser parser = new WSDLParser();
+  public Definitions getDefinitionsFromWsdl(final String wsdlUrl) {
+    final WSDLParser parser = new WSDLParser();
     return parser.parse(wsdlUrl);
   }
 }

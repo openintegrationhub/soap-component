@@ -28,9 +28,10 @@ public class RequestHandlerTest {
   @BeforeAll
   public static void initConfig() {
     requestHandler = new RequestHandler();
-    soapBodyDescriptor = new SoapBodyDescriptor();
-    soapBodyDescriptor.setRequestBodyElementName("getBank");
-    soapBodyDescriptor.setSoapAction("");
+    soapBodyDescriptor = new SoapBodyDescriptor.Builder()
+        .setRequestBodyElementName("getBank")
+        .setSoapAction("")
+        .build();
 
     requestObject = new GetBankType();
     requestObject.setBlz("67270003");

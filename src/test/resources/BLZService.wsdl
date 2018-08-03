@@ -1,7 +1,14 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://thomas-bayer.com/blz/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://thomas-bayer.com/blz/">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://thomas-bayer.com/blz/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+  targetNamespace="http://thomas-bayer.com/blz/">
   <wsdl:documentation>BLZService</wsdl:documentation>
   <wsdl:types>
-    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://thomas-bayer.com/blz/">
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+      targetNamespace="http://thomas-bayer.com/blz/">
       <xsd:element name="getBank" type="tns:getBankType"/>
       <xsd:element name="getBankResponse" type="tns:getBankResponseType"/>
       <xsd:complexType name="getBankType">
@@ -33,7 +40,8 @@
   <wsdl:portType name="BLZServicePortType">
     <wsdl:operation name="getBank">
       <wsdl:input message="tns:getBank"/>
-      <wsdl:output message="tns:getBankResponse" wsaw:Action="http://thomas-bayer.com/blz/BLZService/getBankResponse"/>
+      <wsdl:output message="tns:getBankResponse"
+        wsaw:Action="http://thomas-bayer.com/blz/BLZService/getBankResponse"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BLZServiceSOAP11Binding" type="tns:BLZServicePortType">

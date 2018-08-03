@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class WsImportGeneratorImpl implements IJaxbGenerator {
 
-  private static final Logger logger = LoggerFactory.getLogger(WsImportGeneratorImpl.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(WsImportGeneratorImpl.class);
 
   /**
    * Parses WSDL and generates compiled JAXB structure using {@link WsImport} tool. It has some
@@ -25,23 +25,21 @@ public class WsImportGeneratorImpl implements IJaxbGenerator {
    * @return Path of the JAXB structure where it has been generated
    */
   @Override
-  public String generateJaxbClasses(String wsdlUrl, Map<String, String> wsdlCompiledClassesCacheMap)
-      throws Throwable {
-    logger.info("About to start generating JAXB structure...");
+  public String generateJaxbClasses(final String wsdlUrl,
+      final Map<String, String> wsdlCompiledClassesCacheMap) throws Throwable {
+    LOGGER.info("About to start generating JAXB structure...");
     String path = wsdlCompiledClassesCacheMap.get(wsdlUrl);
-    if (path != null) {
-      return path;
-    }
-    String[] input = new String[]{
-        "-d", AppConstants.GENERATED_RESOURCES_DIR,
-        "-p", AppConstants.DEFAULT_PACKAGE,
-        wsdlUrl};
+    if (path == null) {
+      final String[] input = new String[]{
+          "-d", AppConstants.GENERATED_RESOURCES_DIR,
+          "-p", AppConstants.DEFAULT_PACKAGE,
+          wsdlUrl};
 
-    WsImport.doMain(input);
-    logger.info("JAXB structure was successfully generated");
-    path = AppConstants.GENERATED_RESOURCES_DIR;
-    wsdlCompiledClassesCacheMap.put(wsdlUrl, AppConstants.GENERATED_RESOURCES_DIR);
-    logger.info("JAXB structure successfully created");
+      WsImport.doMain(input);
+      path = AppConstants.GENERATED_RESOURCES_DIR;
+      wsdlCompiledClassesCacheMap.put(wsdlUrl, AppConstants.GENERATED_RESOURCES_DIR);
+      LOGGER.info("JAXB structure was successfully created");
+    }
     return path;
   }
 }

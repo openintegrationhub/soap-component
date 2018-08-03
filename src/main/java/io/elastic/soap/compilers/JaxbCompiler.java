@@ -3,6 +3,7 @@ package io.elastic.soap.compilers;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.predic8.schema.Schema;
 import com.predic8.wsdl.Binding;
 import com.predic8.wsdl.BindingOperation;
 import com.predic8.wsdl.Definitions;
@@ -26,13 +27,27 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class for generating JAXB classes structure and loading it into classloader in order to make it
+ * accessible in runtime.
+ *
+ * One of the available implementations can be used: {@link io.elastic.soap.compilers.generators.impl.WsImportGeneratorImpl}
+ * or {@link Axis2GeneratorImpl}
+ *
+ * {@link io.elastic.soap.compilers.generators.impl.WsImportGeneratorImpl} has some limitations. In
+ * JAX-WS RPC/encoded is not supported as a messaging mode. In JAX-WS the “encoded” encoding style
+ * isn’t supported and only the “literal” encoding style used. In most cases using {@link
+ * Axis2GeneratorImpl} is preferred.
+ */
 public class JaxbCompiler {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(JaxbCompiler.class);
+  /**
+   * One of two available IJaxbGenerator implementations is injected here. It can be done in {@link
+   * JaxbGeneratorModule} class
+   */
   @Inject
   private static IJaxbGenerator generator;
-
-  private static final Logger logger = LoggerFactory.getLogger(JaxbCompiler.class);
-
   private static Map<String, String> isWsdlCompiledMap = new HashMap<>();
   private static Map<String, Definitions> loadedDefsMap = new HashMap<>();
 
@@ -47,24 +62,30 @@ public class JaxbCompiler {
    * Creates {@link Injector} in order to inject needed implementation of {@link IJaxbGenerator}
    */
   static {
-    generator = injectJaxbGeneratorModule(Axis2GeneratorImpl.class);
+    generator = injectJaxbGeneratorModule(IJaxbGenerator.class);
   }
 
   /**
    * Check directory for generating JAXB classes in. If it does not exist, create it.
    */
-  public static void createFolder(String path) {
-    File dir = new File(path);
+  public static void createFolder(final String path) {
+    final File dir = new File(path);
     if (!dir.exists()) {
-      dir.mkdir();
-      logger.info("Directory {} successfully created.", AppConstants.GENERATED_RESOURCES_DIR);
+      boolean mkDirResult = dir.mkdir();
+      if (mkDirResult) {
+        LOGGER.info("Directory {} successfully created.", AppConstants.GENERATED_RESOURCES_DIR);
+      } else {
+        throw new RuntimeException(
+            "Folder for storing generated classes cold not be created. "
+                + "The component execution will be terminated");
+      }
     }
   }
 
   /**
    * Generates JAXB structure and loads it into classpath
    */
-  public static void generateAndLoadJaxbStructure(String wsdlUrl) throws Throwable {
+  public static void generateAndLoadJaxbStructure(final String wsdlUrl) throws Throwable {
     generator.generateJaxbClasses(wsdlUrl, isWsdlCompiledMap);
     loadClassesInDirToClassloader();
   }
@@ -77,9 +98,9 @@ public class JaxbCompiler {
    * @param operation Operation name
    * @return {@link BindingOperation} object
    */
-  public static BindingOperation getBindingOperation(Definitions defs, String binding,
-      String operation) {
-    List<Binding> bindingList = defs.getBindings();
+  public static BindingOperation getBindingOperation(final Definitions defs, final String binding,
+      final String operation) {
+    final List<Binding> bindingList = defs.getBindings();
     return bindingList.stream()
         .filter(bind -> bind.getName().equals(binding))
         .findAny().get()
@@ -92,31 +113,49 @@ public class JaxbCompiler {
    * Method parses the WSDL for the given bending/operation pair, creates and returns a {@link
    * SoapBodyDescriptor} object containing this data combination
    */
-  public static SoapBodyDescriptor getSoapBodyDescriptor(String wsdlUrl, String binding,
-      String operation) {
+  public static SoapBodyDescriptor getSoapBodyDescriptor(final String wsdlUrl, final String binding,
+      final String operation) {
     Definitions defs = loadedDefsMap.get(wsdlUrl);
     if (defs == null) {
       defs = new JaxbCompiler().getDefinitionsFromWsdl(wsdlUrl);
       loadedDefsMap.put(wsdlUrl, defs);
     }
-    BindingOperation bindingOperation = getBindingOperation(defs, binding, operation);
-    String soapAction = bindingOperation.getOperation().getSoapAction();
-    String soapEndPoint = defs.getServices().stream()
+    final BindingOperation bindingOperation = getBindingOperation(defs, binding, operation);
+    LOGGER.info("Got {} style wsdl", bindingOperation.getBinding().getStyle());
+    if (bindingOperation.getBinding().getStyle().equals("Rpc/Encoded")) {
+      LOGGER.error("SOAP component currently doesn't support the rpc/encoded style {}",
+          bindingOperation.getBinding().getStyle());
+      throw new UnsupportedOperationException(
+          "SOAP component currently doesn't support the rpc/encoded style");
+    }
+    final String soapAction = bindingOperation.getOperation().getSoapAction();
+    final String soapEndPoint = defs.getServices().stream()
         .flatMap(service -> service.getPorts().stream())
         .filter(port -> port.getBinding().getName().equals(binding)).findAny().get().getAddress()
         .getLocation();
-    Message inputMessage = (Message) bindingOperation.getInput().getProperty("message");
-    Message outputMessage = (Message) bindingOperation.getOutput().getProperty("message");
+    final Message inputMessage = (Message) bindingOperation.getInput().getProperty("message");
+    final Message outputMessage = (Message) bindingOperation.getOutput().getProperty("message");
 
-    return buildSoapBodyDescriptor(inputMessage, outputMessage, binding, operation, soapAction,
-        soapEndPoint);
+    final String inputElementName = inputMessage.getParts().get(0).getElement().getName();
+    final String outputElementName = outputMessage.getParts().get(0).getElement().getName();
+
+    return new SoapBodyDescriptor.Builder()
+        .setBindingName(binding).setOperationName(operation).setSoapAction(soapAction)
+        .setSoapEndPoint(soapEndPoint).setRequestBodyElementName(inputElementName)
+        .setRequestBodyPackageName(Utils.convertToPackageName(inputMessage.getNamespaceUri()))
+        .setRequestBodyNameSpace(inputMessage.getParts().get(0).getElement().getNamespaceUri())
+        .setRequestBodyClassName(getClassName(inputMessage, inputElementName))
+        .setResponseBodyElementName(outputElementName)
+        .setRequestBodyPackageName(Utils.convertToPackageName(inputMessage.getNamespaceUri()))
+        .setResponseBodyNameSpace(outputMessage.getNamespaceUri())
+        .setResponseBodyClassName(getClassName(outputMessage, outputElementName)).build();
   }
 
   /**
    * Creates {@link Injector} in order to inject needed implementation of {@link IJaxbGenerator}
    */
-  public static IJaxbGenerator injectJaxbGeneratorModule(Class clazz) {
-    Injector injector = Guice.createInjector(new JaxbGeneratorModule());
+  public static IJaxbGenerator injectJaxbGeneratorModule(final Class clazz) {
+    final Injector injector = Guice.createInjector(new JaxbGeneratorModule());
     return (IJaxbGenerator) injector.getInstance(clazz);
   }
 
@@ -126,46 +165,15 @@ public class JaxbCompiler {
    */
   public static void loadClassesInDirToClassloader()
       throws ClassNotFoundException, MalformedURLException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-    logger.info("About to start loading generated JAXB classes into class loader");
-    File file = new File(AppConstants.GENERATED_RESOURCES_DIR);
-    URL url = file.toURI().toURL();
-    URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-    Class urlClass = URLClassLoader.class;
-    Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
+    LOGGER.info("About to start loading generated JAXB classes into class loader");
+    final File file = new File(AppConstants.GENERATED_RESOURCES_DIR);
+    final URL url = file.toURI().toURL();
+    final URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+    final Class urlClass = URLClassLoader.class;
+    final Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
     method.setAccessible(true);
     method.invoke(urlClassLoader, new Object[]{url});
-    logger.info("Loading generated JAXB classes into class loader successfully done");
-  }
-
-  /**
-   * Service method to set an instance of {@link SoapBodyDescriptor} object with values
-   *
-   * @return Fully built and ready to use {@link SoapBodyDescriptor} object
-   */
-  private static SoapBodyDescriptor buildSoapBodyDescriptor(Message inputMessage,
-      Message outputMessage,
-      String binding, String operation, String soapAction, String soapEndPoint) {
-    SoapBodyDescriptor soapBodyDescriptor = new SoapBodyDescriptor();
-    soapBodyDescriptor.setBindingName(binding);
-    soapBodyDescriptor.setOperationName(operation);
-    soapBodyDescriptor.setSoapAction(soapAction);
-    soapBodyDescriptor.setSoapEndPoint(soapEndPoint);
-
-    String elementName = inputMessage.getParts().get(0).getElement().getName();
-    soapBodyDescriptor.setRequestBodyElementName(elementName);
-    soapBodyDescriptor
-        .setRequestBodyPackageName(Utils.convertToPackageName(inputMessage.getNamespaceUri()));
-    soapBodyDescriptor.setRequestBodyNameSpace(outputMessage.getNamespaceUri());
-    soapBodyDescriptor.setRequestBodyClassName(getClassName(inputMessage, elementName));
-
-    elementName = outputMessage.getParts().get(0).getElement().getName();
-    soapBodyDescriptor.setResponseBodyElementName(elementName);
-    soapBodyDescriptor
-        .setResponseBodyPackageName(Utils.convertToPackageName(outputMessage.getNamespaceUri()));
-    soapBodyDescriptor.setResponseBodyNameSpace(outputMessage.getNamespaceUri());
-    soapBodyDescriptor.setResponseBodyClassName(getClassName(outputMessage, elementName));
-
-    return soapBodyDescriptor;
+    LOGGER.info("Loading generated JAXB classes into class loader successfully done");
   }
 
   /**
@@ -176,13 +184,13 @@ public class JaxbCompiler {
    * @param elementName The name of the element which type or element name should be retieved
    * @return Element or type name
    */
-  private static String getClassName(Message msg, String elementName) {
+  private static String getClassName(final Message msg, final String elementName) {
     String className;
     if (msg.getParts().get(0).getElement().getType() == null) {
-      className = Utils.getWithUpperFirstLetter(elementName);
+      className = Utils.convertStringToUpperCamelCase(elementName);
     } else {
       className = msg.getParts().get(0).getElement().getType().getLocalPart();
-      className = Utils.getWithUpperFirstLetter(className);
+      className = Utils.convertStringToUpperCamelCase(className);
     }
     return Utils.convertToPackageName(msg.getNamespaceUri()) + "." + className;
   }
@@ -192,8 +200,19 @@ public class JaxbCompiler {
    *
    * @return {@link Definitions} object
    */
-  public Definitions getDefinitionsFromWsdl(String wsdlUrl) {
-    WSDLParser parser = new WSDLParser();
+  public static Definitions getDefinitionsFromWsdl(final String wsdlUrl) {
+    final WSDLParser parser = new WSDLParser();
     return parser.parse(wsdlUrl);
+  }
+
+  public static void main(String[] args) {
+    Definitions definitions = getDefinitionsFromWsdl(
+        "http://ws.cdyne.com/emailverify/Emailvernotestemail.asmx?wsdl");
+    List<Schema> schemas = definitions.getSchemas();
+    for (Schema schema : schemas) {
+      System.out.println(schema.toString());
+
+    }
+
   }
 }

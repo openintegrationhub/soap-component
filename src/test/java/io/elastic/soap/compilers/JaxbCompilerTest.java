@@ -15,8 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import org.mockito.Spy;
 
@@ -32,13 +32,13 @@ public class JaxbCompilerTest {
   private static String[] arrayOfDirsToDelete = {AppConstants.GENERATED_RESOURCES_DIR, "src/com",
       "src/io"};
 
-  @BeforeAll
+  @BeforeClass
   public static void init() {
     definitionsUT = JaxbCompilerTest.getDefinitions(WSDL_URL);
     doReturn(definitionsUT).when(jaxbCompilerUT).getDefinitionsFromWsdl(any(String.class));
   }
 
-  @AfterAll
+  @AfterClass
   public static void cleanup() throws IOException {
     for (final String dirName : Arrays.asList(arrayOfDirsToDelete)) {
       final File dir = new File(dirName);
