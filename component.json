@@ -9,39 +9,10 @@
       }
     }
   },
-  "triggers": {
-    "callTrigger": {
-      "title": "Call",
-      "main": "io.elastic.soap.triggers.CallAction",
-      "fields": {
-        "wsdlURI": {
-          "label": "WSDL URI",
-          "required": true,
-          "viewClass": "TextFieldWithNoteView",
-          "placeholder": "http://www.webservicex.net/CreditCard.asmx?wsdl",
-          "note": "Specify full WSDL URI, it should be accessible from the Internet."
-        },
-        "binding": {
-          "viewClass": "SelectView",
-          "label": "Binding",
-          "required": true,
-          "model": "io.elastic.soap.providers.BindingModelProvider",
-          "prompt": "Choose a Binding [Service/Port]"
-        },
-        "operation": {
-          "viewClass": "SelectView",
-          "label": "Operation",
-          "required": true,
-          "model": "io.elastic.soap.providers.OperationModelProvider",
-          "prompt": "Choose an Operation [Service/Port]"
-        }
-      },
-      "dynamicMetadata": "io.elastic.soap.providers.BodyMetaProvider"
-    }
-  },
   "actions": {
     "callAction": {
       "title": "Call",
+      "description": "Makes a call to SOAP service over HTTP using public WSDL URL",
       "main": "io.elastic.soap.actions.CallAction",
       "fields": {
         "wsdlURI": {
