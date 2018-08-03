@@ -38,7 +38,7 @@ Component supports next wsdl styles:
 You can select next authorization type:
 * **No Auth**
 * **Basic Auth**
-* **API Key Auth** <span style="color:red">(*has not supported yet*)</span>.
+* **API Key Auth** <span style="color:red">(*isn't not supported yet*)</span>.
 ### Username (Basic auth type)
 Username for Basic authorization header
 ### Password (Basic auth type)
@@ -78,7 +78,7 @@ This is so, because the SOAP encoding specification does not guarantee 100% inte
 
 * Only self-containing wsdls are supported now.
 * WS-Security header isn`t supported.
-* WS-Addressing osn`t supported now.
+* WS-Addressing isn`t supported now.
 * There is no ability to set values in SOAP headers.
 * The WSDL and associated schemas must be accessible via a publicly accessible URL. File upload of the WSDL and/or XSD schemas is not supported.
 * Component doesn't support multipart in SOAP request element. Only first part of request element will be processed.
