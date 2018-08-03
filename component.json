@@ -1,5 +1,5 @@
 {
-  "title": "SOAP component",
+  "title": "SOAP V2",
   "description": "Generic SOAP / WebServices integration Component",
   "credentials": {
     "fields": {
