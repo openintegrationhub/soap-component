@@ -1,10 +1,10 @@
 # soap-component-java
 ## Description
-The SOAP Component provides the SOAP Web Services work opportunity within a elastic.io flow.
+The SOAP Component provides the SOAP Web Services work opportunity within a open integration hub flow.
 
 ### Purpose
 
-As an integration platform, elastic.io should has an opportunity to invoke SOAP Web services over HTTP.
+As an integration platform, open integration hub should has an opportunity to invoke SOAP Web services over HTTP.
 
 ### How it works
 #### Step 1
@@ -37,7 +37,8 @@ Component supports next wsdl styles:
 * Document/Literal
 
 #### Environment variables
-``` EIO_REQUIRED_RAM_MB - recommended value of allocated memory is 2048MB ```
+``` OIH_REQUIRED_RAM_MB - recommended value of allocated memory is 2048MB ```
+
 ## Credentials
 
 ### Type
