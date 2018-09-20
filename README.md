@@ -1,4 +1,4 @@
-# soap-component-java
+# soap-component
 ## Description
 The SOAP Component provides the SOAP Web Services work opportunity within a open integration hub flow.
 
