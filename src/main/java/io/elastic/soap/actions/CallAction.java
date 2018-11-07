@@ -37,7 +37,10 @@ public class CallAction implements Module {
     try {
       outputBody = soapCallService.call(body, configuration);
     } catch (SOAPFaultException soapFaultException) {
-      LOGGER.error("SOAP Fault has occurred. See the logs.");
+      String soapFaultCode = soapFaultException.getFault().getFaultCode();
+      String soapFaultString = soapFaultException.getFault().getFaultString();
+      LOGGER.error("Server has responded with SOAP fault. See the logs for more details. Code: "
+          + soapFaultCode + ". Reason: " + soapFaultString);
 
       // emitting an exception
       parameters.getEventEmitter().emitException(soapFaultException);
