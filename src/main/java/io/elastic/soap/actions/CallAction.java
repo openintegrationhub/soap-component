@@ -40,7 +40,7 @@ public class CallAction implements Module {
       String soapFaultCode = soapFaultException.getFault().getFaultCode();
       String soapFaultString = soapFaultException.getFault().getFaultString();
       String exceptionText =
-          "Server has responded with SOAP fault. See the logs for more details. Code: "
+          "Server has responded with SOAP fault. See logs for more details. Code: "
               + soapFaultCode + ". Reason: " + soapFaultString + ".";
       LOGGER.error(exceptionText);
 
