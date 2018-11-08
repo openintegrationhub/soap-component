@@ -37,10 +37,15 @@ public class CallAction implements Module {
     try {
       outputBody = soapCallService.call(body, configuration);
     } catch (SOAPFaultException soapFaultException) {
-      LOGGER.error("SOAP Fault has occurred. See the logs.");
+      String soapFaultCode = soapFaultException.getFault().getFaultCode();
+      String soapFaultString = soapFaultException.getFault().getFaultString();
+      String exceptionText =
+          "Server has responded with SOAP fault. See logs for more details. Code: "
+              + soapFaultCode + ". Reason: " + soapFaultString + ".";
+      LOGGER.error(exceptionText);
 
-      // emitting an exception
-      parameters.getEventEmitter().emitException(soapFaultException);
+      // throwing an exception
+      throw new RuntimeException(exceptionText);
     } catch (Throwable throwable) {
       LOGGER.error("Unexpected internal component error: {}", throwable.getMessage());
       throw new RuntimeException(throwable);

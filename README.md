@@ -60,6 +60,10 @@ Makes a call to SOAP service over HTTP using public WSDL URL
 * **Binding** - One of the bindings available and described in the WSDL, which you want to use for a SOAP call
 * **Operation** - One of the operations available for the binding you have selected above.
 
+#### SOAP Fault
+A SOAP fault is used to carry error information within a SOAP message. The component handles SOAP faults and emits platform exception in this case.
+SOAP Fault should comply with the [W3C SOAP Fault standard](https://www.w3.org/TR/soap12-part1/#soapfault).
+
 #### Input json schema
 The component does not have static input json schema as it is dynamically generated for every wsdl/binding/operation specified in the process of configuration the component input fields.
 [Apache Axis2](http://axis.apache.org/axis2/java/core/) and [FasterXML JsonSchemaGenerator](https://github.com/FasterXML/jackson-module-jsonSchema) tools are used by the component internally to generate an input metadata.
