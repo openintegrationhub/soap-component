@@ -1,11 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
-apply plugin: 'eclipse'
 apply plugin: 'java-library-distribution'
 
 group = 'io.elastic'
-version = '1.0.0'
+version = '1.1.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -17,10 +16,22 @@ repositories {
     mavenCentral()
     mavenLocal()
 }
+sourceSets {
+    integrationTest {
+        java.outputDir = file('build/classes/integrationtest')
+        java { srcDir file('src/integration-test/java') }
+        resources { srcDir file('src/integration-test/resources') }
+    }
+    main {
+        java.outputDir = file('build/classes/main')
+    }
+    test {
+        java.outputDir = file('build/classes/test')
+    }
+}
 
 dependencies {
     compile files("lib/tools.jar")
-    compile "com.google.code.gson:gson:2.8.0"
     compile "com.sun.xml.bind:jaxb-xjc:2.1.6"
     compile "com.sun.xml.ws:jaxws-tools:2.2.1"
     compile "io.elastic:sailor-jvm:2.1.0"
@@ -33,13 +44,7 @@ dependencies {
         exclude group: "javax.annotation"
     }
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jsonSchema', version: '2.9.6'
-
-
-    compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
-
-    // JUnit 5 is used in the project. Junit 4.12 is needed to fix
-    // some ClassNotFound exceptions in one of transitive dependencies
-    testCompile "junit:junit:4.12"
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr353', version: '2.9.6'
     testCompile "org.junit.jupiter:junit-jupiter-params:5.1.0"
     testCompile "org.mockito:mockito-core:2.13.0"
 
@@ -51,6 +56,13 @@ uploadArchives {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
+wrapper {
+    gradleVersion = '5.4.1'
+}
+
+task downloadDependencies() {
+    description 'Download all dependencies to the Gradle cache'
+    doLast {
+        configurations.findAll { it.canBeResolved }.files
+    }
 }
