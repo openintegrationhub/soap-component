@@ -17,17 +17,21 @@ repositories {
     mavenLocal()
 }
 sourceSets {
-    integrationTest {
-        java.outputDir = file('build/classes/integrationtest')
-        java { srcDir file('src/integration-test/java') }
-        resources { srcDir file('src/integration-test/resources') }
-    }
     main {
         java.outputDir = file('build/classes/main')
     }
     test {
         java.outputDir = file('build/classes/test')
     }
+}
+
+test {
+    useJUnitPlatform()
+    exclude 'io/elastic/integration/**'
+    testLogging {
+        showStandardStreams = true
+    }
+    maxParallelForks 1
 }
 
 dependencies {
@@ -47,7 +51,6 @@ dependencies {
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr353', version: '2.9.6'
     testCompile "org.junit.jupiter:junit-jupiter-params:5.1.0"
     testCompile "org.mockito:mockito-core:2.13.0"
-
 }
 
 uploadArchives {

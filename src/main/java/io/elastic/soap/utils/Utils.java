@@ -1,5 +1,6 @@
 package io.elastic.soap.utils;
 
+import ch.qos.logback.classic.Level;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -250,6 +251,15 @@ public final class Utils {
             final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             soapMessage.writeTo(outputStream);
             log.trace(message, new String(outputStream.toByteArray(), StandardCharsets.UTF_8));
+        }
+    }
+
+    public static void configLogger() {
+        final org.slf4j.Logger root = LoggerFactory.getLogger("root");
+        if (root instanceof ch.qos.logback.classic.Logger) {
+            final String level = Optional.ofNullable(System.getenv("LOG_LEVEL")).orElse("info");
+            ch.qos.logback.classic.Logger rootLogback = (ch.qos.logback.classic.Logger) root;
+            rootLogback.setLevel(Level.toLevel(level));
         }
     }
 

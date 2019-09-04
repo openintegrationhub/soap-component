@@ -9,6 +9,15 @@
       }
     }
   },
+  "triggers": {
+    "receive": {
+      "title": "Receive SOAP Request",
+      "description": "Receive SOAP Request",
+      "main": "io.elastic.soap.triggers.ReceiveRequest",
+      "type": "webhook"
+
+    }
+  },
   "actions": {
     "callAction": {
       "title": "Call",
