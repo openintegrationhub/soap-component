@@ -5,6 +5,8 @@ import static io.elastic.soap.utils.Utils.configLogger;
 import io.elastic.api.ExecutionParameters;
 import io.elastic.api.Message;
 import io.elastic.api.Module;
+import io.elastic.soap.utils.Utils;
+import javax.json.Json;
 import javax.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +30,12 @@ public class ReceiveRequest implements Module {
     final Message message = parameters.getMessage();
     LOGGER.trace("Input message: {}", message);
 
-    final JsonObject body = message.getBody();
     final JsonObject configuration = parameters.getConfiguration();
 
-    final Message data = new Message.Builder().body(message.getBody()).build();
+
+    final JsonObject body = Utils.getSoapBody(message.getBody());
+
+    final Message data = new Message.Builder().body(body).build();
     LOGGER.trace("Emitting data: {}", data);
 
     parameters.getEventEmitter().emitData(data);

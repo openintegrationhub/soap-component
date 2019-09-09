@@ -1,0 +1,1222 @@
+{
+  "soapenv-Envelope": {
+    "_attr": {
+      "xmlns:soapenv": "http://schemas.xmlsoap.org/soap/envelope/",
+      "xmlns:new": "http://www.newmarketinc.com"
+    },
+    "soapenv-Header": {
+      "new-EmailAuth": {
+        "new-EmailAddress": "?",
+        "new-PwdHash": "?"
+      }
+    },
+    "soapenv-Body": {
+      "new-SetProposalResponse": {
+        "new-request": {
+          "_attr": {
+            "source": "?",
+            "destination": "?",
+            "propertyKey": "?",
+            "name": "?",
+            "GUID": "?",
+            "vendorID": "?",
+            "serviceID": "?"
+          },
+          "new-input": {
+            "new-Publisher": {
+              "new-Contact": {
+                "_attr": {
+                  "key": "?",
+                  "personalTitle": "?",
+                  "secondaryPersonalTitle": "?",
+                  "firstName": "?",
+                  "secondaryFirstName": "?",
+                  "middleName": "?",
+                  "secondaryMiddleName": "?",
+                  "lastName": "?",
+                  "secondaryLastName": "?",
+                  "suffix": "?",
+                  "secondarySuffix": "?",
+                  "fullName": "?",
+                  "secondaryFullName": "?",
+                  "email": "?",
+                  "email2": "?",
+                  "email3": "?",
+                  "professionalTitle": "?",
+                  "secondaryProfessionalTitle": "?",
+                  "salutation": "?",
+                  "secondarySalutation": "?"
+                },
+                "new-Phones": {
+                  "new-Phone": {
+                    "_attr": {
+                      "phoneNumber": "?",
+                      "phoneExtension": "?",
+                      "countryCode": "?",
+                      "phonePriority": "?",
+                      "phoneType": "?"
+                    }
+                  },
+                  "new-System": "\n                           e\n                           \n                           gero\n                        "
+                },
+                "new-Address": {
+                  "_attr": {
+                    "addressType": "?",
+                    "address1": "?",
+                    "address2": "?",
+                    "address3": "?",
+                    "city": "?",
+                    "stateProvince": "?",
+                    "postalCode": "?",
+                    "country": "?",
+                    "countryCode": "?"
+                  }
+                },
+                "new-Roles": {
+                  "new-Role": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  }
+                },
+                "new-UDF": {
+                  "_attr": {
+                    "recType": "?"
+                  },
+                  "new-Field": {
+                    "_attr": {
+                      "type": "?",
+                      "abrv": "?",
+                      "name": "?"
+                    },
+                    "new-Value": {
+                      "_attr": {
+                        "value": "?",
+                        "selected": "?"
+                      }
+                    }
+                  }
+                },
+                "new-System": "\n                        cum\n                        \n                        sonoras\n                     "
+              },
+              "new-Property": {
+                "_attr": {
+                  "key": "?",
+                  "name": "?",
+                  "secondaryName": "?",
+                  "abbreviation": "?"
+                },
+                "new-Address": {
+                  "_attr": {
+                    "addressType": "?",
+                    "address1": "?",
+                    "address2": "?",
+                    "address3": "?",
+                    "city": "?",
+                    "stateProvince": "?",
+                    "postalCode": "?",
+                    "country": "?",
+                    "countryCode": "?"
+                  }
+                },
+                "new-Phone": {
+                  "_attr": {
+                    "phoneNumber": "?",
+                    "phoneExtension": "?",
+                    "countryCode": "?",
+                    "phonePriority": "?",
+                    "phoneType": "?"
+                  }
+                },
+                "new-Currency": {
+                  "_attr": {
+                    "name": "?",
+                    "abbreviation": "?"
+                  }
+                }
+              }
+            },
+            "new-GroupBusiness": {
+              "_attr": {
+                "setup": "?",
+                "control": "?",
+                "groupMove": "?"
+              },
+              "new-BookingDetails": {
+                "_attr": {
+                  "key": "?",
+                  "name": "?",
+                  "secondaryName": "?",
+                  "abbreviation": "?",
+                  "bookingTypeKey": "?",
+                  "bookingType": "?",
+                  "arriveDate": "?",
+                  "departDate": "?",
+                  "status": "?",
+                  "decisonDate": "?",
+                  "cutoffDate": "?",
+                  "blockCode": "?",
+                  "compRooms": "?",
+                  "commissionPer": "?",
+                  "statusDate": "?",
+                  "pickupDate": "?",
+                  "createDate": "?"
+                },
+                "new-BookedBy": {
+                  "_attr": {
+                    "key": "?",
+                    "name": "?",
+                    "initials": "?",
+                    "email": "?"
+                  }
+                },
+                "new-MarketSegment": {
+                  "_attr": {
+                    "key": "?",
+                    "name": "?",
+                    "abrv": "?"
+                  }
+                },
+                "new-LeadSource": {
+                  "_attr": {
+                    "key": "?",
+                    "name": "?",
+                    "abrv": "?"
+                  }
+                },
+                "new-LeadInfo": {
+                  "new-Lead": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  },
+                  "new-Referral": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  },
+                  "new-MeetingBroker": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  }
+                },
+                "new-HousingMethod": {
+                  "_attr": {
+                    "key": "?",
+                    "name": "?",
+                    "abrv": "?"
+                  }
+                },
+                "new-Currency": {
+                  "_attr": {
+                    "name": "?",
+                    "abbreviation": "?"
+                  }
+                },
+                "new-Sources": {
+                  "new-CateringManager": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?",
+                      "initials": "?",
+                      "email": "?"
+                    }
+                  },
+                  "new-ServiceManager": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?",
+                      "initials": "?",
+                      "email": "?"
+                    }
+                  },
+                  "new-OtherSources": {
+                    "new-Source": {
+                      "_attr": {
+                        "key": "?",
+                        "name": "?",
+                        "initials": "?",
+                        "email": "?",
+                        "role": "?"
+                      }
+                    }
+                  }
+                },
+                "new-BookingClass": {
+                  "_attr": {
+                    "key": "?",
+                    "name": "?"
+                  }
+                },
+                "new-LostBusiness": {
+                  "_attr": {
+                    "date": "?"
+                  },
+                  "new-Competitor": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  },
+                  "new-Reason": {
+                    "_attr": {
+                      "key": "?",
+                      "reason": "?"
+                    }
+                  }
+                },
+                "new-Features": {
+                  "new-Feature": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  }
+                },
+                "new-OtherInfos": {
+                  "new-Info": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  }
+                },
+                "new-UDF": {
+                  "_attr": {
+                    "recType": "?"
+                  },
+                  "new-Field": {
+                    "_attr": {
+                      "type": "?",
+                      "abrv": "?",
+                      "name": "?"
+                    },
+                    "new-Value": {
+                      "_attr": {
+                        "value": "?",
+                        "selected": "?"
+                      }
+                    }
+                  }
+                },
+                "new-ExternalReferences": {
+                  "_attr": {
+                    "type": "?"
+                  },
+                  "new-Reference": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?"
+                    }
+                  }
+                },
+                "new-System": "\n                        aeoliam\n                        \n                        quae\n                     "
+              },
+              "new-Organization": {
+                "new-Client": {
+                  "new-Contact": {
+                    "new-PrimaryContact": {
+                      "_attr": {
+                        "key": "?",
+                        "personalTitle": "?",
+                        "secondaryPersonalTitle": "?",
+                        "firstName": "?",
+                        "secondaryFirstName": "?",
+                        "middleName": "?",
+                        "secondaryMiddleName": "?",
+                        "lastName": "?",
+                        "secondaryLastName": "?",
+                        "suffix": "?",
+                        "secondarySuffix": "?",
+                        "fullName": "?",
+                        "secondaryFullName": "?",
+                        "email": "?",
+                        "email2": "?",
+                        "email3": "?",
+                        "professionalTitle": "?",
+                        "secondaryProfessionalTitle": "?",
+                        "salutation": "?",
+                        "secondarySalutation": "?"
+                      },
+                      "new-Phones": {
+                        "new-Phone": {
+                          "_attr": {
+                            "phoneNumber": "?",
+                            "phoneExtension": "?",
+                            "countryCode": "?",
+                            "phonePriority": "?",
+                            "phoneType": "?"
+                          }
+                        },
+                        "new-System": "\n                                    ventos\n                                    \n                                    verrantque\n                                 "
+                      },
+                      "new-Address": {
+                        "_attr": {
+                          "addressType": "?",
+                          "address1": "?",
+                          "address2": "?",
+                          "address3": "?",
+                          "city": "?",
+                          "stateProvince": "?",
+                          "postalCode": "?",
+                          "country": "?",
+                          "countryCode": "?"
+                        }
+                      },
+                      "new-Roles": {
+                        "new-Role": {
+                          "_attr": {
+                            "key": "?",
+                            "name": "?"
+                          }
+                        }
+                      },
+                      "new-UDF": {
+                        "_attr": {
+                          "recType": "?"
+                        },
+                        "new-Field": {
+                          "_attr": {
+                            "type": "?",
+                            "abrv": "?",
+                            "name": "?"
+                          },
+                          "new-Value": {
+                            "_attr": {
+                              "value": "?",
+                              "selected": "?"
+                            }
+                          }
+                        }
+                      },
+                      "new-System": "\n                                 temperat\n                                 \n                                 per\n                              "
+                    },
+                    "new-System": "\n                              turbine\n                              \n                              circum\n                           "
+                  },
+                  "new-Account": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?",
+                      "type": "?",
+                      "typeDescription": "?",
+                      "secondaryName": "?"
+                    },
+                    "new-Phones": {
+                      "new-Phone": {
+                        "_attr": {
+                          "phoneNumber": "?",
+                          "phoneExtension": "?",
+                          "countryCode": "?",
+                          "phonePriority": "?",
+                          "phoneType": "?"
+                        }
+                      },
+                      "new-System": "\n                                 regemque\n                                 \n                                 nimborum\n                              "
+                    },
+                    "new-Address": {
+                      "_attr": {
+                        "addressType": "?",
+                        "address1": "?",
+                        "address2": "?",
+                        "address3": "?",
+                        "city": "?",
+                        "stateProvince": "?",
+                        "postalCode": "?",
+                        "country": "?",
+                        "countryCode": "?"
+                      }
+                    },
+                    "new-AccountID": {
+                      "new-PrimaryID": {
+                        "_attr": {
+                          "id": "?"
+                        }
+                      },
+                      "new-SecondaryID": {
+                        "_attr": {
+                          "idType": "?",
+                          "id": "?"
+                        }
+                      }
+                    },
+                    "new-Contacts": {
+                      "new-PrimaryContact": {
+                        "_attr": {
+                          "key": "?",
+                          "personalTitle": "?",
+                          "secondaryPersonalTitle": "?",
+                          "firstName": "?",
+                          "secondaryFirstName": "?",
+                          "middleName": "?",
+                          "secondaryMiddleName": "?",
+                          "lastName": "?",
+                          "secondaryLastName": "?",
+                          "suffix": "?",
+                          "secondarySuffix": "?",
+                          "fullName": "?",
+                          "secondaryFullName": "?",
+                          "email": "?",
+                          "email2": "?",
+                          "email3": "?",
+                          "professionalTitle": "?",
+                          "secondaryProfessionalTitle": "?",
+                          "salutation": "?",
+                          "secondarySalutation": "?"
+                        },
+                        "new-Phones": {
+                          "new-Phone": {
+                            "_attr": {
+                              "phoneNumber": "?",
+                              "phoneExtension": "?",
+                              "countryCode": "?",
+                              "phonePriority": "?",
+                              "phoneType": "?"
+                            }
+                          },
+                          "new-System": "\n                                       fremunt\n                                       \n                                       foedere\n                                    "
+                        },
+                        "new-Address": {
+                          "_attr": {
+                            "addressType": "?",
+                            "address1": "?",
+                            "address2": "?",
+                            "address3": "?",
+                            "city": "?",
+                            "stateProvince": "?",
+                            "postalCode": "?",
+                            "country": "?",
+                            "countryCode": "?"
+                          }
+                        },
+                        "new-Roles": {
+                          "new-Role": {
+                            "_attr": {
+                              "key": "?",
+                              "name": "?"
+                            }
+                          }
+                        },
+                        "new-UDF": {
+                          "_attr": {
+                            "recType": "?"
+                          },
+                          "new-Field": {
+                            "_attr": {
+                              "type": "?",
+                              "abrv": "?",
+                              "name": "?"
+                            },
+                            "new-Value": {
+                              "_attr": {
+                                "value": "?",
+                                "selected": "?"
+                              }
+                            }
+                          }
+                        },
+                        "new-System": "\n                                    ferant\n                                    \n                                    profundum\n                                 "
+                      },
+                      "new-System": "\n                                 sceptra\n                                 \n                                 et\n                              "
+                    },
+                    "new-AccountDetails": {
+                      "_attr": {
+                        "abbreviation": "?",
+                        "webAddress": "?"
+                      },
+                      "new-MarketSegment": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-ParentAccount": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-SIC": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-Region": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-QualityRating": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-LeadSource": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-SalesManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-Assistant": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-CateringManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-ServiceManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-TransientManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-UDF": {
+                        "_attr": {
+                          "recType": "?"
+                        },
+                        "new-Field": {
+                          "_attr": {
+                            "type": "?",
+                            "abrv": "?",
+                            "name": "?"
+                          },
+                          "new-Value": {
+                            "_attr": {
+                              "value": "?",
+                              "selected": "?"
+                            }
+                          }
+                        }
+                      },
+                      "new-System": "\n                                 turbine\n                                 \n                                 iovis\n                              "
+                    },
+                    "new-ExternalReferences": {
+                      "_attr": {
+                        "type": "?"
+                      },
+                      "new-Reference": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      }
+                    },
+                    "new-Comments": "\n                              flammato\n                              \n                              speluncis\n                           ",
+                    "new-System": "\n                              profundum\n                              \n                              bella\n                           "
+                  },
+                  "new-System": "\n                           nubibus\n                           \n                           flammas\n                        "
+                },
+                "new-ThirdParty": {
+                  "new-Contact": {
+                    "new-PrimaryContact": {
+                      "_attr": {
+                        "key": "?",
+                        "personalTitle": "?",
+                        "secondaryPersonalTitle": "?",
+                        "firstName": "?",
+                        "secondaryFirstName": "?",
+                        "middleName": "?",
+                        "secondaryMiddleName": "?",
+                        "lastName": "?",
+                        "secondaryLastName": "?",
+                        "suffix": "?",
+                        "secondarySuffix": "?",
+                        "fullName": "?",
+                        "secondaryFullName": "?",
+                        "email": "?",
+                        "email2": "?",
+                        "email3": "?",
+                        "professionalTitle": "?",
+                        "secondaryProfessionalTitle": "?",
+                        "salutation": "?",
+                        "secondarySalutation": "?"
+                      },
+                      "new-Phones": {
+                        "new-Phone": {
+                          "_attr": {
+                            "phoneNumber": "?",
+                            "phoneExtension": "?",
+                            "countryCode": "?",
+                            "phonePriority": "?",
+                            "phoneType": "?"
+                          }
+                        },
+                        "new-System": "\n                                    ac\n                                    \n                                    hoc\n                                 "
+                      },
+                      "new-Address": {
+                        "_attr": {
+                          "addressType": "?",
+                          "address1": "?",
+                          "address2": "?",
+                          "address3": "?",
+                          "city": "?",
+                          "stateProvince": "?",
+                          "postalCode": "?",
+                          "country": "?",
+                          "countryCode": "?"
+                        }
+                      },
+                      "new-Roles": {
+                        "new-Role": {
+                          "_attr": {
+                            "key": "?",
+                            "name": "?"
+                          }
+                        }
+                      },
+                      "new-UDF": {
+                        "_attr": {
+                          "recType": "?"
+                        },
+                        "new-Field": {
+                          "_attr": {
+                            "type": "?",
+                            "abrv": "?",
+                            "name": "?"
+                          },
+                          "new-Value": {
+                            "_attr": {
+                              "value": "?",
+                              "selected": "?"
+                            }
+                          }
+                        }
+                      },
+                      "new-System": "\n                                 rapidum\n                                 \n                                 ac\n                              "
+                    },
+                    "new-System": "\n                              caelumque\n                              \n                              speluncis\n                           "
+                  },
+                  "new-Agency": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?",
+                      "type": "?",
+                      "typeDescription": "?",
+                      "secondaryName": "?"
+                    },
+                    "new-Phones": {
+                      "new-Phone": {
+                        "_attr": {
+                          "phoneNumber": "?",
+                          "phoneExtension": "?",
+                          "countryCode": "?",
+                          "phonePriority": "?",
+                          "phoneType": "?"
+                        }
+                      },
+                      "new-System": "\n                                 circum\n                                 \n                                 aris\n                              "
+                    },
+                    "new-Address": {
+                      "_attr": {
+                        "addressType": "?",
+                        "address1": "?",
+                        "address2": "?",
+                        "address3": "?",
+                        "city": "?",
+                        "stateProvince": "?",
+                        "postalCode": "?",
+                        "country": "?",
+                        "countryCode": "?"
+                      }
+                    },
+                    "new-AccountID": {
+                      "new-PrimaryID": {
+                        "_attr": {
+                          "id": "?"
+                        }
+                      },
+                      "new-SecondaryID": {
+                        "_attr": {
+                          "idType": "?",
+                          "id": "?"
+                        }
+                      }
+                    },
+                    "new-Contacts": {
+                      "new-PrimaryContact": {
+                        "_attr": {
+                          "key": "?",
+                          "personalTitle": "?",
+                          "secondaryPersonalTitle": "?",
+                          "firstName": "?",
+                          "secondaryFirstName": "?",
+                          "middleName": "?",
+                          "secondaryMiddleName": "?",
+                          "lastName": "?",
+                          "secondaryLastName": "?",
+                          "suffix": "?",
+                          "secondarySuffix": "?",
+                          "fullName": "?",
+                          "secondaryFullName": "?",
+                          "email": "?",
+                          "email2": "?",
+                          "email3": "?",
+                          "professionalTitle": "?",
+                          "secondaryProfessionalTitle": "?",
+                          "salutation": "?",
+                          "secondarySalutation": "?"
+                        },
+                        "new-Phones": {
+                          "new-Phone": {
+                            "_attr": {
+                              "phoneNumber": "?",
+                              "phoneExtension": "?",
+                              "countryCode": "?",
+                              "phonePriority": "?",
+                              "phoneType": "?"
+                            }
+                          },
+                          "new-System": "\n                                       coniunx\n                                       \n                                       praeterea\n                                    "
+                        },
+                        "new-Address": {
+                          "_attr": {
+                            "addressType": "?",
+                            "address1": "?",
+                            "address2": "?",
+                            "address3": "?",
+                            "city": "?",
+                            "stateProvince": "?",
+                            "postalCode": "?",
+                            "country": "?",
+                            "countryCode": "?"
+                          }
+                        },
+                        "new-Roles": {
+                          "new-Role": {
+                            "_attr": {
+                              "key": "?",
+                              "name": "?"
+                            }
+                          }
+                        },
+                        "new-UDF": {
+                          "_attr": {
+                            "recType": "?"
+                          },
+                          "new-Field": {
+                            "_attr": {
+                              "type": "?",
+                              "abrv": "?",
+                              "name": "?"
+                            },
+                            "new-Value": {
+                              "_attr": {
+                                "value": "?",
+                                "selected": "?"
+                              }
+                            }
+                          }
+                        },
+                        "new-System": "\n                                    arce\n                                    \n                                    claustra\n                                 "
+                      },
+                      "new-System": "\n                                 circum\n                                 \n                                 imperio\n                              "
+                    },
+                    "new-AgencyDetails": {
+                      "_attr": {
+                        "abbreviation": "?",
+                        "webAddress": "?"
+                      },
+                      "new-ParentAccount": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-SIC": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-Region": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-QualityRating": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-LeadSource": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "abrv": "?"
+                        }
+                      },
+                      "new-SalesManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-Assistant": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-CateringManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-ServiceManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-TransientManager": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      },
+                      "new-AgencyInfo": {
+                        "new-AgencyTypes": {
+                          "_attr": {
+                            "key": "?",
+                            "name": "?",
+                            "abrv": "?"
+                          }
+                        },
+                        "new-GDSSystems": {
+                          "_attr": {
+                            "key": "?",
+                            "name": "?",
+                            "abrv": "?"
+                          }
+                        }
+                      },
+                      "new-UDF": {
+                        "_attr": {
+                          "recType": "?"
+                        },
+                        "new-Field": {
+                          "_attr": {
+                            "type": "?",
+                            "abrv": "?",
+                            "name": "?"
+                          },
+                          "new-Value": {
+                            "_attr": {
+                              "value": "?",
+                              "selected": "?"
+                            }
+                          }
+                        }
+                      },
+                      "new-System": "\n                                 certo\n                                 \n                                 quisquam\n                              "
+                    },
+                    "new-ExternalReferences": {
+                      "_attr": {
+                        "type": "?"
+                      },
+                      "new-Reference": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?"
+                        }
+                      }
+                    },
+                    "new-Comments": "\n                              et\n                              \n                              ac\n                           ",
+                    "new-System": "\n                              feta\n                              \n                              ac\n                           "
+                  },
+                  "new-System": "\n                           sed\n                           \n                           pectore\n                        "
+                }
+              },
+              "new-Revenue": {
+                "new-Type": {
+                  "_attr": {
+                    "type": "?",
+                    "category": "?",
+                    "actual": "?",
+                    "posted": "?"
+                  }
+                }
+              },
+              "new-GuestRooms": {
+                "new-StayDay": {
+                  "_attr": {
+                    "date": "?"
+                  },
+                  "new-Room": {
+                    "_attr": {
+                      "key": "?",
+                      "name": "?",
+                      "secondaryName": "?",
+                      "abbreviation": "?",
+                      "secondaryAbbreviation": "?",
+                      "subBlockCode": "?",
+                      "propertyId": "?"
+                    },
+                    "new-Category": {
+                      "_attr": {
+                        "key": "?",
+                        "name": "?",
+                        "abrv": "?"
+                      }
+                    },
+                    "new-Agreed": {
+                      "new-Single": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Double": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Triple": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Quad": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-System": "\n                                 talia\n                                 \n                                 pectore\n                              "
+                    },
+                    "new-Block": {
+                      "new-Single": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Double": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Triple": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Quad": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-System": "\n                                 austris\n                                 \n                                 annos\n                              "
+                    },
+                    "new-Forecast": {
+                      "new-Single": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Double": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Triple": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Quad": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-System": "\n                                 sciret\n                                 \n                                 certo\n                              "
+                    },
+                    "new-Pickup": {
+                      "new-Single": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Double": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Triple": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-Quad": {
+                        "_attr": {
+                          "rooms": "?",
+                          "rate": "?"
+                        }
+                      },
+                      "new-System": "\n                                 dare\n                                 \n                                 rates\n                              "
+                    },
+                    "new-System": "\n                              bella\n                              \n                              volutans\n                           "
+                  }
+                }
+              },
+              "new-Events": {
+                "new-EventDay": {
+                  "_attr": {
+                    "date": "?"
+                  },
+                  "new-Revenue": {
+                    "_attr": {
+                      "food": "?",
+                      "beverage": "?",
+                      "resource": "?",
+                      "rental": "?"
+                    }
+                  },
+                  "new-EventDetails": {
+                    "new-Event": {
+                      "_attr": {
+                        "key": "?",
+                        "parentEventKey": "?",
+                        "name": "?",
+                        "secondaryName": "?",
+                        "startDateTime": "?",
+                        "endDateTime": "?",
+                        "isPosted": "?",
+                        "isMovable": "?",
+                        "isOptional": "?",
+                        "hold": "?",
+                        "setupTime": "?",
+                        "tearDownTime": "?",
+                        "status": "?",
+                        "propertyId": "?"
+                      },
+                      "new-Type": {
+                        "_attr": {
+                          "typeKey": "?",
+                          "typeName": "?",
+                          "secondaryTypeName": "?",
+                          "abbreviation": "?",
+                          "secondaryAbbreviation": "?",
+                          "forecastTypeKey": "?",
+                          "forecastTypeName": "?"
+                        }
+                      },
+                      "new-SetupType": {
+                        "_attr": {
+                          "setupTypeKey": "?",
+                          "setupTypeName": "?",
+                          "secondarySetupTypeName": "?",
+                          "setupTypeAbbreviation": "?",
+                          "secondarySetupTypeAbbreviation": "?",
+                          "specialSetupTypeKey": "?",
+                          "specialSetupTypeName": "?"
+                        }
+                      },
+                      "new-Room": {
+                        "_attr": {
+                          "key": "?",
+                          "name": "?",
+                          "secondaryName": "?",
+                          "abbreviation": "?",
+                          "secondaryAbbreviation": "?"
+                        }
+                      },
+                      "new-Quantity": {
+                        "_attr": {
+                          "agreed": "?",
+                          "expected": "?",
+                          "guaranteed": "?",
+                          "set": "?",
+                          "actual": "?"
+                        }
+                      },
+                      "new-Revenue": {
+                        "new-Type": {
+                          "_attr": {
+                            "type": "?",
+                            "category": "?",
+                            "actual": "?",
+                            "currentProjected": "?",
+                            "forecasted": "?"
+                          }
+                        }
+                      },
+                      "new-ExternalReferences": {
+                        "_attr": {
+                          "type": "?"
+                        },
+                        "new-Reference": {
+                          "_attr": {
+                            "key": "?",
+                            "name": "?"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "new-Comments": "\n                     dedit\n                     \n                     faciat\n                  ",
+              "new-System": "\n                     magno\n                     \n                     et\n                  "
+            }
+          },
+          "new-output": "\n               ac\n               \n               et\n            ",
+          "new-return": {
+            "_attr": {
+              "code": "?",
+              "msg": "?"
+            }
+          },
+          "new-system": "\n               regemque\n               \n               annos\n            "
+        }
+      }
+    }
+  }
+}

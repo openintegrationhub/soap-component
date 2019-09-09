@@ -6,7 +6,7 @@
     "fields": {
       "auth": {
         "required": false,
-        "viewClass": "HTTPAuthView"
+        "viewClass": "WebhookAuthView"
       }
     }
   },
@@ -15,14 +15,66 @@
       "title": "Receive SOAP Request",
       "description": "Receive SOAP Request",
       "main": "io.elastic.soap.triggers.ReceiveRequest",
-      "type": "webhook"
-
+      "type": "webhook",
+      "fields": {
+        "wsdlURI": {
+          "label": "WSDL URI",
+          "required": true,
+          "viewClass": "TextFieldWithNoteView",
+          "placeholder": "http://www.webservicex.net/CreditCard.asmx?wsdl",
+          "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
+        },
+        "binding": {
+          "viewClass": "SelectView",
+          "label": "Binding",
+          "required": true,
+          "model": "io.elastic.soap.providers.BindingModelProvider",
+          "prompt": "Chose an Binding [Service/Port]"
+        },
+        "operation": {
+          "viewClass": "SelectView",
+          "label": "Operation",
+          "required": true,
+          "model": "io.elastic.soap.providers.OperationModelProvider",
+          "prompt": "Chose an Operation [Service/Port]"
+        }
+      }
     }
   },
   "actions": {
     "callAction": {
       "title": "Call",
       "description": "Makes a call to SOAP service over HTTP using public WSDL URL",
+      "main": "io.elastic.soap.actions.CallAction",
+      "fields": {
+        "wsdlURI": {
+          "label": "WSDL URI",
+          "required": true,
+          "viewClass": "TextFieldWithNoteView",
+          "placeholder": "http://www.webservicex.net/CreditCard.asmx?wsdl",
+          "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
+        },
+        "binding": {
+          "viewClass": "SelectView",
+          "label": "Binding",
+          "required": true,
+          "model": "io.elastic.soap.providers.BindingModelProvider",
+          "prompt": "Chose an Binding [Service/Port]"
+        },
+        "operation": {
+          "viewClass": "SelectView",
+          "label": "Operation",
+          "required": true,
+          "model": "io.elastic.soap.providers.OperationModelProvider",
+          "prompt": "Chose an Operation [Service/Port]"
+        }
+      },
+      "dynamicMetadata": "io.elastic.soap.providers.BodyMetaProvider"
+    },
+
+    "soapReplyAction": {
+      "title": "Soap Reply",
+      "description": "Returns soap response to client",
       "main": "io.elastic.soap.actions.CallAction",
       "fields": {
         "wsdlURI": {
