@@ -98,7 +98,7 @@
           "prompt": "Chose an Operation [Service/Port]"
         }
       },
-      "dynamicMetadata": "io.elastic.soap.providers.BodyMetaProvider"
+      "dynamicMetadata": "io.elastic.soap.providers.ReplyBodyMetaProvider"
     }
   }
 }
