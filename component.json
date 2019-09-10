@@ -1,6 +1,5 @@
 {
   "title": "SOAP V2",
-  "buildType":"docker",
   "description": "Generic SOAP / WebServices integration Component",
   "credentials": {
     "fields": {
