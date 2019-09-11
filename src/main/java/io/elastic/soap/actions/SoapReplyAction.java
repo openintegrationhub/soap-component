@@ -9,7 +9,6 @@ import io.elastic.api.Module;
 import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.handlers.RequestHandler;
 import io.elastic.soap.utils.Utils;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
