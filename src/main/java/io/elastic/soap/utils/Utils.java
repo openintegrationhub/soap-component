@@ -15,6 +15,7 @@ import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.services.SoapCallService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -24,15 +25,18 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonString;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.soap.SOAPFaultException;
 import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 public final class Utils {
 
@@ -244,10 +248,14 @@ public final class Utils {
 
   public static void logSOAPMSgIfTraceEnabled(final Logger log, final String message, final SOAPMessage soapMessage) throws IOException, SOAPException {
     if (log.isTraceEnabled()) {
+      log.trace(message, getStringOfSoapMessage(soapMessage));
+    }
+  }
+
+  public static String getStringOfSoapMessage(final SOAPMessage soapMessage) throws IOException, SOAPException {
       final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
       soapMessage.writeTo(outputStream);
-      log.trace(message, new String(outputStream.toByteArray(), StandardCharsets.UTF_8));
-    }
+      return new String(outputStream.toByteArray(), StandardCharsets.UTF_8);
   }
 
   public static void configLogger() {
@@ -268,6 +276,26 @@ public final class Utils {
     }
     final JsonObject soapBody = envelope.getJsonObject(soapBodyKeyList.get(0));
     return soapBody;
+  }
+
+
+  public static Document convertStringToXMLDocument(String xmlString) {
+    //Parser that produces DOM object trees from XML content
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+    //API to obtain DOM Document instance
+    DocumentBuilder builder = null;
+    try {
+      //Create DocumentBuilder with default configuration
+      builder = factory.newDocumentBuilder();
+
+      //Parse the content to Document object
+      Document doc = builder.parse(new InputSource(new StringReader(xmlString)));
+      return doc;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }
 

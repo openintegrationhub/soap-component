@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class SoapReplyAction implements Module {
+
   static {
     Utils.configLogger();
   }
@@ -46,13 +47,13 @@ public class SoapReplyAction implements Module {
   @Override
   public void execute(ExecutionParameters parameters) {
     JsonObject headers = parameters.getMessage().getHeaders();
-    JsonObject body = parameters.getMessage().getBody();
+    JsonObject inputBody = parameters.getMessage().getBody();
     JsonObject configuration = parameters.getConfiguration();
     Message inputMsg = parameters.getMessage();
 
     LOGGER.trace("Input configuration: {}", configuration);
     LOGGER.trace("Input headers: {}", headers);
-    LOGGER.trace("Input body: {}", body);
+    LOGGER.trace("Input body: {}", inputBody);
 
     String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders().getString("reply_to") : null;
 
@@ -61,22 +62,21 @@ public class SoapReplyAction implements Module {
       return;
     }
 
-//    SoapBodyDescriptor soapBodyDescriptor = JaxbCompiler
-//        .getSoapBodyDescriptor(configuration.getString("wsdlURI"), configuration.getString("binding"), configuration.getString("operation"));
-//
-//    if (null != body.getJsonObject(soapBodyDescriptor.getResponseBodyElementName())) {
-//      outputBody = body;
-//    }
-
-    JsonObject outputHeaders = Json.createObjectBuilder()
-        .add(HEADER_ROUTING_KEY, replyTo)
-        .add(HEADER_CONTENT_TYPE, CONTENT_TYPE)
-        .build();
     try {
 
       RequestHandler requestHandler = new RequestHandler();
-      Object response = requestHandler.getResponseObject(body, soapBodyDescriptor, Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
+      Object response = requestHandler.getResponseObject(inputBody, soapBodyDescriptor, Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
       SOAPMessage message = requestHandler.getSoapRequestMessage(response, soapBodyDescriptor, Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
+
+//      final String xml = XML.toString(new JSONObject(body));
+//      final Document document = Utils.convertStringToXMLDocument(xml);
+//
+//      final SOAPMessage message = MessageFactory.newInstance().createMessage();
+//      final MimeHeaders soapHeaders = message.getMimeHeaders();
+//
+//      soapHeaders.addHeader("SOAPAction", soapBodyDescriptor.getSoapAction());
+//      message.getSOAPBody().addDocument(document);
+
       PipedInputStream in = new PipedInputStream();
       final PipedOutputStream outputStream = new PipedOutputStream(in);
       message.writeTo(outputStream);
@@ -84,9 +84,19 @@ public class SoapReplyAction implements Module {
           .content(in)
           .header(HEADER_ROUTING_KEY, replyTo)
           .header(HEADER_CONTENT_TYPE, CONTENT_TYPE)
+          .status(200)
           .build();
       parameters.getEventEmitter().emitHttpReply(httpReply);
-    } catch (IOException | ClassNotFoundException | SOAPException | JAXBException | ParserConfigurationException e) {
+
+      JsonObject body = Json.createObjectBuilder().add("SoapResponse",  Utils.getStringOfSoapMessage(message)).build();
+      parameters.getEventEmitter().emitData(new Message.Builder().body(body).build());
+    } catch (IOException | SOAPException e) {
+      e.printStackTrace();
+    } catch (JAXBException e) {
+      e.printStackTrace();
+    } catch (ParserConfigurationException e) {
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
   }
