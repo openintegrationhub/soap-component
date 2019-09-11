@@ -1,5 +1,6 @@
 {
   "title": "SOAP V2",
+  "service": "request-reply",
   "description": "Generic SOAP / WebServices integration Component",
   "credentials": {
     "fields": {
