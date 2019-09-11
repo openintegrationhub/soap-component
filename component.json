@@ -74,7 +74,7 @@
     "soapReplyAction": {
       "title": "Soap Reply",
       "description": "Returns soap response to client",
-      "main": "io.elastic.soap.actions.CallAction",
+      "main": "io.elastic.soap.actions.SoapReplyAction",
       "fields": {
         "wsdlURI": {
           "label": "WSDL URI",
