@@ -5,6 +5,7 @@ import io.elastic.api.Message;
 import io.elastic.api.Module;
 import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.exceptions.ComponentException;
+import io.elastic.soap.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,10 @@ import static io.elastic.soap.utils.Utils.loadClasses;
  * Action to make a SOAP call.
  */
 public class CallAction implements Module {
+
+    static {
+        Utils.configLogger();
+    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CallAction.class);
     private SoapBodyDescriptor soapBodyDescriptor;

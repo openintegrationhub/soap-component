@@ -70,7 +70,6 @@
       },
       "dynamicMetadata": "io.elastic.soap.providers.BodyMetaProvider"
     },
-
     "soapReplyAction": {
       "title": "Soap Reply",
       "description": "Returns soap response to client",

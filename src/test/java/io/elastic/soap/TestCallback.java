@@ -24,7 +24,10 @@ public class TestCallback implements EventEmitter.Callback {
   }
 
   public static Object getLastCall() {
-    return list.get(list.size() - 1);
+    if(list.size()>0){
+      return list.get(list.size() - 1);
+    }
+    return null;
   }
 
   public void reset() {

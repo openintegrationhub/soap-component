@@ -5,10 +5,7 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.utils.Utils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-
+import java.io.IOException;
 import javax.json.JsonObject;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -21,66 +18,96 @@ import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 /**
  * Class handles JSON request (and its Java generic class representation) and marshals it to XML
  */
 public class RequestHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandler.class);
 
-    /**
-     * Marshalling {@code request} to {@link SOAPMessage} object
-     *
-     * @param request            Java {@link Object} representation of SOAP request structure
-     * @param soapBodyDescriptor {@link SoapBodyDescriptor} object for service WSDL
-     * @param clazz              The {@link Class} of the {@code request}
-     * @return {@link SOAPMessage} representation of {@code request} object
-     */
-    public <T> SOAPMessage getSoapRequestMessage(final Object request,
-                                                 final SoapBodyDescriptor soapBodyDescriptor, final Class<T> clazz)
-            throws SOAPException, IOException, JAXBException, ParserConfigurationException {
-        final QName qName = new QName(soapBodyDescriptor.getRequestBodyNameSpace(),
-                soapBodyDescriptor.getRequestBodyElementName());
-        final JAXBElement<T> myRootElement = new JAXBElement<T>(qName, clazz, clazz.cast(request));
+  /**
+   * Marshalling {@code request} to {@link SOAPMessage} object
+   *
+   * @param request Java {@link Object} representation of SOAP request structure
+   * @param soapBodyDescriptor {@link SoapBodyDescriptor} object for service WSDL
+   * @param clazz The {@link Class} of the {@code request}
+   * @return {@link SOAPMessage} representation of {@code request} object
+   */
+  public <T> SOAPMessage getSoapRequestMessage(final Object request,
+      final SoapBodyDescriptor soapBodyDescriptor, final Class<T> clazz)
+      throws SOAPException, IOException, JAXBException, ParserConfigurationException {
+    final QName qName = new QName(soapBodyDescriptor.getRequestBodyNameSpace(),
+        soapBodyDescriptor.getRequestBodyElementName());
+    final JAXBElement<T> myRootElement = new JAXBElement<T>(qName, clazz, clazz.cast(request));
 
-        final Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-        final Marshaller marshaller = JAXBContext.newInstance(clazz).createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        marshaller.marshal(myRootElement, document);
+    final Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+    final Marshaller marshaller = JAXBContext.newInstance(clazz).createMarshaller();
+    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+    marshaller.marshal(myRootElement, document);
 
-        final SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
-        final MimeHeaders headers = soapMessage.getMimeHeaders();
-        headers.addHeader("SOAPAction", soapBodyDescriptor.getSoapAction());
-        soapMessage.getSOAPBody().addDocument(document);
+    final SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
+    final MimeHeaders headers = soapMessage.getMimeHeaders();
+    headers.addHeader("SOAPAction", soapBodyDescriptor.getSoapAction());
+    soapMessage.getSOAPBody().addDocument(document);
 
-        Utils.logSOAPMSgIfTraceEnabled(LOGGER, "Request to SOAP service: {}", soapMessage);
-        return soapMessage;
+    Utils.logSOAPMSgIfTraceEnabled(LOGGER, "Request to SOAP service: {}", soapMessage);
+    return soapMessage;
+  }
+
+  /**
+   * Deserialization {@code request} to {@link Object} object
+   *
+   * @param request Java {@link Object} representation of SOAP request structure
+   * @param soapBodyDescriptor {@link SoapBodyDescriptor} object for service WSDL
+   * @param clazz The {@link Class} of the {@code request} object
+   * @return {@link Object} representation of {@link JsonObject} {@code request} object
+   */
+  public <T> T getRequestObject(final JsonObject request,
+      final SoapBodyDescriptor soapBodyDescriptor, final Class<T> clazz) throws IOException {
+    return getObjectFromJson(request, soapBodyDescriptor.getRequestBodyElementName(), clazz);
+  }
+
+
+  /**
+   * Deserialization {@code request} to {@link Object} object
+   *
+   * @param request Java {@link Object} representation of SOAP request structure
+   * @param soapBodyDescriptor {@link SoapBodyDescriptor} object for service WSDL
+   * @param clazz The {@link Class} of the {@code request} object
+   * @return {@link Object} representation of {@link JsonObject} {@code request} object
+   */
+  public <T> T getResponseObject(final JsonObject request,
+      final SoapBodyDescriptor soapBodyDescriptor, final Class<T> clazz) throws IOException {
+    return getObjectFromJson(request, soapBodyDescriptor.getResponseBodyElementName(), clazz);
+  }
+
+
+  /**
+   * Deserialization {@code request} to {@link Object} object
+   *
+   * @param request Java {@link Object} representation of SOAP request structure
+   * @param elementName {@link String} root element name
+   * @param clazz The {@link Class} of the {@code request} object
+   * @return {@link Object} representation of {@link JsonObject} {@code request} object
+   */
+  public <T> T getObjectFromJson(final JsonObject request,
+      final String elementName, final Class<T> clazz) throws IOException {
+    LOGGER.info("About to start deserialization JsonObject");
+    LOGGER.trace("JsonObject: {}", request);
+    final JaxbAnnotationModule module = new JaxbAnnotationModule();
+    final ObjectMapper objectMapper = Utils.getConfiguredObjectMapper();
+    objectMapper.registerModule(module);
+    final JsonObject requestBody = request.getJsonObject(elementName);
+    if (null == requestBody) {
+      throw new ComponentException(String.format("Can not find valid structure for request. Object '%s' is not exist", elementName));
     }
-
-    /**
-     * Deserialization {@code request} to {@link Object} object
-     *
-     * @param request            Java {@link Object} representation of SOAP request structure
-     * @param soapBodyDescriptor {@link SoapBodyDescriptor} object for service WSDL
-     * @param clazz              The {@link Class} of the {@code request} object
-     * @return {@link Object} representation of {@link JsonObject} {@code request} object
-     */
-    public <T> T getRequestObject(final JsonObject request,
-                                  final SoapBodyDescriptor soapBodyDescriptor, final Class<T> clazz) throws IOException {
-        LOGGER.info("About to start deserialization JsonObject");
-        LOGGER.trace("JsonObject: {}", request);
-        final JaxbAnnotationModule module = new JaxbAnnotationModule();
-        final ObjectMapper objectMapper = Utils.getConfiguredObjectMapper();
-        objectMapper.registerModule(module);
-        final JsonObject requestBody = request.getJsonObject(soapBodyDescriptor.getRequestBodyElementName());
-        if (null == requestBody) {
-            throw new ComponentException(String.format("Can not find valid structure for request. Object '%s' is not exist", soapBodyDescriptor.getRequestBodyElementName()));
-        }
-        final T requestObject = objectMapper.readValue(requestBody.toString(), clazz);
-        LOGGER.trace("Deserialization JsonObject to {} class successfully done", clazz.getSimpleName());
-        LOGGER.info("Finish deserialization");
-        return requestObject;
-    }
+    final T requestObject = objectMapper.readValue(requestBody.toString(), clazz);
+    LOGGER.trace("Deserialization JsonObject to {} class successfully done", clazz.getSimpleName());
+    LOGGER.info("Finish deserialization");
+    return requestObject;
+  }
 }

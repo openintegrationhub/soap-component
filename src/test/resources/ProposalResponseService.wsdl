@@ -1,0 +1,1214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.newmarketinc.com" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.newmarketinc.com">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://www.newmarketinc.com">
+			<s:element name="SetProposalResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="request">
+							<s:complexType>
+								<s:sequence>
+									<s:element minOccurs="0" maxOccurs="1" name="input">
+										<s:complexType>
+											<s:sequence>
+												<s:element minOccurs="0" maxOccurs="1" name="Publisher" type="tns:publisherType"/>
+												<s:element minOccurs="0" maxOccurs="1" name="GroupBusiness" type="tns:bookingWithRoomsAndEvents2"/>
+											</s:sequence>
+										</s:complexType>
+									</s:element>
+									<s:element minOccurs="0" maxOccurs="1" name="output" type="tns:anyType"/>
+									<s:element minOccurs="0" maxOccurs="1" name="return">
+										<s:complexType>
+											<s:attribute name="code" type="s:string"/>
+											<s:attribute name="msg" type="s:string"/>
+										</s:complexType>
+									</s:element>
+									<s:element minOccurs="0" maxOccurs="1" name="system" type="tns:anyType"/>
+								</s:sequence>
+								<s:attribute name="source" type="s:string"/>
+								<s:attribute name="destination" type="s:string"/>
+								<s:attribute name="propertyKey" type="s:string"/>
+								<s:attribute name="name" type="s:string"/>
+								<s:attribute name="GUID" type="s:string"/>
+								<s:attribute name="vendorID" type="s:string"/>
+								<s:attribute name="serviceID" type="s:string"/>
+							</s:complexType>
+						</s:element>
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="publisherType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Contact" type="tns:personType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Property" type="tns:propertyDetailsType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="personType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Phones" type="tns:phoneListType"/>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Address" type="tns:addressType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Roles" type="tns:ArrayOfRoleType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="UDF" type="tns:contactUDFType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="personalTitle" type="s:string"/>
+				<s:attribute name="secondaryPersonalTitle" type="s:string"/>
+				<s:attribute name="firstName" type="s:string"/>
+				<s:attribute name="secondaryFirstName" type="s:string"/>
+				<s:attribute name="middleName" type="s:string"/>
+				<s:attribute name="secondaryMiddleName" type="s:string"/>
+				<s:attribute name="lastName" type="s:string"/>
+				<s:attribute name="secondaryLastName" type="s:string"/>
+				<s:attribute name="suffix" type="s:string"/>
+				<s:attribute name="secondarySuffix" type="s:string"/>
+				<s:attribute name="fullName" type="s:string"/>
+				<s:attribute name="secondaryFullName" type="s:string"/>
+				<s:attribute name="email" type="s:string"/>
+				<s:attribute name="email2" type="s:string"/>
+				<s:attribute name="email3" type="s:string"/>
+				<s:attribute name="professionalTitle" type="s:string"/>
+				<s:attribute name="secondaryProfessionalTitle" type="s:string"/>
+				<s:attribute name="salutation" type="s:string"/>
+				<s:attribute name="secondarySalutation" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="phoneListType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Phone" type="tns:phoneType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="phoneType2">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:phoneType1">
+						<s:attribute name="phonePriority" type="s:integer"/>
+						<s:attribute name="phoneType" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="phoneType1">
+				<s:attribute name="phoneNumber" type="s:string"/>
+				<s:attribute name="phoneExtension" type="s:string"/>
+				<s:attribute name="countryCode" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="anyType" mixed="true">
+				<s:sequence>
+					<s:any minOccurs="0" maxOccurs="unbounded"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="addressType">
+				<s:attribute name="addressType" type="s:string"/>
+				<s:attribute name="address1" type="s:string"/>
+				<s:attribute name="address2" type="s:string"/>
+				<s:attribute name="address3" type="s:string"/>
+				<s:attribute name="city" type="s:string"/>
+				<s:attribute name="stateProvince" type="s:string"/>
+				<s:attribute name="postalCode" type="s:string"/>
+				<s:attribute name="country" type="s:string"/>
+				<s:attribute name="countryCode" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="ArrayOfRoleType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Role" type="tns:roleType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="roleType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="contactUDFType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:udfType">
+						<s:attribute name="recType" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="C"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="udfType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Field">
+						<s:complexType>
+							<s:sequence>
+								<s:element minOccurs="0" maxOccurs="unbounded" name="Value">
+									<s:complexType>
+										<s:attribute name="value" type="s:string"/>
+										<s:attribute name="selected" type="s:boolean"/>
+									</s:complexType>
+								</s:element>
+							</s:sequence>
+							<s:attribute name="type" type="s:string"/>
+							<s:attribute name="abrv" type="s:string"/>
+							<s:attribute name="name" type="s:string"/>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="accountUDFType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:udfType">
+						<s:attribute name="recType" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="A"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="bookingUDFType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:udfType">
+						<s:attribute name="recType" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="B"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="exhibitorUDFType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:udfType">
+						<s:attribute name="recType" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="E"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="propertyDetailsType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Address" type="tns:addressType"/>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Phone" type="tns:phoneType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:currencyType2"/>
+				</s:sequence>
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+				<s:attribute name="secondaryName" type="s:string"/>
+				<s:attribute name="abbreviation" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="currencyType2">
+				<s:attribute name="name" type="s:string"/>
+				<s:attribute name="abbreviation" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="bookingWithRoomsAndEvents2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="BookingDetails" type="tns:bookingType3"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Organization" type="tns:bookingClientAndOrgType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Revenue" type="tns:ArrayOfBookingRevenueTypeType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="GuestRooms" type="tns:ArrayOfStayDayType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Events">
+						<s:complexType>
+							<s:sequence>
+								<s:element minOccurs="0" maxOccurs="unbounded" name="EventDay" type="tns:eventType"/>
+							</s:sequence>
+						</s:complexType>
+					</s:element>
+					<s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:anyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="setup" use="required">
+					<s:simpleType>
+						<s:restriction base="s:string">
+							<s:enumeration value="0"/>
+							<s:enumeration value="1"/>
+						</s:restriction>
+					</s:simpleType>
+				</s:attribute>
+				<s:attribute name="control" use="required">
+					<s:simpleType>
+						<s:restriction base="s:string">
+							<s:enumeration value="Delphi"/>
+							<s:enumeration value="Vendor"/>
+						</s:restriction>
+					</s:simpleType>
+				</s:attribute>
+				<s:attribute name="groupMove" use="required">
+					<s:simpleType>
+						<s:restriction base="s:string">
+							<s:enumeration value="0"/>
+							<s:enumeration value="1"/>
+						</s:restriction>
+					</s:simpleType>
+				</s:attribute>
+			</s:complexType>
+			<s:complexType name="bookingType3">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:bookingKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="BookedBy" type="tns:userKeyType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="MarketSegment" type="tns:marketSegmentType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadInfo">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="Lead" type="tns:leadKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="Referral" type="tns:referralKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="MeetingBroker" type="tns:meetingBrokerKeyType"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="HousingMethod" type="tns:housingMethodType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:currencyType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Sources">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:userKeyType2"/>
+										<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:userKeyType2"/>
+										<s:element minOccurs="0" maxOccurs="1" name="OtherSources" type="tns:ArrayOfBookingType3SourcesSource"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="BookingClass" type="tns:keyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LostBusiness">
+								<s:complexType>
+									<s:complexContent mixed="false">
+										<s:extension base="tns:lostBusinessType">
+											<s:sequence>
+												<s:element minOccurs="0" maxOccurs="1" name="Competitor" type="tns:competitorType"/>
+												<s:element minOccurs="0" maxOccurs="1" name="Reason" type="tns:reasonType"/>
+											</s:sequence>
+										</s:extension>
+									</s:complexContent>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="Features" type="tns:ArrayOfKeyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="OtherInfos" type="tns:ArrayOfKeyType1"/>
+							<s:element minOccurs="0" maxOccurs="1" name="UDF" type="tns:bookingUDFType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="ExternalReferences" type="tns:externalReferencesType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+						<s:attribute name="secondaryName" type="s:string"/>
+						<s:attribute name="abbreviation" type="s:string"/>
+						<s:attribute name="bookingTypeKey" type="s:string"/>
+						<s:attribute name="bookingType" type="s:string"/>
+						<s:attribute name="arriveDate" type="s:date" use="required"/>
+						<s:attribute name="departDate" type="s:date" use="required"/>
+						<s:attribute name="status" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="prospect"/>
+									<s:enumeration value="tentative"/>
+									<s:enumeration value="definite"/>
+									<s:enumeration value="canceled"/>
+									<s:enumeration value="turned down"/>
+									<s:enumeration value="inquiry"/>
+									<s:enumeration value="completed"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+						<s:attribute name="decisonDate" type="s:date"/>
+						<s:attribute name="cutoffDate" type="s:date"/>
+						<s:attribute name="blockCode" type="s:string"/>
+						<s:attribute name="compRooms" type="s:integer"/>
+						<s:attribute name="commissionPer" type="s:decimal"/>
+						<s:attribute name="statusDate" type="s:date"/>
+						<s:attribute name="pickupDate" type="s:date"/>
+						<s:attribute name="createDate" type="s:date"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="bookingKeyType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="bookingType2">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:bookingKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="BookedBy" type="tns:userKeyType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="MarketSegment" type="tns:marketSegmentType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadInfo">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="Lead" type="tns:leadKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="Referral" type="tns:referralKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="MeetingBroker" type="tns:meetingBrokerKeyType"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="HousingMethod" type="tns:housingMethodType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:currencyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Sources">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:userKeyType2"/>
+										<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:userKeyType2"/>
+										<s:element minOccurs="0" maxOccurs="1" name="OtherSources" type="tns:ArrayOfBookingType2SourcesSource"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="BookingClass" type="tns:keyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LostBusiness">
+								<s:complexType>
+									<s:complexContent mixed="false">
+										<s:extension base="tns:lostBusinessType">
+											<s:sequence>
+												<s:element minOccurs="0" maxOccurs="1" name="Competitor" type="tns:competitorType"/>
+												<s:element minOccurs="0" maxOccurs="1" name="Reason" type="tns:reasonType"/>
+											</s:sequence>
+										</s:extension>
+									</s:complexContent>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="Features" type="tns:ArrayOfKeyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="OtherInfos" type="tns:ArrayOfKeyType1"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+						<s:attribute name="abbreviation" type="s:string"/>
+						<s:attribute name="bookingTypeKey" type="s:string"/>
+						<s:attribute name="bookingType" type="s:string"/>
+						<s:attribute name="arriveDate" type="s:date" use="required"/>
+						<s:attribute name="departDate" type="s:date" use="required"/>
+						<s:attribute name="status" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="prospect"/>
+									<s:enumeration value="tentative"/>
+									<s:enumeration value="definite"/>
+									<s:enumeration value="canceled"/>
+									<s:enumeration value="turned down"/>
+									<s:enumeration value="inquiry"/>
+									<s:enumeration value="completed"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+						<s:attribute name="decisonDate" type="s:date"/>
+						<s:attribute name="cutoffDate" type="s:date"/>
+						<s:attribute name="blockCode" type="s:string"/>
+						<s:attribute name="compRooms" type="s:integer"/>
+						<s:attribute name="commissionPer" type="s:decimal"/>
+						<s:attribute name="statusDate" type="s:date"/>
+						<s:attribute name="pickupDate" type="s:date"/>
+						<s:attribute name="createDate" type="s:date"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="userKeyType2">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:userKeyType">
+						<s:attribute name="email" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="userKeyType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+				<s:attribute name="initials" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="marketSegmentType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="keyType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="contactKeyType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType"/>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="agencyInfoType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="referralKeyType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType"/>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="sicType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="regionType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="leadSourceType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="qualityType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="housingMethodType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="gdsSystemsType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="keyAbrvType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType">
+						<s:attribute name="abrv" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="roomCategoryKeyType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyAbrvType"/>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="roomKeyType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType"/>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="leadKeyType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:keyType"/>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="meetingBrokerKeyType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="currencyType">
+				<s:attribute name="code" type="s:string"/>
+				<s:attribute name="description" type="s:string"/>
+				<s:attribute name="conversionrate" type="s:decimal"/>
+			</s:complexType>
+			<s:complexType name="ArrayOfBookingType2SourcesSource">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Source">
+						<s:complexType>
+							<s:complexContent mixed="false">
+								<s:extension base="tns:userKeyType2">
+									<s:attribute name="role" type="s:string"/>
+								</s:extension>
+							</s:complexContent>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="lostBusinessType">
+				<s:attribute name="date" type="s:date"/>
+			</s:complexType>
+			<s:complexType name="competitorType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="reasonType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="reason" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="ArrayOfKeyType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Feature" type="tns:keyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfKeyType1">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Info" type="tns:keyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="bookingType4">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:bookingKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="BookedBy" type="tns:userKeyType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="MarketSegment" type="tns:marketSegmentType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadInfo">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="Lead" type="tns:leadKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="Referral" type="tns:referralKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="MeetingBroker" type="tns:meetingBrokerKeyType"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="HousingMethod" type="tns:housingMethodType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:currencyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Sources">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:userKeyType2"/>
+										<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:userKeyType2"/>
+										<s:element minOccurs="0" maxOccurs="1" name="OtherSources" type="tns:ArrayOfBookingType4SourcesSource"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="BookingClass" type="tns:keyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LostBusiness">
+								<s:complexType>
+									<s:complexContent mixed="false">
+										<s:extension base="tns:lostBusinessType">
+											<s:sequence>
+												<s:element minOccurs="0" maxOccurs="1" name="Competitor" type="tns:competitorType"/>
+												<s:element minOccurs="0" maxOccurs="1" name="Reason" type="tns:reasonType"/>
+												<s:element minOccurs="0" maxOccurs="1" name="City">
+													<s:complexType>
+														<s:attribute name="name" type="s:string"/>
+													</s:complexType>
+												</s:element>
+											</s:sequence>
+										</s:extension>
+									</s:complexContent>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="Features" type="tns:ArrayOfKeyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="OtherInfos" type="tns:ArrayOfKeyType1"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+						<s:attribute name="abbreviation" type="s:string"/>
+						<s:attribute name="bookingTypeKey" type="s:string"/>
+						<s:attribute name="bookingType" type="s:string"/>
+						<s:attribute name="arriveDate" type="s:date" use="required"/>
+						<s:attribute name="departDate" type="s:date" use="required"/>
+						<s:attribute name="status" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="prospect"/>
+									<s:enumeration value="tentative"/>
+									<s:enumeration value="definite"/>
+									<s:enumeration value="canceled"/>
+									<s:enumeration value="turned down"/>
+									<s:enumeration value="inquiry"/>
+									<s:enumeration value="completed"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+						<s:attribute name="decisonDate" type="s:date"/>
+						<s:attribute name="cutoffDate" type="s:date"/>
+						<s:attribute name="blockCode" type="s:string"/>
+						<s:attribute name="compRooms" type="s:integer"/>
+						<s:attribute name="commissionPer" type="s:decimal"/>
+						<s:attribute name="statusDate" type="s:date"/>
+						<s:attribute name="pickupDate" type="s:date"/>
+						<s:attribute name="createDate" type="s:date"/>
+						<s:attribute name="pickupComplete" type="s:boolean"/>
+						<s:attribute name="totalAgreedRooms" type="s:integer"/>
+						<s:attribute name="totalBlockedRooms" type="s:integer"/>
+						<s:attribute name="totalPickupRooms" type="s:integer"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="ArrayOfBookingType4SourcesSource">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Source">
+						<s:complexType>
+							<s:complexContent mixed="false">
+								<s:extension base="tns:userKeyType2">
+									<s:attribute name="role" type="s:string"/>
+								</s:extension>
+							</s:complexContent>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="bookingType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:bookingKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="BookedBy" type="tns:userKeyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="MarketSegment" type="tns:marketSegmentType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LeadInfo">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="Lead" type="tns:leadKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="Referral" type="tns:referralKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="MeetingBroker" type="tns:meetingBrokerKeyType"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="HousingMethod" type="tns:housingMethodType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Currency" type="tns:currencyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Sources">
+								<s:complexType>
+									<s:sequence>
+										<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:userKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:userKeyType"/>
+										<s:element minOccurs="0" maxOccurs="1" name="OtherSources" type="tns:ArrayOfBookingTypeSourcesSource"/>
+									</s:sequence>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="BookingClass" type="tns:keyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="LostBusiness">
+								<s:complexType>
+									<s:complexContent mixed="false">
+										<s:extension base="tns:lostBusinessType">
+											<s:sequence>
+												<s:element minOccurs="0" maxOccurs="1" name="Competitor" type="tns:competitorType"/>
+												<s:element minOccurs="0" maxOccurs="1" name="Reason" type="tns:reasonType"/>
+											</s:sequence>
+										</s:extension>
+									</s:complexContent>
+								</s:complexType>
+							</s:element>
+							<s:element minOccurs="0" maxOccurs="1" name="Features" type="tns:ArrayOfKeyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="OtherInfos" type="tns:ArrayOfKeyType1"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+						<s:attribute name="abbreviation" type="s:string"/>
+						<s:attribute name="bookingType" type="s:string"/>
+						<s:attribute name="arriveDate" type="s:date" use="required"/>
+						<s:attribute name="departDate" type="s:date" use="required"/>
+						<s:attribute name="status" use="required">
+							<s:simpleType>
+								<s:restriction base="s:string">
+									<s:enumeration value="prospect"/>
+									<s:enumeration value="tentative"/>
+									<s:enumeration value="definite"/>
+									<s:enumeration value="canceled"/>
+									<s:enumeration value="turned down"/>
+									<s:enumeration value="inquiry"/>
+									<s:enumeration value="completed"/>
+								</s:restriction>
+							</s:simpleType>
+						</s:attribute>
+						<s:attribute name="decisonDate" type="s:date"/>
+						<s:attribute name="cutoffDate" type="s:date"/>
+						<s:attribute name="blockCode" type="s:string"/>
+						<s:attribute name="compRooms" type="s:integer"/>
+						<s:attribute name="commissionPer" type="s:decimal"/>
+						<s:attribute name="statusDate" type="s:date"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="ArrayOfBookingTypeSourcesSource">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Source">
+						<s:complexType>
+							<s:complexContent mixed="false">
+								<s:extension base="tns:userKeyType2">
+									<s:attribute name="role" type="s:string"/>
+								</s:extension>
+							</s:complexContent>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfBookingType3SourcesSource">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Source">
+						<s:complexType>
+							<s:complexContent mixed="false">
+								<s:extension base="tns:userKeyType2">
+									<s:attribute name="role" type="s:string"/>
+								</s:extension>
+							</s:complexContent>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="externalReferencesType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Reference" type="tns:keyType"/>
+				</s:sequence>
+				<s:attribute name="type" use="required">
+					<s:simpleType>
+						<s:restriction base="s:string">
+							<s:enumeration value="Account"/>
+							<s:enumeration value="Booking"/>
+							<s:enumeration value="Event"/>
+							<s:enumeration value="BEO"/>
+						</s:restriction>
+					</s:simpleType>
+				</s:attribute>
+			</s:complexType>
+			<s:complexType name="bookingClientAndOrgType2">
+				<s:sequence>
+					<s:choice minOccurs="0" maxOccurs="unbounded">
+						<s:element minOccurs="0" maxOccurs="1" name="Client" type="tns:bookingClientType2"/>
+						<s:element minOccurs="0" maxOccurs="1" name="ThirdParty" type="tns:bookingThirdPartyType2"/>
+					</s:choice>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="bookingClientType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Contact" type="tns:primaryContactType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Account" type="tns:accountType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="primaryContactType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="PrimaryContact" type="tns:personType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="accountType2">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:accountKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="Phones" type="tns:phoneListType"/>
+							<s:element minOccurs="0" maxOccurs="unbounded" name="Address" type="tns:addressType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AccountID" type="tns:accountIDType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Contacts" type="tns:primaryContactType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AccountDetails" type="tns:accountDetailsType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="ExternalReferences" type="tns:externalReferencesType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:anyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+						<s:attribute name="secondaryName" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="accountKeyType">
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+				<s:attribute name="type" use="required">
+					<s:simpleType>
+						<s:restriction base="s:string">
+							<s:enumeration value="1"/>
+							<s:enumeration value="2"/>
+							<s:enumeration value="3"/>
+							<s:enumeration value="4"/>
+						</s:restriction>
+					</s:simpleType>
+				</s:attribute>
+				<s:attribute name="typeDescription" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="agencyKeyType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:accountKeyType"/>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="agencyType2">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:agencyKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="Phones" type="tns:phoneListType"/>
+							<s:element minOccurs="0" maxOccurs="unbounded" name="Address" type="tns:addressType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AccountID" type="tns:accountIDType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Contacts" type="tns:primaryContactType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AgencyDetails" type="tns:agencyDetailsType2"/>
+							<s:element minOccurs="0" maxOccurs="1" name="ExternalReferences" type="tns:externalReferencesType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:anyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+						<s:attribute name="secondaryName" type="s:string"/>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="accountIDType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="PrimaryID">
+						<s:complexType>
+							<s:attribute name="id" type="s:string"/>
+						</s:complexType>
+					</s:element>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="SecondaryID">
+						<s:complexType>
+							<s:attribute name="idType" type="s:string"/>
+							<s:attribute name="id" type="s:string"/>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="agencyDetailsType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="ParentAccount" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SIC" type="tns:sicType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Region" type="tns:regionType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="QualityRating" type="tns:qualityType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SalesManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Assistant" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="TransientManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="AgencyInfo">
+						<s:complexType>
+							<s:sequence>
+								<s:element minOccurs="0" maxOccurs="unbounded" name="AgencyTypes" type="tns:agencyInfoType"/>
+								<s:element minOccurs="0" maxOccurs="unbounded" name="GDSSystems" type="tns:gdsSystemsType"/>
+							</s:sequence>
+						</s:complexType>
+					</s:element>
+					<s:element minOccurs="0" maxOccurs="1" name="UDF" type="tns:accountUDFType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="abbreviation" type="s:string"/>
+				<s:attribute name="webAddress" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="agencyType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:agencyKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="Phones" type="tns:phoneListType"/>
+							<s:element minOccurs="0" maxOccurs="unbounded" name="Address" type="tns:addressType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AccountID" type="tns:accountIDType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Contacts" type="tns:primaryContactType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AgencyDetails" type="tns:agencyDetailsType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:anyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="primaryContactType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="PrimaryContact" type="tns:personType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="personType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Phones" type="tns:phoneListType"/>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Address" type="tns:addressType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Roles" type="tns:ArrayOfRoleType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="personalTitle" type="s:string"/>
+				<s:attribute name="firstName" type="s:string"/>
+				<s:attribute name="middleName" type="s:string"/>
+				<s:attribute name="lastName" type="s:string"/>
+				<s:attribute name="suffix" type="s:string"/>
+				<s:attribute name="fullName" type="s:string"/>
+				<s:attribute name="email" type="s:string"/>
+				<s:attribute name="email2" type="s:string"/>
+				<s:attribute name="email3" type="s:string"/>
+				<s:attribute name="professionalTitle" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="agencyDetailsType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="ParentAccount" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SIC" type="tns:sicType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Region" type="tns:regionType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="QualityRating" type="tns:qualityType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SalesManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Assistant" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="TransientManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="AgencyInfo">
+						<s:complexType>
+							<s:sequence>
+								<s:element minOccurs="0" maxOccurs="unbounded" name="AgencyTypes" type="tns:agencyInfoType"/>
+								<s:element minOccurs="0" maxOccurs="unbounded" name="GDSSystems" type="tns:gdsSystemsType"/>
+							</s:sequence>
+						</s:complexType>
+					</s:element>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="abbreviation" type="s:string"/>
+				<s:attribute name="webAddress" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="accountType">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:accountKeyType">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="Phones" type="tns:phoneListType"/>
+							<s:element minOccurs="0" maxOccurs="unbounded" name="Address" type="tns:addressType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AccountID" type="tns:accountIDType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Contacts" type="tns:primaryContactType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="AccountDetails" type="tns:accountDetailsType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:anyType"/>
+							<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+						</s:sequence>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="accountDetailsType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="MarketSegment" type="tns:marketSegmentType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="ParentAccount" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SIC" type="tns:sicType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Region" type="tns:regionType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="QualityRating" type="tns:qualityType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SalesManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Assistant" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="TransientManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="abbreviation" type="s:string"/>
+				<s:attribute name="webAddress" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="accountDetailsType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="MarketSegment" type="tns:marketSegmentType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="ParentAccount" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SIC" type="tns:sicType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Region" type="tns:regionType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="QualityRating" type="tns:qualityType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="LeadSource" type="tns:leadSourceType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="SalesManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Assistant" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="CateringManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="ServiceManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="TransientManager" type="tns:keyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="UDF" type="tns:accountUDFType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="abbreviation" type="s:string"/>
+				<s:attribute name="webAddress" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="bookingThirdPartyType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Contact" type="tns:primaryContactType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Agency" type="tns:agencyType2"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfBookingRevenueTypeType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Type">
+						<s:complexType>
+							<s:attribute name="type" type="s:string"/>
+							<s:attribute name="category" type="s:string"/>
+							<s:attribute name="actual" type="s:double" use="required"/>
+							<s:attribute name="posted" type="s:double"/>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfStayDayType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="StayDay" type="tns:stayDayType2"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="stayDayType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Room" type="tns:roomType2"/>
+				</s:sequence>
+				<s:attribute name="date" type="s:date" use="required"/>
+			</s:complexType>
+			<s:complexType name="roomType2">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Category" type="tns:roomCategoryKeyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Agreed" type="tns:allOccupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Block" type="tns:allOccupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Forecast" type="tns:allOccupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Pickup" type="tns:allOccupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+				<s:attribute name="key" type="s:string"/>
+				<s:attribute name="name" type="s:string"/>
+				<s:attribute name="secondaryName" type="s:string"/>
+				<s:attribute name="abbreviation" type="s:string"/>
+				<s:attribute name="secondaryAbbreviation" type="s:string"/>
+				<s:attribute name="subBlockCode" type="s:string"/>
+				<s:attribute name="propertyId" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="allOccupancyType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Single" type="tns:occupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Double" type="tns:occupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Triple" type="tns:occupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="Quad" type="tns:occupancyType"/>
+					<s:element minOccurs="0" maxOccurs="1" name="System" type="tns:anyType"/>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="occupancyType">
+				<s:attribute name="rooms" type="s:integer"/>
+				<s:attribute name="rate" type="s:double" use="required"/>
+			</s:complexType>
+			<s:complexType name="eventType">
+				<s:sequence>
+					<s:choice minOccurs="0" maxOccurs="unbounded">
+						<s:element minOccurs="0" maxOccurs="1" name="Revenue" type="tns:totalEventRevenueType"/>
+						<s:element minOccurs="0" maxOccurs="1" name="EventDetails" type="tns:eventDetailsType"/>
+					</s:choice>
+				</s:sequence>
+				<s:attribute name="date" type="s:date" use="required"/>
+			</s:complexType>
+			<s:complexType name="totalEventRevenueType">
+				<s:attribute name="food" type="s:double" use="required"/>
+				<s:attribute name="beverage" type="s:double" use="required"/>
+				<s:attribute name="resource" type="s:double" use="required"/>
+				<s:attribute name="rental" type="s:double" use="required"/>
+			</s:complexType>
+			<s:complexType name="eventDetailsType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Event">
+						<s:complexType>
+							<s:sequence>
+								<s:element minOccurs="0" maxOccurs="1" name="Type" type="tns:eventTypeType"/>
+								<s:element minOccurs="0" maxOccurs="1" name="SetupType" type="tns:eventSetupTypeType"/>
+								<s:element minOccurs="0" maxOccurs="1" name="Room">
+									<s:complexType>
+										<s:attribute name="key" type="s:string"/>
+										<s:attribute name="name" type="s:string"/>
+										<s:attribute name="secondaryName" type="s:string"/>
+										<s:attribute name="abbreviation" type="s:string"/>
+										<s:attribute name="secondaryAbbreviation" type="s:string"/>
+									</s:complexType>
+								</s:element>
+								<s:element minOccurs="0" maxOccurs="1" name="Quantity">
+									<s:complexType>
+										<s:attribute name="agreed" type="s:integer"/>
+										<s:attribute name="expected" type="s:integer"/>
+										<s:attribute name="guaranteed" type="s:integer"/>
+										<s:attribute name="set" type="s:integer"/>
+										<s:attribute name="actual" type="s:integer"/>
+									</s:complexType>
+								</s:element>
+								<s:element minOccurs="0" maxOccurs="1" name="Revenue" type="tns:ArrayOfEventRevenueTypeType"/>
+								<s:element minOccurs="0" maxOccurs="1" name="ExternalReferences" type="tns:externalReferencesType"/>
+							</s:sequence>
+							<s:attribute name="key" type="s:string"/>
+							<s:attribute name="parentEventKey" type="s:string"/>
+							<s:attribute name="name" type="s:string"/>
+							<s:attribute name="secondaryName" type="s:string"/>
+							<s:attribute name="startDateTime" type="s:dateTime" use="required"/>
+							<s:attribute name="endDateTime" type="s:dateTime" use="required"/>
+							<s:attribute name="isPosted" type="s:boolean"/>
+							<s:attribute name="isMovable" type="s:boolean"/>
+							<s:attribute name="isOptional" type="s:boolean"/>
+							<s:attribute name="hold" type="s:boolean"/>
+							<s:attribute name="setupTime" type="s:integer"/>
+							<s:attribute name="tearDownTime" type="s:integer"/>
+							<s:attribute name="status" type="s:string"/>
+							<s:attribute name="propertyId" type="s:string"/>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="eventTypeType">
+				<s:attribute name="typeKey" type="s:string"/>
+				<s:attribute name="typeName" type="s:string"/>
+				<s:attribute name="secondaryTypeName" type="s:string"/>
+				<s:attribute name="abbreviation" type="s:string"/>
+				<s:attribute name="secondaryAbbreviation" type="s:string"/>
+				<s:attribute name="forecastTypeKey" type="s:string"/>
+				<s:attribute name="forecastTypeName" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="eventSetupTypeType">
+				<s:attribute name="setupTypeKey" type="s:string"/>
+				<s:attribute name="setupTypeName" type="s:string"/>
+				<s:attribute name="secondarySetupTypeName" type="s:string"/>
+				<s:attribute name="setupTypeAbbreviation" type="s:string"/>
+				<s:attribute name="secondarySetupTypeAbbreviation" type="s:string"/>
+				<s:attribute name="specialSetupTypeKey" type="s:string"/>
+				<s:attribute name="specialSetupTypeName" type="s:string"/>
+			</s:complexType>
+			<s:complexType name="ArrayOfEventRevenueTypeType">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Type">
+						<s:complexType>
+							<s:attribute name="type" type="s:string"/>
+							<s:attribute name="category" type="s:string"/>
+							<s:attribute name="actual" type="s:double" use="required"/>
+							<s:attribute name="currentProjected" type="s:double"/>
+							<s:attribute name="forecasted" type="s:double"/>
+						</s:complexType>
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:element name="SetProposalResponseResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="SetProposalResponseResult" type="tns:ProposalResponseResult"/>
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="ProposalResponseResult">
+				<s:choice minOccurs="0" maxOccurs="unbounded">
+					<s:element minOccurs="0" maxOccurs="1" name="ResponseURL" type="s:string"/>
+					<s:element minOccurs="0" maxOccurs="1" name="OBSResult" type="tns:OBSResultType"/>
+				</s:choice>
+			</s:complexType>
+			<s:complexType name="OBSResultType">
+				<s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="ResponseError" type="s:string"/>
+					<s:element minOccurs="1" maxOccurs="1" name="ResponseCode" type="s:string"/>
+				</s:sequence>
+			</s:complexType>
+			<s:element name="EmailAuth" type="tns:EmailAuth"/>
+			<s:complexType name="EmailAuth">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string"/>
+					<s:element minOccurs="0" maxOccurs="1" name="PwdHash" type="s:string"/>
+				</s:sequence>
+				<s:anyAttribute/>
+			</s:complexType>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="SetProposalResponseSoapIn">
+		<wsdl:part name="parameters" element="tns:SetProposalResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SetProposalResponseSoapOut">
+		<wsdl:part name="parameters" element="tns:SetProposalResponseResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SetProposalResponseEmailAuth">
+		<wsdl:part name="EmailAuth" element="tns:EmailAuth"/>
+	</wsdl:message>
+	<wsdl:portType name="ProposalResponseServiceSoap">
+		<wsdl:operation name="SetProposalResponse">
+			<wsdl:input message="tns:SetProposalResponseSoapIn"/>
+			<wsdl:output message="tns:SetProposalResponseSoapOut"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ProposalResponseServiceSoap" type="tns:ProposalResponseServiceSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="SetProposalResponse">
+			<soap:operation soapAction="http://www.newmarketinc.com/SetProposalResponse" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:SetProposalResponseEmailAuth" part="EmailAuth" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="ProposalResponseServiceSoap12" type="tns:ProposalResponseServiceSoap">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="SetProposalResponse">
+			<wsdl:input>
+				<soap12:body use="literal"/>
+				<soap12:header message="tns:SetProposalResponseEmailAuth" part="EmailAuth" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ProposalResponseService">
+		<wsdl:port name="ProposalResponseServiceSoap" binding="tns:ProposalResponseServiceSoap">
+			<soap:address location="http://localhost/ProposalResponseService.asmx"/>
+		</wsdl:port>
+		<wsdl:port name="ProposalResponseServiceSoap12" binding="tns:ProposalResponseServiceSoap12">
+			<soap12:address location="http://localhost/ProposalResponseService.asmx"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
