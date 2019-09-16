@@ -17,6 +17,16 @@
       "main": "io.elastic.soap.triggers.ReceiveRequest",
       "type": "webhook",
       "fields": {
+        "validation" : {
+          "label" : "Validation",
+          "required" : false,
+          "viewClass" : "SelectFieldView",
+          "model" : {
+            "enabled" : "Enabled",
+            "disabled" : "Disabled"
+          },
+          "note" : "Validation is enabled by default"
+        },
         "wsdlURI": {
           "label": "WSDL URI",
           "required": true,
@@ -76,6 +86,16 @@
       "description": "Returns soap response to client",
       "main": "io.elastic.soap.actions.SoapReplyAction",
       "fields": {
+        "validation" : {
+          "label" : "Validation",
+          "required" : false,
+          "viewClass" : "SelectFieldView",
+          "model" : {
+            "enabled" : "Enabled",
+            "disabled" : "Disabled"
+          },
+          "note" : "Validation is enabled by default"
+        },
         "wsdlURI": {
           "label": "WSDL URI",
           "required": true,
