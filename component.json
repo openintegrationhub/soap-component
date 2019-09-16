@@ -20,7 +20,7 @@
         "validation" : {
           "label" : "Validation",
           "required" : false,
-          "viewClass" : "SelectFieldView",
+          "viewClass" : "SelectView",
           "model" : {
             "enabled" : "Enabled",
             "disabled" : "Disabled"
@@ -89,7 +89,7 @@
         "validation" : {
           "label" : "Validation",
           "required" : false,
-          "viewClass" : "SelectFieldView",
+          "viewClass" : "SelectView",
           "model" : {
             "enabled" : "Enabled",
             "disabled" : "Disabled"
