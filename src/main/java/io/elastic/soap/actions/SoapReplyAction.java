@@ -12,14 +12,10 @@ import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.handlers.RequestHandler;
 import io.elastic.soap.utils.Utils;
-import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +56,8 @@ public class SoapReplyAction implements Module {
       if (VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
 
       }
-      String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders().getString("reply_to") : null;
+      String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders()
+          .getString("reply_to") : null;
 
       // Don't emit this message when running sample data
       if (null == replyTo) {
@@ -68,8 +65,10 @@ public class SoapReplyAction implements Module {
       }
 
       RequestHandler requestHandler = new RequestHandler();
-      Object response = requestHandler.getResponseObject(inputBody, soapBodyDescriptor, Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
-      SOAPMessage message = requestHandler.getSoapRequestMessage(response, soapBodyDescriptor, Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
+      Object response = requestHandler.getResponseObject(inputBody, soapBodyDescriptor,
+          Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
+      SOAPMessage message = requestHandler.getSoapRequestMessage(response, soapBodyDescriptor,
+          Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
 
 //      final String xml = XML.toString(new JSONObject(body));
 //      final Document document = Utils.convertStringToXMLDocument(xml);
@@ -83,18 +82,25 @@ public class SoapReplyAction implements Module {
       PipedInputStream in = new PipedInputStream();
       final PipedOutputStream outputStream = new PipedOutputStream(in);
       message.writeTo(outputStream);
+
       HttpReply httpReply = new HttpReply.Builder()
           .content(in)
           .header(HEADER_ROUTING_KEY, replyTo)
           .header(HEADER_CONTENT_TYPE, CONTENT_TYPE)
           .status(200)
           .build();
+
       parameters.getEventEmitter().emitHttpReply(httpReply);
-      JsonObject body = Json.createObjectBuilder().add("SoapResponse", Utils.getStringOfSoapMessage(message)).build();
+
+      JsonObject body = Json.createObjectBuilder()
+          .add("SoapResponse", Utils.getStringOfSoapMessage(message))
+          .build();
+
       parameters.getEventEmitter().emitData(new Message.Builder().body(body).build());
     } catch (ComponentException e) {
+      parameters.getEventEmitter().emitException(e);
     } catch (Exception e) {
-
+      parameters.getEventEmitter().emitException(e);
     }
   }
 }
