@@ -1,5 +1,7 @@
 package io.elastic.soap.actions;
 
+import static io.elastic.soap.AppConstants.VALIDATION;
+import static io.elastic.soap.AppConstants.VALIDATION_ENABLED;
 import static io.elastic.soap.utils.Utils.loadClasses;
 
 import io.elastic.api.ExecutionParameters;
@@ -7,6 +9,7 @@ import io.elastic.api.HttpReply;
 import io.elastic.api.Message;
 import io.elastic.api.Module;
 import io.elastic.soap.compilers.model.SoapBodyDescriptor;
+import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.handlers.RequestHandler;
 import io.elastic.soap.utils.Utils;
 import java.io.IOException;
@@ -46,23 +49,23 @@ public class SoapReplyAction implements Module {
 
   @Override
   public void execute(ExecutionParameters parameters) {
-    JsonObject headers = parameters.getMessage().getHeaders();
-    JsonObject inputBody = parameters.getMessage().getBody();
-    JsonObject configuration = parameters.getConfiguration();
-    Message inputMsg = parameters.getMessage();
-
-    LOGGER.trace("Input configuration: {}", configuration);
-    LOGGER.trace("Input headers: {}", headers);
-    LOGGER.trace("Input body: {}", inputBody);
-
-    String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders().getString("reply_to") : null;
-
-    // Don't emit this message when running sample data
-    if (null == replyTo) {
-      return;
-    }
-
     try {
+      JsonObject headers = parameters.getMessage().getHeaders();
+      JsonObject inputBody = parameters.getMessage().getBody();
+      JsonObject configuration = parameters.getConfiguration();
+      Message inputMsg = parameters.getMessage();
+      LOGGER.trace("Input configuration: {}", configuration);
+      LOGGER.trace("Input headers: {}", headers);
+      LOGGER.trace("Input body: {}", inputBody);
+      if (VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
+
+      }
+      String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders().getString("reply_to") : null;
+
+      // Don't emit this message when running sample data
+      if (null == replyTo) {
+        return;
+      }
 
       RequestHandler requestHandler = new RequestHandler();
       Object response = requestHandler.getResponseObject(inputBody, soapBodyDescriptor, Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
@@ -87,17 +90,11 @@ public class SoapReplyAction implements Module {
           .status(200)
           .build();
       parameters.getEventEmitter().emitHttpReply(httpReply);
-
-      JsonObject body = Json.createObjectBuilder().add("SoapResponse",  Utils.getStringOfSoapMessage(message)).build();
+      JsonObject body = Json.createObjectBuilder().add("SoapResponse", Utils.getStringOfSoapMessage(message)).build();
       parameters.getEventEmitter().emitData(new Message.Builder().body(body).build());
-    } catch (IOException | SOAPException e) {
-      e.printStackTrace();
-    } catch (JAXBException e) {
-      e.printStackTrace();
-    } catch (ParserConfigurationException e) {
-      e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
+    } catch (ComponentException e) {
+    } catch (Exception e) {
+
     }
   }
 }

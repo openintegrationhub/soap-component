@@ -98,9 +98,7 @@ public class RequestHandler {
       final String elementName, final Class<T> clazz) throws IOException {
     LOGGER.info("About to start deserialization JsonObject");
     LOGGER.trace("JsonObject: {}", request);
-    final JaxbAnnotationModule module = new JaxbAnnotationModule();
     final ObjectMapper objectMapper = Utils.getConfiguredObjectMapper();
-    objectMapper.registerModule(module);
     final JsonObject requestBody = request.getJsonObject(elementName);
     if (null == requestBody) {
       throw new ComponentException(String.format("Can not find valid structure for request. Object '%s' is not exist", elementName));
