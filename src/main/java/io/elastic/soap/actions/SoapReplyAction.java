@@ -98,8 +98,12 @@ public class SoapReplyAction implements Module {
 
       parameters.getEventEmitter().emitData(new Message.Builder().body(body).build());
     } catch (ComponentException e) {
+      LOGGER.error("Got component exception: ", e);
+      e.printStackTrace();
       parameters.getEventEmitter().emitException(e);
     } catch (Exception e) {
+      LOGGER.error("Got exception: ", e);
+      e.printStackTrace();
       parameters.getEventEmitter().emitException(e);
     }
   }
