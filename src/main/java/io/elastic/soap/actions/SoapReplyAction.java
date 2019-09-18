@@ -84,7 +84,7 @@ public class SoapReplyAction implements Module {
         LOGGER.error("No reply_to id found!");
         return;
       }
-      final String xml = XML.toString(new JSONObject(body));
+      final String xml = XML.toString(new JSONObject(body.toString()));
       final Document document = Utils.convertStringToXMLDocument(xml);
 
       final SOAPMessage message = MessageFactory.newInstance().createMessage();
