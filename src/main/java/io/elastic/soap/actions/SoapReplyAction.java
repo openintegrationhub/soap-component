@@ -12,6 +12,8 @@ import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.handlers.RequestHandler;
 import io.elastic.soap.utils.Utils;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import javax.json.Json;
@@ -61,15 +63,9 @@ public class SoapReplyAction implements Module {
 
       // Don't emit this message when running sample data
       if (null == replyTo) {
+        LOGGER.error("No reply_to id found!");
         return;
       }
-
-      RequestHandler requestHandler = new RequestHandler();
-      Object response = requestHandler.getResponseObject(inputBody, soapBodyDescriptor,
-          Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
-      SOAPMessage message = requestHandler.getSoapRequestMessage(response, soapBodyDescriptor,
-          Class.forName(soapBodyDescriptor.getResponseBodyClassName()));
-
 //      final String xml = XML.toString(new JSONObject(body));
 //      final Document document = Utils.convertStringToXMLDocument(xml);
 //
@@ -79,9 +75,13 @@ public class SoapReplyAction implements Module {
 //      soapHeaders.addHeader("SOAPAction", soapBodyDescriptor.getSoapAction());
 //      message.getSOAPBody().addDocument(document);
 
-      PipedInputStream in = new PipedInputStream();
-      final PipedOutputStream outputStream = new PipedOutputStream(in);
-      message.writeTo(outputStream);
+      String message = inputBody.toString();
+
+//      PipedInputStream in = new PipedInputStream();
+//      final PipedOutputStream outputStream = new PipedOutputStream(in);
+//      message.writeTo(outputStream);
+
+      InputStream in = new ByteArrayInputStream(message.getBytes());
 
       HttpReply httpReply = new HttpReply.Builder()
           .content(in)
@@ -93,7 +93,8 @@ public class SoapReplyAction implements Module {
       parameters.getEventEmitter().emitHttpReply(httpReply);
 
       JsonObject body = Json.createObjectBuilder()
-          .add("SoapResponse", Utils.getStringOfSoapMessage(message))
+//          .add("SoapResponse", Utils.getStringOfSoapMessage(message))
+          .add("SoapResponse", message)
           .build();
 
       parameters.getEventEmitter().emitData(new Message.Builder().body(body).build());
