@@ -62,6 +62,7 @@ public class SoapReplyAction implements Module {
           .getString("reply_to") : null;
 
       // Don't emit this message when running sample data
+      LOGGER.info("Creating output message...");
       if (null == replyTo) {
         LOGGER.error("No reply_to id found!");
         return;
@@ -75,14 +76,15 @@ public class SoapReplyAction implements Module {
 //      soapHeaders.addHeader("SOAPAction", soapBodyDescriptor.getSoapAction());
 //      message.getSOAPBody().addDocument(document);
 
+      LOGGER.info("Creating output message...");
       String message = inputBody.toString();
 
 //      PipedInputStream in = new PipedInputStream();
 //      final PipedOutputStream outputStream = new PipedOutputStream(in);
 //      message.writeTo(outputStream);
 
+      LOGGER.info("Building HTTP reply object...");
       InputStream in = new ByteArrayInputStream(message.getBytes());
-
       HttpReply httpReply = new HttpReply.Builder()
           .content(in)
           .header(HEADER_ROUTING_KEY, replyTo)
@@ -90,6 +92,7 @@ public class SoapReplyAction implements Module {
           .status(200)
           .build();
 
+      LOGGER.info("Making HTTP reply...");
       parameters.getEventEmitter().emitHttpReply(httpReply);
 
       JsonObject body = Json.createObjectBuilder()
@@ -97,6 +100,7 @@ public class SoapReplyAction implements Module {
           .add("SoapResponse", message)
           .build();
 
+      LOGGER.info("Emitting data...");
       parameters.getEventEmitter().emitData(new Message.Builder().body(body).build());
     } catch (ComponentException e) {
       LOGGER.error("Got component exception: ", e);
