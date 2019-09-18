@@ -48,7 +48,7 @@ public class SoapReplyAction implements Module {
     try {
       LOGGER.info("On init started");
       soapBodyDescriptor = loadClasses(configuration, soapBodyDescriptor);
-      validator = new WsdlSOAPValidator(soapBodyDescriptor.getRequestBodyClassName());
+      validator = new WsdlSOAPValidator(soapBodyDescriptor.getResponseBodyClassName());
       LOGGER.info("On init finished");
     } catch (ComponentException e) {
       LOGGER.error("Error in init method", e);
@@ -66,14 +66,14 @@ public class SoapReplyAction implements Module {
       final JsonObject headers = parameters.getMessage().getHeaders();
       final JsonObject configuration = parameters.getConfiguration();
       final Message inputMsg = parameters.getMessage();
-      final JsonObject body = Utils.getSoapBody(inputMsg.getBody());
+      final JsonObject body = inputMsg.getBody();
 
       LOGGER.trace("Input configuration: {}", configuration);
       LOGGER.trace("Input headers: {}", headers);
       LOGGER.trace("Input body: {}", body);
       if (VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
         LOGGER.trace("Validation is required for SOAP message");
-        validator.validate(body);
+        validator.validate(body.getJsonObject(body.keySet().iterator().next()));
       }
       String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders()
           .getString("reply_to") : null;
@@ -93,9 +93,6 @@ public class SoapReplyAction implements Module {
       soapHeaders.addHeader("SOAPAction", soapBodyDescriptor.getSoapAction());
       message.getSOAPBody().addDocument(document);
 
-      LOGGER.info("Creating output message...");
-//      String message = body.toString();
-
       LOGGER.info("Building HTTP reply object...");
       InputStream in = new ByteArrayInputStream(Utils.getStringOfSoapMessage(message).getBytes());
       HttpReply httpReply = new HttpReply.Builder()
@@ -108,8 +105,12 @@ public class SoapReplyAction implements Module {
       LOGGER.info("Making HTTP reply...");
       parameters.getEventEmitter().emitHttpReply(httpReply);
 
+      final JsonObject soapResponse = Json.createObjectBuilder()
+          .add("SoapResponse", Utils.getStringOfSoapMessage(message))
+          .build();
+
       LOGGER.info("Emitting data...");
-      parameters.getEventEmitter().emitData(new Message.Builder().body(body).build());
+      parameters.getEventEmitter().emitData(new Message.Builder().body(soapResponse).build());
     } catch (ComponentException e) {
       LOGGER.error("Got component exception: ", e);
       e.printStackTrace();
