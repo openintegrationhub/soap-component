@@ -29,9 +29,10 @@ public class ReceiveRequestTest {
   public static void initConfig() throws IOException {
 
     cfg = Json.createObjectBuilder()
-        .add(AppConstants.BINDING_CONFIG_NAME, "ProposalResponseServiceSoap")
-        .add(AppConstants.OPERATION_CONFIG_NAME, "SetProposalResponse")
-        .add(AppConstants.WSDL_CONFIG_NAME, "/ProposalResponseService.wsdl")
+        .add(AppConstants.VALIDATION, AppConstants.VALIDATION_ENABLED)
+        .add(AppConstants.OPERATION_CONFIG_NAME, "Add")
+        .add(AppConstants.BINDING_CONFIG_NAME, "CalculatorSoap12")
+        .add(AppConstants.WSDL_CONFIG_NAME, "http://www.dneonline.com/calculator.asmx?wsdl")
         .add("auth",
             Json.createObjectBuilder().add("type", "No Auth")
                 .add("basic", Json.createObjectBuilder().add("username", "")
@@ -43,11 +44,11 @@ public class ReceiveRequestTest {
 
 
   @ParameterizedTest
-  @JsonFileSource(resources = "/soapJsonSample.json")
+  @JsonFileSource(resources = "/add.json")
   @DisplayName("Receive and parse SOAP message")
   public void receiveRequest(JsonObject body) {
     ReceiveRequest receiveRequest = new ReceiveRequest();
-
+    receiveRequest.init(cfg);
     Message msg = new Message.Builder().body(body).build();
     EventEmitter eventEmitter = new EventEmitter.Builder()
         .onData(new TestCallback())
@@ -56,10 +57,7 @@ public class ReceiveRequestTest {
         .onRebound(new TestCallback())
         .onHttpReplyCallback(new TestCallback())
         .build();
-//    ExecutionParameters executionParameters = new ExecutionParameters.Builder(msg, eventEmitter).configuration(cfg).build();
-//
-//    receiveRequest.execute(executionParameters);
-//    Message result = (Message) TestCallback.getLastCall();
-//    assertEquals(body.getJsonObject("soapenv-Envelope").getJsonObject("soapenv-Body"), result.getBody());
+    ExecutionParameters executionParameters = new ExecutionParameters.Builder(msg, eventEmitter).configuration(cfg).build();
+    receiveRequest.execute(executionParameters);
   }
 }
