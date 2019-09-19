@@ -12,6 +12,7 @@ import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.utils.Utils;
 import io.elastic.soap.validation.SOAPValidator;
+import io.elastic.soap.validation.ValidationResult;
 import io.elastic.soap.validation.impl.WsdlSOAPValidator;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -71,9 +72,15 @@ public class SoapReplyAction implements Module {
       LOGGER.trace("Input configuration: {}", configuration);
       LOGGER.trace("Input headers: {}", headers);
       LOGGER.trace("Input body: {}", body);
+
+      final Document document;
       if (VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
         LOGGER.trace("Validation is required for SOAP message");
-        validator.validate(body.getJsonObject(body.keySet().iterator().next()));
+        ValidationResult validationResult = validator.validate(body.getJsonObject(body.keySet().iterator().next()));
+        document = validationResult.getResultXml();
+      } else {
+        final String xml = XML.toString(new JSONObject(body.toString()));
+        document = Utils.convertStringToXMLDocument(xml);
       }
       String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders()
           .getString("reply_to") : null;
@@ -84,8 +91,6 @@ public class SoapReplyAction implements Module {
         LOGGER.error("No reply_to id found!");
         return;
       }
-      final String xml = XML.toString(new JSONObject(body.toString()));
-      final Document document = Utils.convertStringToXMLDocument(xml);
 
       final SOAPMessage message = MessageFactory.newInstance().createMessage();
       final MimeHeaders soapHeaders = message.getMimeHeaders();
