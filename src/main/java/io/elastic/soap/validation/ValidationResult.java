@@ -4,7 +4,8 @@ import io.elastic.soap.exceptions.ValidationException;
 import org.w3c.dom.Document;
 
 /**
- * Represents result of validation, if message is invalid contains exception with information about invalid fields.
+ * Represents result of validation, if message is invalid contains exception with information about
+ * invalid fields.
  */
 public class ValidationResult {
 
@@ -12,12 +13,24 @@ public class ValidationResult {
   private ValidationException exception;
   private Document resultXml;
 
+  public String getXmlString() {
+    return xmlString;
+  }
+
+  private String xmlString;
+
   public ValidationResult() {
     result = true;
   }
 
-  public ValidationResult(Document resultXml) {
+  public ValidationResult(String xmlString) {
     result = true;
+    this.xmlString = xmlString;
+  }
+
+  public ValidationResult(String xmlString, Document resultXml) {
+    result = true;
+    this.xmlString = xmlString;
     this.resultXml = resultXml;
   }
 

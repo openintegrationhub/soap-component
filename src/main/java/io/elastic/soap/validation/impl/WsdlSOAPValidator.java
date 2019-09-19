@@ -9,7 +9,6 @@ import io.elastic.soap.utils.Utils;
 import io.elastic.soap.validation.SOAPValidator;
 import io.elastic.soap.validation.ValidationResult;
 import java.io.InputStream;
-import java.io.PipedInputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import javax.json.JsonObject;
@@ -17,15 +16,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.io.input.ReaderInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 
 /**
  * Validate SOAP message over WSDL.
@@ -56,16 +50,19 @@ public class WsdlSOAPValidator extends SOAPValidator {
       StringWriter sw = new StringWriter();
 
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      factory.setNamespaceAware(true);
       DocumentBuilder builder = factory.newDocumentBuilder();
 
       marshaller.marshal(mappingResult, sw);
 
-      InputStream is = new ReaderInputStream(new StringReader(sw.toString()));
+      String xmlString = sw.toString();
+
+      InputStream is = new ReaderInputStream(new StringReader(xmlString));
 
       Document doc = builder.parse(is);
 
       LOGGER.trace("Successful finished message validation");
-      return new ValidationResult(doc);
+      return new ValidationResult(xmlString, doc);
     } catch (JsonParseException | JsonMappingException e) {
       LOGGER.error("Failed to validate message", e);
       return new ValidationResult(new ValidationException(e.getLocation().toString(), e));
