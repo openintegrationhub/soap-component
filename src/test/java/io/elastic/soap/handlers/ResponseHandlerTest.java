@@ -91,25 +91,6 @@ public class ResponseHandlerTest {
                             .format("expected is %s but actual is %s", "bezeichnung",
                                     responseMessage.getSOAPBody().getFirstChild().getFirstChild().getFirstChild()
                                             .getLocalName()));
-
-            /*content asserts*/
-            Node currentElement = responseMessage.getSOAPBody().getFirstChild().getFirstChild()
-                    .getFirstChild();
-            assertEquals(details.getBezeichnung(), currentElement.getFirstChild().getNodeValue(), String
-                    .format("expected is %s but actual is %s", details.getBezeichnung(),
-                            currentElement.getFirstChild().getNodeValue()));
-            currentElement = currentElement.getNextSibling();
-            assertEquals(details.getBic(), currentElement.getFirstChild().getNodeValue(), String
-                    .format("expected is %s but actual is %s", details.getBic(),
-                            currentElement.getFirstChild().getNodeValue()));
-            currentElement = currentElement.getNextSibling();
-            assertEquals(details.getOrt(), currentElement.getFirstChild().getNodeValue(), String
-                    .format("expected is %s but actual is %s", details.getOrt(),
-                            currentElement.getFirstChild().getNodeValue()));
-            currentElement = currentElement.getNextSibling();
-            assertEquals(details.getPlz(), currentElement.getFirstChild().getNodeValue(), String
-                    .format("expected is %s but actual is %s", details.getPlz(),
-                            currentElement.getFirstChild().getNodeValue()));
         } catch (ClassNotFoundException | IOException | SOAPException | JAXBException e) {
             logger.error("getResponseObjectTest error", e);
         }
