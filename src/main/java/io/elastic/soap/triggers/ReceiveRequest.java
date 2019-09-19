@@ -62,7 +62,7 @@ public class ReceiveRequest implements Module {
       LOGGER.trace("Input configuration: {}", configuration);
       LOGGER.trace("Input body: {}", body);
       final Message data = new Message.Builder().body(body).build();
-      if (VALIDATION.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
+      if (VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
         LOGGER.trace("Validation is required for SOAP message");
         final ValidationResult validationResult = validator.validate(body);
         if (!validationResult.isResult()) {
