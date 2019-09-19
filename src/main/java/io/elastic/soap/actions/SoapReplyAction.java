@@ -74,13 +74,16 @@ public class SoapReplyAction implements Module {
       LOGGER.trace("Input body: {}", body);
 
       final Document document;
+      final String xmlString;
       if (VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
         LOGGER.trace("Validation is required for SOAP message");
-        ValidationResult validationResult = validator.validate(body.getJsonObject(body.keySet().iterator().next()));
+        ValidationResult validationResult = validator
+            .validate(body.getJsonObject(body.keySet().iterator().next()));
         document = validationResult.getResultXml();
+        xmlString = validationResult.getXmlString();
       } else {
-        final String xml = XML.toString(new JSONObject(body.toString()));
-        document = Utils.convertStringToXMLDocument(xml);
+        xmlString = XML.toString(new JSONObject(body.toString()));
+        document = Utils.convertStringToXMLDocument(xmlString);
       }
       String replyTo = inputMsg.getHeaders().get("reply_to") != null ? inputMsg.getHeaders()
           .getString("reply_to") : null;

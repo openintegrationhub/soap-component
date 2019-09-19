@@ -12,14 +12,14 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import net.joshka.junit.json.params.JsonFileSource;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Disabled
 public class SoapReplyTest {
-
-
 
   private static final Logger logger = LoggerFactory.getLogger(EventEmitter.class);
 
