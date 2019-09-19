@@ -271,14 +271,12 @@ public final class Utils {
   }
 
   public static JsonObject getSoapBody(JsonObject body) {
-    JsonObject envelope = body.getJsonObject(body.keySet().iterator().next());
-
-    List<String> soapBodyKeyList = envelope.keySet().stream().filter(key -> key.toLowerCase().contains("body")).collect(Collectors.toList());
-    if (soapBodyKeyList.size() != 1) {
-      throw new IllegalStateException();
-    }
-    final JsonObject soapBody = envelope.getJsonObject(soapBodyKeyList.get(0));
-    return soapBody;
+    final JsonObject envelope = body.getJsonObject(body.keySet().iterator().next());
+    final String soapBodyKeyList = envelope.keySet().stream()
+        .filter(key -> key.toLowerCase().contains("body"))
+        .findFirst()
+        .orElseThrow(() -> new ComponentException("SOAP message does not contains SOAP Body"));
+    return envelope.getJsonObject(soapBodyKeyList);
   }
 
 
