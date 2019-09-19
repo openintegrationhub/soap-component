@@ -12,6 +12,7 @@ import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.utils.Utils;
 import io.elastic.soap.validation.SOAPValidator;
+import io.elastic.soap.validation.ValidationResult;
 import io.elastic.soap.validation.impl.WsdlSOAPValidator;
 import javax.json.JsonObject;
 import org.slf4j.Logger;
@@ -63,7 +64,10 @@ public class ReceiveRequest implements Module {
       final Message data = new Message.Builder().body(body).build();
       if (VALIDATION.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
         LOGGER.trace("Validation is required for SOAP message");
-        validator.validate(body);
+        final ValidationResult validationResult = validator.validate(body);
+        if (!validationResult.isResult()) {
+         throw validationResult.getException();
+        }
       }
       LOGGER.trace("Emitting data: {}", data);
       parameters.getEventEmitter().emitData(data);
