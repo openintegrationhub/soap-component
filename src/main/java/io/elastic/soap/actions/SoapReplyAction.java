@@ -1,6 +1,7 @@
 package io.elastic.soap.actions;
 
 import static io.elastic.soap.AppConstants.VALIDATION;
+import static io.elastic.soap.AppConstants.VALIDATION_DISABLED;
 import static io.elastic.soap.AppConstants.VALIDATION_ENABLED;
 import static io.elastic.soap.utils.Utils.loadClasses;
 
@@ -18,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.xml.namespace.QName;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPMessage;
@@ -26,6 +28,7 @@ import org.json.XML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 
 public class SoapReplyAction implements Module {
@@ -73,9 +76,11 @@ public class SoapReplyAction implements Module {
       LOGGER.trace("Input headers: {}", headers);
       LOGGER.trace("Input body: {}", body);
 
+      final boolean enableValidation = !VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_DISABLED));
+
       final Document document;
       final String xmlString;
-      if (VALIDATION_ENABLED.equals(configuration.getString(VALIDATION, VALIDATION_ENABLED))) {
+      if (enableValidation) {
         LOGGER.trace("Validation is required for SOAP message");
         ValidationResult validationResult = validator
             .validate(body.getJsonObject(body.keySet().iterator().next()));
@@ -101,8 +106,17 @@ public class SoapReplyAction implements Module {
       soapHeaders.addHeader("SOAPAction", soapBodyDescriptor.getSoapAction());
       message.getSOAPBody().addDocument(document);
 
+      if (enableValidation) {
+        message.getSOAPBody()
+            .addAttribute(new QName("xmlns"), soapBodyDescriptor.getResponseBodyNameSpace());
+      }
+
+      String soapResponseMessageString = enableValidation
+          ? Utils.getStringOfSoapMessage(message)
+          : Utils.getStringOfSoapMessage(message).replaceAll(" xmlns=\"\"", "");
+
       LOGGER.info("Building HTTP reply object...");
-      InputStream in = new ByteArrayInputStream(Utils.getStringOfSoapMessage(message).getBytes());
+      InputStream in = new ByteArrayInputStream(soapResponseMessageString.getBytes());
       HttpReply httpReply = new HttpReply.Builder()
           .content(in)
           .header(HEADER_ROUTING_KEY, replyTo)
@@ -114,7 +128,7 @@ public class SoapReplyAction implements Module {
       parameters.getEventEmitter().emitHttpReply(httpReply);
 
       final JsonObject soapResponse = Json.createObjectBuilder()
-          .add("SoapResponse", Utils.getStringOfSoapMessage(message))
+          .add("SoapResponse", soapResponseMessageString)
           .build();
 
       LOGGER.info("Emitting data...");

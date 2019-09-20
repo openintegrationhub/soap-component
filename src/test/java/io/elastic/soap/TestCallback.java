@@ -10,7 +10,7 @@ public class TestCallback implements EventEmitter.Callback {
 
   private static final Logger logger = LoggerFactory.getLogger(TestCallback.class);
 
-  private static List<Object> list = new ArrayList<>();
+  private List<Object> list = new ArrayList<>();
 
   @Override
   public void receive(Object data) {
@@ -19,11 +19,11 @@ public class TestCallback implements EventEmitter.Callback {
   }
 
 
-  public static List<Object> getCalls() {
+  public List<Object> getCalls() {
     return list;
   }
 
-  public static Object getLastCall() {
+  public Object getLastCall() {
     if(list.size()>0){
       return list.get(list.size() - 1);
     }
