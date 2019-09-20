@@ -32,7 +32,7 @@ public class ReceiveRequestTest {
         .add(AppConstants.VALIDATION, AppConstants.VALIDATION_ENABLED)
         .add(AppConstants.OPERATION_CONFIG_NAME, "Add")
         .add(AppConstants.BINDING_CONFIG_NAME, "CalculatorSoap12")
-        .add(AppConstants.WSDL_CONFIG_NAME, "http://www.dneonline.com/calculator.asmx?wsdl")
+        .add(AppConstants.WSDL_CONFIG_NAME, "src/test/resources/calculator.wsdl")
         .add("auth",
             Json.createObjectBuilder().add("type", "No Auth")
                 .add("basic", Json.createObjectBuilder().add("username", "")
