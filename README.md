@@ -80,6 +80,22 @@ Output json schema is generated dynamically the same as for the input (see above
 2. Binding
 3. Operation
 
+### Soap Reply
+Wraps and returns input data as SOAP response by provided SOAP metadata
+
+#### Input fields description
+* **WSDL URI** - Public URL address of the WSDL
+* **Binding** - One of the bindings available and described in the WSDL, which you want to use for a SOAP call
+* **Operation** - One of the operations available for the binding you have selected above.
+
+#### Input json schema
+The component does not have static input json schema as it is dynamically generated for every wsdl/binding/operation specified in the process of configuration the component input fields.
+[Apache Axis2](http://axis.apache.org/axis2/java/core/) and [FasterXML JsonSchemaGenerator](https://github.com/FasterXML/jackson-module-jsonSchema) tools are used by the component internally to generate an input metadata.
+You can refer these tools documentation in order to get deeper understanding about the product.
+
+#### Output json schema
+Output json schema is generated dynamically the same as for the input (see above).
+
 ### Current limitations
 The following are limitations of this connector:
 
