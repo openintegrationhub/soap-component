@@ -17,18 +17,27 @@ import io.elastic.soap.services.SoapCallService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonString;
+import javax.json.JsonValue;
 import javax.json.JsonValue.ValueType;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -272,13 +281,116 @@ public final class Utils {
     }
   }
 
+  /**
+   * Extracts SOAP body from envelope and remove namespaces from keys
+   * @param body body with envelope
+   * @return SOAP body
+   */
   public static JsonObject getSoapBody(JsonObject body) {
     final JsonObject envelope = body.getJsonObject(body.keySet().iterator().next());
     final String soapBodyKeyList = envelope.keySet().stream()
         .filter(key -> key.toLowerCase().contains("body"))
         .findFirst()
         .orElseThrow(() -> new ComponentException("SOAP message does not contains SOAP Body"));
-    return envelope.getJsonObject(soapBodyKeyList);
+    return removeNameSpace(envelope.getJsonObject(soapBodyKeyList));
+  }
+
+  /**
+   * Recursively remove namespace from each JsonObject keys
+   * Examples:
+   *  {                               {
+   *    "ns1-a" : "val1",               "a" : "val1",
+   *    "ns2-b" : {           =====>    "b": {
+   *      "ns1-c" : "val2"                     "c" : "val2"
+   *    }                                    }
+   *  }                                }
+   * @param jsonObject json.
+   * @return json object with keys without namespace.
+   */
+  public static JsonObject removeNameSpace(final JsonObject jsonObject) {
+    try {
+      return resolveObject(jsonObject);
+    } catch (Exception e) {
+      throw new  ComponentException(e);
+    }
+  }
+
+  /**
+   * Removes fist part key that is namespace
+   * Examples:
+   *  1. ns-a -> a
+   *  2. ns-a-b -> a-b
+   * @param key key with namespace
+   * @return key without namespace part.
+   * @throws Exception
+   */
+  private static String getNewKey(final String key) throws Exception {
+    final String[] parts = key.split("-");
+    final StringBuilder result = new StringBuilder();
+    if (parts.length == 1 || parts.length == 0 || key.startsWith("-")) {
+      return key;
+    }
+    for (int i = 0; i < parts.length; i++) {
+         if (i == 0) {
+           continue;
+         }
+         result.append(parts[i]).append("-");
+    }
+    if (key.endsWith("-")) {
+      return result.toString();
+    }
+    return result.deleteCharAt(result.length() - 1).toString();
+  }
+
+  /**
+   * Remove namespaces from JsonArray
+   */
+  private static JsonValue resolveArray(JsonArray array) throws Exception {
+    Field valueList = array.getClass().getDeclaredField("valueList");
+    valueList.setAccessible(true);
+    List<JsonValue> newValues = new ArrayList<>();
+    Iterator<JsonValue> iter = array.iterator();
+    while (iter.hasNext()) {
+      JsonValue v = iter.next();
+      ValueType type = v.getValueType();
+      if (type.equals(ValueType.OBJECT)) {
+        newValues.add(resolveObject((JsonObject) v));
+        continue;
+      }
+      if (type.equals(ValueType.ARRAY)) {
+        newValues.add(resolveArray((JsonArray) v));
+        continue;
+      }
+      newValues.add(v);
+    }
+    valueList.set(array, newValues);
+    return array;
+  }
+
+  /**
+   * Remove namespaces from JsonObject
+   */
+  private static JsonObject resolveObject(JsonObject object) throws Exception {
+    Field valueMap = object.getClass().getDeclaredField("valueMap");
+    valueMap.setAccessible(true);
+    Map<String, JsonValue> map = (Map<String, JsonValue>) valueMap.get(object);
+    Map<String, JsonValue> newKeys = new HashMap<>();
+    for (Entry<String, JsonValue> e : map.entrySet()) {
+      final String newKey = getNewKey(e.getKey());
+      JsonValue value = e.getValue();
+      final ValueType type = e.getValue().getValueType();
+      if (type.equals(ValueType.OBJECT)) {
+        newKeys.put(newKey, resolveObject((JsonObject) value));
+        continue;
+      }
+      if (type.equals(ValueType.ARRAY)) {
+        newKeys.put(newKey, resolveArray((JsonArray) value));
+        continue;
+      }
+      newKeys.put(newKey, value);
+    }
+    valueMap.set(object, newKeys);
+    return object;
   }
 
 
