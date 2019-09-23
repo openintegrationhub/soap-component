@@ -15,8 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import javax.json.Json;
 import javax.json.JsonObject;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.springframework.util.Assert;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -147,7 +145,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void removeNameSpaceRemoves() throws IOException {
+    public void prettifyJson() throws IOException {
         String content = new String(Files.readAllBytes(Paths.get("src/test/resources/namespace.json")));
         JsonReader jsonReader = Json.createReader(new StringReader(content));
         JsonArray object = jsonReader.readArray();
@@ -155,7 +153,7 @@ public class UtilsTest {
         Iterator<JsonValue> iter = object.iterator();
         while (iter.hasNext()) {
             JsonObject o = (JsonObject) iter.next();
-            assertEquals(o.getJsonObject("result"), Utils.removeNameSpace(o.getJsonObject("ns")));
+            assertEquals(o.getJsonObject("result"), Utils.prettifyBody(o.getJsonObject("ns")));
         }
     }
 }

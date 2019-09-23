@@ -25,7 +25,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +32,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonString;
@@ -292,22 +290,25 @@ public final class Utils {
         .filter(key -> key.toLowerCase().contains("body"))
         .findFirst()
         .orElseThrow(() -> new ComponentException("SOAP message does not contains SOAP Body"));
-    return removeNameSpace(envelope.getJsonObject(soapBodyKeyList));
+    return prettifyBody(envelope.getJsonObject(soapBodyKeyList));
   }
 
   /**
    * Recursively remove namespace from each JsonObject keys
    * Examples:
-   *  {                               {
-   *    "ns1-a" : "val1",               "a" : "val1",
-   *    "ns2-b" : {           =====>    "b": {
-   *      "ns1-c" : "val2"                     "c" : "val2"
-   *    }                                    }
-   *  }                                }
+   *  {                                 {
+   *    "ns1-a" : "val1",                 "a" : "val1",
+   *    "ns2-b" : {           =========>    "b": {
+   *      "ns1-c" : {                         "c" : "val2"
+   *        "_attr" : ["a, b, c"],          }
+   *        "_" : "val2"                 }
+   *      }
+   *    }
+   *  }
    * @param jsonObject json.
    * @return json object with keys without namespace.
    */
-  public static JsonObject removeNameSpace(final JsonObject jsonObject) {
+  public static JsonObject prettifyBody(final JsonObject jsonObject) {
     try {
       return resolveObject(jsonObject);
     } catch (Exception e) {
@@ -354,7 +355,12 @@ public final class Utils {
       JsonValue v = iter.next();
       ValueType type = v.getValueType();
       if (type.equals(ValueType.OBJECT)) {
-        newValues.add(resolveObject((JsonObject) v));
+        JsonObject vo = (JsonObject) v;
+        if (vo.containsKey("_attr") && vo.containsKey("_")) {
+          removeAttributeFromArray(newValues, vo);
+          continue;
+        }
+        newValues.add(resolveObject((JsonObject) vo));
         continue;
       }
       if (type.equals(ValueType.ARRAY)) {
@@ -365,6 +371,20 @@ public final class Utils {
     }
     valueList.set(array, newValues);
     return array;
+  }
+
+  private static void removeAttributeFromArray(List<JsonValue> newValues, JsonObject v) throws Exception {
+    JsonValue realValue = v.get("_");
+    ValueType realType = realValue.getValueType();
+    if (realType.equals(ValueType.OBJECT)) {
+      newValues.add(resolveObject((JsonObject) realValue));
+      return;
+    }
+    if (realType.equals(ValueType.ARRAY)) {
+      newValues.add(resolveArray((JsonArray) realValue));
+      return;
+    }
+    newValues.add(realValue);
   }
 
   /**
@@ -380,6 +400,11 @@ public final class Utils {
       JsonValue value = e.getValue();
       final ValueType type = e.getValue().getValueType();
       if (type.equals(ValueType.OBJECT)) {
+        JsonObject v = (JsonObject) value;
+        if (v.containsKey("_attr") && v.containsKey("_")) {
+          removeAttribute(newKeys, newKey, v);
+          continue;
+        }
         newKeys.put(newKey, resolveObject((JsonObject) value));
         continue;
       }
@@ -391,6 +416,20 @@ public final class Utils {
     }
     valueMap.set(object, newKeys);
     return object;
+  }
+
+  private static void removeAttribute(Map<String, JsonValue> newKeys, String newKey, JsonObject v) throws Exception {
+    JsonValue realValue = v.get("_");
+    ValueType realType = realValue.getValueType();
+    if (realType.equals(ValueType.OBJECT)) {
+      newKeys.put(newKey, resolveObject((JsonObject) realValue));
+      return;
+    }
+    if (realType.equals(ValueType.ARRAY)) {
+      newKeys.put(newKey, resolveArray((JsonArray) realValue));
+      return;
+    }
+    newKeys.put(newKey, realValue);
   }
 
 
