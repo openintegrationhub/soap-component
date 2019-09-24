@@ -356,7 +356,7 @@ public final class Utils {
       ValueType type = v.getValueType();
       if (type.equals(ValueType.OBJECT)) {
         JsonObject vo = (JsonObject) v;
-        if (vo.containsKey("_attr") && vo.containsKey("_")) {
+        if (vo.containsKey("_")) {
           removeAttributeFromArray(newValues, vo);
           continue;
         }
@@ -396,12 +396,15 @@ public final class Utils {
     Map<String, JsonValue> map = (Map<String, JsonValue>) valueMap.get(object);
     Map<String, JsonValue> newKeys = new HashMap<>();
     for (Entry<String, JsonValue> e : map.entrySet()) {
+      if(e.getKey().equals("_attr")) {
+        continue;
+      }
       final String newKey = getNewKey(e.getKey());
       JsonValue value = e.getValue();
       final ValueType type = e.getValue().getValueType();
       if (type.equals(ValueType.OBJECT)) {
         JsonObject v = (JsonObject) value;
-        if (v.containsKey("_attr") && v.containsKey("_")) {
+        if (v.containsKey("_")) {
           removeAttribute(newKeys, newKey, v);
           continue;
         }
