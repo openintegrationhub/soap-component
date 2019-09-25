@@ -1,11 +1,54 @@
 {
   "title": "SOAP V2",
+  "service": "request-reply",
   "description": "Generic SOAP / WebServices integration Component",
   "credentials": {
     "fields": {
       "auth": {
         "required": false,
-        "viewClass": "HTTPAuthView"
+        "viewClass": "WebhookAuthView"
+      }
+    }
+  },
+  "triggers": {
+    "receive": {
+      "title": "Receive SOAP Request",
+      "description": "Receive SOAP Request",
+      "main": "io.elastic.soap.triggers.ReceiveRequest",
+      "type": "webhook",
+      "fields": {
+        "validation" : {
+          "label" : "Validation",
+          "prompt" : "Enabled",
+          "required" : false,
+          "viewClass" : "SelectView",
+          "model" : {
+            "enabled" : "Enabled",
+            "disabled" : "Disabled"
+          },
+          "note" : "Validation is enabled by default"
+        },
+        "wsdlURI": {
+          "label": "WSDL URI",
+          "required": true,
+          "viewClass": "TextFieldWithNoteView",
+          "placeholder": "http://www.example.com?wsdl",
+          "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
+        },
+        "binding": {
+          "viewClass": "SelectView",
+          "label": "Binding",
+          "required": true,
+          "model": "io.elastic.soap.providers.BindingModelProvider",
+          "prompt": "Chose an Binding [Service/Port]"
+        },
+        "operation": {
+          "viewClass": "SelectView",
+          "label": "Operation",
+          "required": true,
+          "model": "io.elastic.soap.providers.OperationModelProvider",
+          "prompt": "Chose an Operation [Service/Port]"
+        }
       }
     }
   },
@@ -19,7 +62,7 @@
           "label": "WSDL URI",
           "required": true,
           "viewClass": "TextFieldWithNoteView",
-          "placeholder": "http://www.webservicex.net/CreditCard.asmx?wsdl",
+          "placeholder": "http://www.example.com?wsdl",
           "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
         },
         "binding": {
@@ -38,6 +81,46 @@
         }
       },
       "dynamicMetadata": "io.elastic.soap.providers.BodyMetaProvider"
+    },
+    "soapReplyAction": {
+      "title": "SOAP Reply",
+      "description": "Returns SOAP response to client",
+      "main": "io.elastic.soap.actions.SoapReplyAction",
+      "fields": {
+        "validation" : {
+          "label" : "Validation",
+          "required" : false,
+          "viewClass" : "SelectView",
+          "prompt": "Enabled",
+          "model" : {
+            "enabled" : "Enabled",
+            "disabled" : "Disabled"
+          },
+          "note" : "Validation is enabled by default"
+        },
+        "wsdlURI": {
+          "label": "WSDL URI",
+          "required": true,
+          "viewClass": "TextFieldWithNoteView",
+          "placeholder": "http://www.example.com?wsdl",
+          "note": "Please specify a full URI of your WSDL, it should also be accessible from the internet."
+        },
+        "binding": {
+          "viewClass": "SelectView",
+          "label": "Binding",
+          "required": true,
+          "model": "io.elastic.soap.providers.BindingModelProvider",
+          "prompt": "Chose an Binding [Service/Port]"
+        },
+        "operation": {
+          "viewClass": "SelectView",
+          "label": "Operation",
+          "required": true,
+          "model": "io.elastic.soap.providers.OperationModelProvider",
+          "prompt": "Chose an Operation [Service/Port]"
+        }
+      },
+      "dynamicMetadata": "io.elastic.soap.providers.ReplyBodyMetaProvider"
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "SetProposalResponseResponse": {
+    "SetProposalResponseResult": {
+      "ResponseURLOrOBSResult": [
+        {
+          "OBSResult": {
+            "ResponseError": "testError",
+            "ResponseCode": "testCode"
+          }
+        }
+      ]
+    }
+  }
+}

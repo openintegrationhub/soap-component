@@ -1,11 +1,13 @@
 package io.elastic.soap.providers;
 
+import static io.elastic.soap.utils.Utils.getElementName;
+import static io.elastic.soap.utils.Utils.isBasicAuth;
+
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import com.predic8.wsdl.Definitions;
@@ -17,16 +19,12 @@ import io.elastic.soap.exceptions.ComponentException;
 import io.elastic.soap.services.WSDLService;
 import io.elastic.soap.services.impls.HttpWSDLService;
 import io.elastic.soap.utils.Utils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.json.Json;
-import javax.json.JsonObject;
 import java.util.Iterator;
 import java.util.Map;
-
-import static io.elastic.soap.utils.Utils.getElementName;
-import static io.elastic.soap.utils.Utils.isBasicAuth;
+import javax.json.Json;
+import javax.json.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides dynamically generated fields set representing correlated XSD schema for given WSDL, its

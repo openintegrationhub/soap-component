@@ -1,0 +1,25 @@
+{
+  "GetCityForecastByZIPResponse": {
+    "getCityForecastByZIPResult": {
+      "success": false,
+      "responseText": "incididunt ut eiusmod ex magna",
+      "state": "ullamco est",
+      "city": "fugiat aute",
+      "weatherStationCity": "velit non",
+      "forecastResult": {
+        "forecast": [
+          {
+            "desciption": "irure culpa consequat"
+          },
+          {
+            "date": 123,
+            "weatherID": 123
+          },
+          {
+            "weatherID": 123
+          }
+        ]
+      }
+    }
+  }
+}

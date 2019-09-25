@@ -2,12 +2,21 @@ package io.elastic.soap.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.elastic.soap.AppConstants;
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Iterator;
+import javax.json.JsonArray;
+import javax.json.JsonReader;
+import javax.json.JsonValue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -135,5 +144,16 @@ public class UtilsTest {
         assertTrue("Leadtributor".equals(Utils.getPassword(configHttpBasicAuth)));
     }
 
-
+    @Test
+    public void prettifyJson() throws IOException {
+        String content = new String(Files.readAllBytes(Paths.get("src/test/resources/namespace.json")));
+        JsonReader jsonReader = Json.createReader(new StringReader(content));
+        JsonArray object = jsonReader.readArray();
+        jsonReader.close();
+        Iterator<JsonValue> iter = object.iterator();
+        while (iter.hasNext()) {
+            JsonObject o = (JsonObject) iter.next();
+            assertEquals(o.getJsonObject("result"), Utils.prettifyBody(o.getJsonObject("ns")));
+        }
+    }
 }

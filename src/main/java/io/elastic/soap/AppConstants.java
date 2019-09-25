@@ -23,6 +23,12 @@ public final class AppConstants {
     public static final String WSDL_CONFIG_NAME = "wsdlURI";
     // Authorization keyword
     public static final String AUTH_KEYWORD = "Authorization";
+    // component.json validation option keyword
+    public static final String VALIDATION = "validation";
+    // Validation enabled keyword
+    public static final String VALIDATION_ENABLED = "enabled";
+    // Validation disabled keyword
+    public static final String VALIDATION_DISABLED = "disabled";
 
     // Private constructor to prevent instantiation. Since utility classes should not be instantiated
     private AppConstants() {
