@@ -1,6 +1,7 @@
 package io.elastic.soap.utils;
 
 import ch.qos.logback.classic.Level;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr353.JSR353Module;
@@ -64,7 +65,10 @@ public final class Utils {
   public static ObjectMapper getConfiguredObjectMapper() {
     final JaxbAnnotationModule module = new JaxbAnnotationModule();
     final ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.configure(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS, true);
+    objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
     objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+    objectMapper.setAnnotationIntrospector(new XMLElementsIntrospector());
     objectMapper.registerModule(new JSR353Module());
     objectMapper.registerModule(module);
     return objectMapper;
