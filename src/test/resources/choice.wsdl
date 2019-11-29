@@ -20,12 +20,7 @@
       <s:complexType name="WeatherDescription">
         <s:choice minOccurs="0" maxOccurs="unbounded">
           <s:element minOccurs="0" maxOccurs="1" name="ResponseURL" type="s:int"/>
-          <s:element minOccurs="0" maxOccurs="1" name="OBSResult" type="s:int"/>
-          <s:element minOccurs="0" maxOccurs="1" name="OBSResult1" type="s:int"/>
-          <s:element minOccurs="0" maxOccurs="1" name="OBSResult3" type="s:int"/>
-          <s:element minOccurs="0" maxOccurs="1" name="OBSResult2" type="s:int"/>
-          <s:element minOccurs="0" maxOccurs="1" name="OBSResult4" type="s:int"/>
-          <s:element minOccurs="0" maxOccurs="1" name="OBSResult5" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="OBSResult" type="tns:WeatherReturn"/>
         </s:choice>
       </s:complexType>
       <s:element name="GetCityForecastByZIP">

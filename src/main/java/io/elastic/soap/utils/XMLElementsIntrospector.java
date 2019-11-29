@@ -1,6 +1,5 @@
 package io.elastic.soap.utils;
 
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.PropertyName;
 import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
@@ -9,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElements;
 
@@ -22,14 +22,13 @@ public class XMLElementsIntrospector extends JacksonAnnotationIntrospector {
       result.addAll(names);
       return result;
     }
-    return super.findPropertyAliases(a);
-  }
-
-  public List<PropertyName> getXMLElementsNames(final Annotated a) {
-    if (a.hasAnnotation(XmlElements.class)) {
-      return Arrays.stream(a.getAnnotation(XmlElements.class).value()).map(e -> new PropertyName(e.name())).collect(Collectors.toList());
+    if (a.hasAnnotation(XmlElement.class)) {
+      final List<PropertyName> result = Optional.ofNullable(super.findPropertyAliases(a)).orElse(new ArrayList<>());
+      XmlElement element = a.getAnnotation(XmlElement.class);
+      result.add(new PropertyName(element.name()));
+      return result;
     }
-   return  Arrays.stream(a.getAnnotation(XmlElementRefs.class).value()).map(e -> new PropertyName(e.name())).collect(Collectors.toList());
+    return super.findPropertyAliases(a);
   }
 
   @Override
@@ -40,5 +39,12 @@ public class XMLElementsIntrospector extends JacksonAnnotationIntrospector {
       return new XMLElementRefDeserializer(a.getType(), a.getAnnotation(XmlElementRefs.class));
     }
     return super.findDeserializer(a);
+  }
+
+  public List<PropertyName> getXMLElementsNames(final Annotated a) {
+    if (a.hasAnnotation(XmlElements.class)) {
+      return Arrays.stream(a.getAnnotation(XmlElements.class).value()).map(e -> new PropertyName(e.name())).collect(Collectors.toList());
+    }
+    return Arrays.stream(a.getAnnotation(XmlElementRefs.class).value()).map(e -> new PropertyName(e.name())).collect(Collectors.toList());
   }
 }
