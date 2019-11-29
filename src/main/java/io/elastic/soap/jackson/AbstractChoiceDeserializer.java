@@ -13,18 +13,30 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.xml.bind.JAXBElement;
 
-public abstract class AbstractJaxbDeserializer extends JsonDeserializer {
+public abstract class AbstractChoiceDeserializer extends JsonDeserializer {
 
   protected final Class rawType;
-  protected final JavaType type;
+  protected final JavaType javaType;
   protected final ObjectMapper mapper;
 
-  protected AbstractJaxbDeserializer(JavaType type) {
-    this.type = type;
-    this.rawType = type.getRawClass();
+  protected AbstractChoiceDeserializer(JavaType javaType) {
+    this.javaType = javaType;
+    this.rawType = javaType.getRawClass();
     this.mapper = Utils.getConfiguredObjectMapper();
   }
 
+  /**
+   * How this works: axios converts wsdl choice element to one of the following structure:
+   * 1. field with annotation XmlElements that contains array of XmlElement. XmlElement has property name and property type(java class of choice)
+   * 2. field with annotation XmlElementsRefs that contains array of XmlElementReg. XmlElementRef has property name and property type(java class of choice)
+   * Field created by axios usually looks like: List<Object> or List<Serializble>. Note in runtime we will have: List
+   * This method do the following:
+   * 1. Check that json value is possible to convert one of type provided by XmlElement or XmlElementRef annotations.
+   * 2. Converts value to type of field created by axios.
+   * @param p jackson parser.
+   * @param ctxt jackson context.
+   * @return deserialize value of choice element.
+   */
   @Override
   public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
     final JsonNode targetNode = p.getCodec().readTree(p);
@@ -32,6 +44,9 @@ public abstract class AbstractJaxbDeserializer extends JsonDeserializer {
     return this.mapper.convertValue(targetNode, this.rawType);
   }
 
+  /**
+   * @return List of possible types of choice element.
+   */
   public abstract List<Class> getPossibleTypes();
 
   /**
@@ -52,7 +67,7 @@ public abstract class AbstractJaxbDeserializer extends JsonDeserializer {
         break;
       }
     }
-    if (!result && node.isArray() && (this.type.isArrayType() || this.type.isCollectionLikeType())) {
+    if (!result && isNodeAndRawTypeArray(node)) {
       result = handleArrayNode(node, possibleTypes);
     }
     if (!result) {
@@ -61,10 +76,17 @@ public abstract class AbstractJaxbDeserializer extends JsonDeserializer {
   }
 
   /**
-   * Checks each item of node over provided possible types.
+   * @param node json node
+   * @return return true if node and raw type is array
+   */
+  public boolean isNodeAndRawTypeArray(final JsonNode node) {
+    return node.isArray() && (this.javaType.isArrayType() || this.javaType.isCollectionLikeType());
+  }
+  /**
+   * Checks each item of node over provided possible types also each item in array must have same type.
    * @param arrayNode ArrayNode
    * @param possibleTypes possible types of node
-   * @return
+   * @return true if each item of array node can be converted to one of possible type.
    */
   public boolean handleArrayNode(JsonNode arrayNode, List<Class> possibleTypes) {
     Class targetType = null;
@@ -78,6 +100,12 @@ public abstract class AbstractJaxbDeserializer extends JsonDeserializer {
     return true;
   }
 
+  /**
+   * @param node json node.
+   * @param possibleTypes possible types of node.
+   * @return type of node
+   * @throws IllegalArgumentException if node can be converted to any of provided possibleTypes
+   */
   private Class findNodeType(JsonNode node, List<Class> possibleTypes) {
     for (Class type : possibleTypes) {
       if (nodeCanBeConvertedToType(node, type)) {
@@ -88,6 +116,12 @@ public abstract class AbstractJaxbDeserializer extends JsonDeserializer {
   }
 
 
+  /**
+   *
+   * @param node json node.
+   * @param type type to be checked.
+   * @return true if node can be converted to provided type, false otherwise.
+   */
   public boolean nodeCanBeConvertedToType(final JsonNode node, Class type) {
     try {
       this.mapper.convertValue(node, type);
@@ -98,8 +132,8 @@ public abstract class AbstractJaxbDeserializer extends JsonDeserializer {
   }
 
   public String constructExceptionString(final JsonNode value, final List<Class> possibleTypes) {
-    StringBuilder bd = new StringBuilder("Failed to convert value: ");
-    bd.append(value.toPrettyString()).append("\n to one of: ");
+    StringBuilder bd = new StringBuilder("Failed to convert choice value: ");
+    bd.append(value.toPrettyString()).append("to one of: ");
     bd.append(possibleTypes.stream().map(Class::getSimpleName).collect(Collectors.joining(","))).append(".");
     return bd.toString();
   }

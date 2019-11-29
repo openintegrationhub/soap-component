@@ -14,6 +14,7 @@ import io.elastic.soap.AppConstants;
 import io.elastic.soap.compilers.JaxbCompiler;
 import io.elastic.soap.compilers.model.SoapBodyDescriptor;
 import io.elastic.soap.exceptions.ComponentException;
+import io.elastic.soap.jackson.XMLElementsIntrospector;
 import io.elastic.soap.services.SoapCallService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

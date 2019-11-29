@@ -1,6 +1,6 @@
 [
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "intFieldOrStringFieldOrComplexType": [
         "1",
         "2"
@@ -8,7 +8,7 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "intFieldOrStringFieldOrComplexType": [
         1,
         2
@@ -16,7 +16,7 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "intFieldOrStringFieldOrComplexType": [
         {
           "Success": true,
@@ -32,17 +32,17 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "intFieldOrStringFieldOrComplexType": "1"
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "intFieldOrStringFieldOrComplexType": 2
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "intFieldOrStringFieldOrComplexType": {
         "Success": true,
         "ResponseText": "Test",
@@ -51,7 +51,7 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "StringField": [
         "1",
         "3"
@@ -59,7 +59,7 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "IntField": [
         1,
         2
@@ -67,7 +67,7 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "ComplexType": [
         {
           "Success": true,
@@ -83,17 +83,17 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "StringField": "4"
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "IntField": 1
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementsChoice": {
       "ComplexType": {
         "Success": true,
         "ResponseText": "Test",

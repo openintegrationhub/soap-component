@@ -1,23 +1,23 @@
 [
   {
-    "WeatherDescription": {
-      "intFieldOrStringFieldOrComplexType": [
+    "XmlElementRefsChoice": {
+      "intFieldOrStringField1OrStringField2": [
         "1",
         "2"
       ]
     }
   },
   {
-    "WeatherDescription": {
-      "intFieldOrStringFieldOrComplexType": [
+    "XmlElementRefsChoice": {
+      "intFieldOrStringField1OrStringField2": [
         1,
         2
       ]
     }
   },
   {
-    "WeatherDescription": {
-      "intFieldOrStringFieldOrComplexType": [
+    "XmlElementRefsChoice": {
+      "intFieldOrStringField1OrStringField2": [
         {
           "Success": true,
           "ResponseText": "Test",
@@ -32,18 +32,18 @@
     }
   },
   {
-    "WeatherDescription": {
-      "intFieldOrStringFieldOrComplexType": "1"
+    "XmlElementRefsChoice": {
+      "intFieldOrStringField1OrStringField2": "1"
     }
   },
   {
-    "WeatherDescription": {
-      "intFieldOrStringFieldOrComplexType": 2
+    "XmlElementRefsChoice": {
+      "intFieldOrStringField1OrStringField2": 2
     }
   },
   {
-    "WeatherDescription": {
-      "intFieldOrStringFieldOrComplexType": {
+    "XmlElementRefsChoice": {
+      "intFieldOrStringField1OrStringField2": {
         "Success": true,
         "ResponseText": "Test",
         "City": "Test"
@@ -51,15 +51,15 @@
     }
   },
   {
-    "WeatherDescription": {
-      "StringField": [
+    "XmlElementRefsChoice": {
+      "StringField1": [
         "1",
         "3"
       ]
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementRefsChoice": {
       "IntField": [
         1,
         2
@@ -67,7 +67,7 @@
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementRefsChoice": {
       "ComplexType": [
         {
           "Success": true,
@@ -83,17 +83,17 @@
     }
   },
   {
-    "WeatherDescription": {
-      "StringField": "4"
+    "XmlElementRefsChoice": {
+      "StringField2": "4"
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementRefsChoice": {
       "IntField": 1
     }
   },
   {
-    "WeatherDescription": {
+    "XmlElementRefsChoice": {
       "ComplexType": {
         "Success": true,
         "ResponseText": "Test",
