@@ -21,6 +21,7 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,16 +31,16 @@ public class ChoiceMetadataTest {
 
   private static BodyMetaProvider provider;
   private static JsonObject config;
-  private final static String WSDL_URL = "src/test/resources/choice.wsdl";
+  private final static String WSDL_URL = "src/test/resources/choices.wsdl";
   private static String[] arrayOfDirsToDelete = {"src/com", "src/io"};
 
   @BeforeAll
   public static void beforeAll() throws Throwable {
     Definitions definitions = getDefinitions(WSDL_URL);
     config = Json.createObjectBuilder()
-        .add(AppConstants.BINDING_CONFIG_NAME, "WeatherSoap")
-        .add(AppConstants.OPERATION_CONFIG_NAME, "GetWeatherInformation")
-        .add(AppConstants.WSDL_CONFIG_NAME, "http://weather.com?wsdl")
+        .add(AppConstants.BINDING_CONFIG_NAME, "SOAP11")
+        .add(AppConstants.OPERATION_CONFIG_NAME, "GetXmlElementRefsChoice")
+        .add(AppConstants.WSDL_CONFIG_NAME, "http://elatic.io/test/")
         .add("auth",
             Json.createObjectBuilder().add("type", "No Auth")
                 .add("basic", Json.createObjectBuilder().add("username", "")
@@ -53,7 +54,7 @@ public class ChoiceMetadataTest {
     provider.setWsdlService(service);
     doReturn(definitions).when(service).getWSDL(any(JsonObject.class));
     JaxbCompiler.generateAndLoadJaxbStructure(WSDL_URL);
-    JaxbCompiler.putToCache("http://weather.com?wsdl", AppConstants.GENERATED_RESOURCES_DIR);
+    JaxbCompiler.putToCache("http://elatic.io/test/", AppConstants.GENERATED_RESOURCES_DIR);
   }
 
 
@@ -62,11 +63,11 @@ public class ChoiceMetadataTest {
     for (final String dirName : Arrays.asList(arrayOfDirsToDelete)) {
       final File dir = new File(dirName);
       if (dir.exists()) {
-//        FileUtils.deleteDirectory(dir);
+        FileUtils.deleteDirectory(dir);
       }
     }
 
-//    FileUtils.cleanDirectory(new File(AppConstants.GENERATED_RESOURCES_DIR));
+    FileUtils.cleanDirectory(new File(AppConstants.GENERATED_RESOURCES_DIR));
   }
 
   public static Definitions getDefinitions(final String wsdlPath) {
@@ -82,30 +83,25 @@ public class ChoiceMetadataTest {
   }
 
   @Test
-  public void serializerTest() throws ClassNotFoundException, IOException {
+  public void serializeClassWithXmlElementsAnnotation() throws ClassNotFoundException {
     final RequestHandler handler = new RequestHandler();
     final String weatherDescription = "WeatherDescription";
-    final Class<?> clazz = Class.forName("com.cdyne.ws.weatherws.WeatherDescription");
-    class DummyTester {
-
-      public Object test(JsonObject o) {
-        try {
-          return handler.getObjectFromJson(o, weatherDescription, clazz);
-        } catch (Exception e) {
-          throw new RuntimeException(e);
-        }
-
-      }
-    }
-    DummyTester tester = new DummyTester();
-    readResourceFileAsJsonArray("choices.json").stream().map(JsonValue::asJsonObject).forEach(o -> {
+    final Class clazz = Class.forName("io.elastic.test.XmlElementsChoice");
+    readResourceFileAsJsonArray("choicesElements.json").stream().map(JsonValue::asJsonObject).forEach(o -> {
       System.out.println(o);
-      Object result = tester.test(o);
+      Object result = this.wrapAndTest(handler, o, weatherDescription, clazz);
       Assertions.assertNotNull(result);
     });
   }
 
-  private JsonArray readResourceFileAsJsonArray(final String path) {
+  public Object wrapAndTest(RequestHandler handler, JsonObject request, String elementName, Class clazz) {
+      try {
+        return handler.getObjectFromJson(request, elementName, clazz);
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+  }
+  public JsonArray readResourceFileAsJsonArray(final String path) {
     InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
     JsonReader jsonReader = Json.createReader(new InputStreamReader(inputStream));
     JsonArray choices = jsonReader.readArray();

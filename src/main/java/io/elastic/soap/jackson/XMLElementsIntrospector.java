@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElements;
 
@@ -37,6 +38,11 @@ public class XMLElementsIntrospector extends JacksonAnnotationIntrospector {
       List<String> names = getXMLElementsNames(a).stream().map(PropertyName::getSimpleName).collect(Collectors.toList());
       names.add(a.getName());
       return new XMLElementRefDeserializer(a.getType(), a.getAnnotation(XmlElementRefs.class));
+    }
+    if (a.hasAnnotation(XmlElements.class)) {
+      List<String> names = getXMLElementsNames(a).stream().map(PropertyName::getSimpleName).collect(Collectors.toList());
+      names.add(a.getName());
+      return new XMLElementsDeserializer(a.getType(), a.getAnnotation(XmlElementRefs.class));
     }
     return super.findDeserializer(a);
   }
